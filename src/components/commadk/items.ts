@@ -8,7 +8,7 @@ import {
     SproutIcon,
     SunIcon,
 } from "lucide-react";
-import { GithubLogo, XLogo } from "@/components/icon/logos";
+import { GithubLogo, TwitterLogo } from "@/components/icon/logos";
 
 export const Pages = [
     {
@@ -63,7 +63,7 @@ export const SocialPages = [
     {
         name: "Twitter",
         href: "https://twitter.com/yoogendra_rana",
-        icon: XLogo,
+        icon: TwitterLogo,
     },
     {
         name: "GitHub Repository",

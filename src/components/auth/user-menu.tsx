@@ -9,7 +9,7 @@ import {
     SettingsIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { XLogo } from "@/components/icon/logos";
+import { TwitterLogo } from "@/components/icon/logos";
 
 const UserMenu = () => {
     const iconSize = 15;
@@ -55,7 +55,7 @@ const UserMenu = () => {
             >
                 <Link href="https://twitter.com/pheralb_" target="_blank">
                     <div className="flex items-center space-x-3">
-                        <XLogo width={iconSize} />
+                        <TwitterLogo width={iconSize} />
                         <span>Contact</span>
                     </div>
                     <ArrowUpRight size={iconSize} className="opacity-40" />

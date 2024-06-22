@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Badge } from "../ui/badge";
 import Commandk from "@/components/commadk";
 import UserButton from "@/components/auth/user-btn";
 import { GithubLogo } from "@/components/icon/logos";
@@ -7,14 +8,19 @@ import { buttonVariants } from "@/components/ui/button";
 import { ModeToggle } from "@/components/util/change-theme";
 import { ExternalLink } from "@/components/ui/external-link";
 
-const Header = () => {
+interface HeaderProps {
+    className?: string;
+}
+
+const Header = ({ className }: HeaderProps) => {
     return (
         <nav
             className={cn(
+                "h-[var(--header-height)]",
                 "flex w-full",
-                "pb-3 pt-4 lg:px-4",
                 "sticky top-0 z-50",
                 "dark:bg-neutral-900",
+                className,
             )}
         >
             <div className={cn("flex w-full items-center justify-between", "container")}>
@@ -24,11 +30,11 @@ const Header = () => {
                             {/* <GoogleLogo width={30} />    */}
                             <Link
                                 href="/"
-                                className="self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"
+                                className="hidden md:flex self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"
                             >
                                 feedback.io
                             </Link>
-                            {/* <Badge className="hidden cursor-pointer md:block">beta</Badge> */}
+                            <Badge className="hidden cursor-pointer md:block">under construction</Badge>
                         </div>
                     </div>
                 </div>
