@@ -35,7 +35,7 @@ const Header = ({ className }: HeaderProps) => {
                             >
                                 feedback.io
                             </Link>
-                            {/* <Badge className="hidden cursor-pointer md:block">under construction</Badge> */}
+                            <Badge className="hidden cursor-pointer md:block">under construction</Badge>
                         </div>
                     </div>
                 </div>
