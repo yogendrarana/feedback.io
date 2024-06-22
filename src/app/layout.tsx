@@ -42,7 +42,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         disableTransitionOnChange
       >
         <BackgroundProvider>
-
           <body
             className={cn(
               `font-sans ${interVariable.variable} ${geistMonoVariable.variable} antialiased`,

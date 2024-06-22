@@ -8,12 +8,12 @@ import {
     CommandItem,
     CommandList,
 } from "@/components/ui/command";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { SearchIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
 import { toast } from "sonner";
+import { useTheme } from "next-themes";
+import { SearchIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 import { ChangeTheme, DocumentationPages, Pages, SocialPages } from "./items";
 
@@ -57,7 +57,7 @@ const Commandk = () => {
                 <span className="sr-only">Open Command Search Dialog</span>
             </Button>
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <CommandInput placeholder="Search..." />
+                <CommandInput placeholder="Type a command or search..." />
                 <CommandList>
                     <CommandEmpty>No results found</CommandEmpty>
                     <CommandGroup heading="General">
@@ -65,6 +65,7 @@ const Commandk = () => {
                             <CommandItem
                                 key={page.href}
                                 onSelect={() => handleRoutePush(page.href)}
+                                className="space-x-3"
                             >
                                 <page.icon size={22} strokeWidth={1.5} />
                                 <span>{page.name}</span>
@@ -77,6 +78,7 @@ const Commandk = () => {
                                 key={theme.param}
                                 value={`Change Theme: ${theme.name}`}
                                 onSelect={() => handleChangeTheme(theme.param)}
+                                className="space-x-3"
                             >
                                 <theme.icon size={22} strokeWidth={1.5} />
                                 <span>{theme.name}</span>
@@ -89,6 +91,7 @@ const Commandk = () => {
                                 key={doc.href}
                                 value={`Contribute: ${doc.name}`}
                                 onSelect={() => handleExternalRoute(doc.href)}
+                                className="space-x-3"
                             >
                                 <doc.icon size={22} strokeWidth={1.5} />
                                 <span>{doc.name}</span>
@@ -100,6 +103,7 @@ const Commandk = () => {
                             <CommandItem
                                 key={page.href}
                                 onSelect={() => handleExternalRoute(page.href)}
+                                className="space-x-3"
                             >
                                 <page.icon width={14} />
                                 <span>{page.name}</span>

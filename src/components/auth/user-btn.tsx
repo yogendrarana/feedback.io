@@ -11,7 +11,6 @@ import Link from "next/link";
 import Avatar from "boring-avatars";
 import UserMenu from "./user-menu";
 import { SignOut } from "./sign-out";
-import { ArrowRight } from "lucide-react";
 
 export default async function UserButton() {
     const session = await auth();
@@ -19,14 +18,13 @@ export default async function UserButton() {
     if (!session?.user)
         return (
             <Link
-                href="/dashboard"
+                href="/auth?callbackUrl=dashboard"
                 className={buttonVariants({
                     variant: "outline",
                     className: "group",
                 })}
             >
                 <span>Get Started</span>
-                <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-[2px]" />
             </Link>
         );
 
