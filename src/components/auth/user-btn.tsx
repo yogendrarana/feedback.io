@@ -11,6 +11,7 @@ import Link from "next/link";
 import Avatar from "boring-avatars";
 import UserMenu from "./user-menu";
 import { SignOut } from "./sign-out";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
 export default async function UserButton() {
     const session = await auth();
@@ -18,13 +19,14 @@ export default async function UserButton() {
     if (!session?.user)
         return (
             <Link
-                href="/auth?callbackUrl=dashboard"
+                href="/join"
                 className={buttonVariants({
                     variant: "outline",
                     className: "group",
                 })}
             >
-                <span>Get Started</span>
+                <span>Join</span>
+                <ArrowRight size={16} />
             </Link>
         );
 

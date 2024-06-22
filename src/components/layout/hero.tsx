@@ -4,6 +4,8 @@ import { GithubLogo } from '../icon/logos'
 import { buttonVariants } from '../ui/button'
 import { ExternalLink } from '../ui/external-link'
 import { TypographyH1, TypographyP } from '../ui/typography'
+import { Zap } from 'lucide-react'
+import { ZapLogo } from '../icon/icons'
 
 const Hero = () => {
     return (
@@ -19,11 +21,11 @@ const Hero = () => {
                 <Link
                     href="/dashboard"
                     className={buttonVariants({
-                        variant: "default",
+                        variant: "outline",
                         size: "lg",
                     })}
                 >
-                     <GithubLogo
+                     <ZapLogo
                         height={18}
                         className="duration-300 group-hover:-rotate-[10deg]"
                     />
@@ -32,7 +34,7 @@ const Hero = () => {
                 <ExternalLink
                     href="https://github.com/yogendrarana/feedback.io"
                     className={buttonVariants({
-                        variant: "expandIcon",
+                        variant: "default",
                         size: "lg",
                         className: "group",
                     })}

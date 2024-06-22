@@ -7,6 +7,7 @@ import { GithubLogo } from "@/components/icon/logos";
 import { buttonVariants } from "@/components/ui/button";
 import { ModeToggle } from "@/components/util/change-theme";
 import { ExternalLink } from "@/components/ui/external-link";
+import { Notebook, NotebookPen, NotebookText } from "lucide-react";
 
 interface HeaderProps {
     className?: string;
@@ -27,18 +28,18 @@ const Header = ({ className }: HeaderProps) => {
                 <div className="flex items-center space-x-5">
                     <div className="flex items-center space-x-1 pr-1 md:pr-4">
                         <div className="flex items-center space-x-3 transition-opacity hover:opacity-80 rtl:space-x-reverse">
-                            {/* <GoogleLogo width={30} />    */}
+                            <NotebookText width={30} />
                             <Link
                                 href="/"
                                 className="hidden md:flex self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"
                             >
                                 feedback.io
                             </Link>
-                            <Badge className="hidden cursor-pointer md:block">under construction</Badge>
+                            {/* <Badge className="hidden cursor-pointer md:block">under construction</Badge> */}
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-1 md:space-x-2">
                     <ExternalLink
                         href="https://github.com/yogendrarana/feedback.io"
                         className={buttonVariants({ variant: "ghost", size: "icon" })}
