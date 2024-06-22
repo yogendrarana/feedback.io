@@ -20,10 +20,7 @@ const Header = () => {
             <div className={cn("flex w-full items-center justify-between", "container")}>
                 <div className="flex items-center space-x-5">
                     <div className="flex items-center space-x-1 pr-1 md:pr-4">
-                        <Link
-                            href="/"
-                            className="flex items-center space-x-3 transition-opacity hover:opacity-80 rtl:space-x-reverse"
-                        >
+                        <div className="flex items-center space-x-3 transition-opacity hover:opacity-80 rtl:space-x-reverse">
                             {/* <GoogleLogo width={30} />    */}
                             <Link
                                 href="/"
@@ -32,16 +29,13 @@ const Header = () => {
                                 feedback.io
                             </Link>
                             {/* <Badge className="hidden cursor-pointer md:block">beta</Badge> */}
-                        </Link>
+                        </div>
                     </div>
                 </div>
                 <div className="flex items-center space-x-1">
                     <ExternalLink
                         href="https://github.com/yogendrarana/feedback.io"
-                        className={buttonVariants({
-                            variant: "ghost",
-                            size: "icon",
-                        })}
+                        className={buttonVariants({ variant: "ghost", size: "icon" })}
                     >
                         <GithubLogo width={20} name="GitHub Repository" />
                     </ExternalLink>

@@ -35,25 +35,25 @@ const geistMonoVariable = localFont({
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
+      <body
+        className={cn(
+          `font-sans ${interVariable.variable} ${geistMonoVariable.variable} antialiased`,
+          "bg-white dark:bg-neutral-900",
+          "selection:bg-neutral-200 dark:selection:bg-neutral-700",
+        )}
       >
-        <BackgroundProvider>
-          <body
-            className={cn(
-              `font-sans ${interVariable.variable} ${geistMonoVariable.variable} antialiased`,
-              "bg-white dark:bg-neutral-900",
-              "selection:bg-neutral-200 dark:selection:bg-neutral-700",
-            )}
-          >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <BackgroundProvider>
             {children}
-          </body>
-          <Toaster />
-        </BackgroundProvider>
-      </ThemeProvider>
+            <Toaster />
+          </BackgroundProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

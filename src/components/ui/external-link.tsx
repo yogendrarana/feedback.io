@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 interface Props {
@@ -9,14 +10,14 @@ interface Props {
 
 const ExternalLink = (props: Props) => {
     return (
-        <a
+        <Link
             href={props.href}
             rel="noreferrer"
             target="_blank"
             className={cn(props.className)}
         >
             {props.children}
-        </a>
+        </Link>
     );
 };
 
