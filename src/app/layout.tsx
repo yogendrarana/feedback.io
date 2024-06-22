@@ -5,8 +5,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Next.js app",
-  description: "Next.js boilerplate",
+  title: "Feedback",
+  description: "Collect feedback from your users with ease.",
 };
 
 // providers
