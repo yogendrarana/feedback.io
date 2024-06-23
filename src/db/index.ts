@@ -1,19 +1,19 @@
-import mongoose from 'mongoose';
+import { MongoClient } from 'mongodb';
+import mongoose, { Connection } from 'mongoose';
 
 interface MongoConnection {
-    conn: mongoose.Connection | null;
-    promise: Promise<mongoose.Connection> | null;
+    conn: Connection | null;
+    promise: Promise<Connection> | null;
 }
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/gita';
-
 if (!uri) {
     throw new Error('Please define the MONGODB_URI environment variable');
 }
 
 let cached: MongoConnection = global.mongoose || { conn: null, promise: null };
 
-async function connectDb(): Promise<mongoose.Connection> {
+async function connectDb(): Promise<Connection> {
     if (cached.conn) {
         return cached.conn;
     }
@@ -36,4 +36,5 @@ if (!global.mongoose) {
     global.mongoose = cached;
 }
 
-export default connectDb;
+
+export { connectDb };

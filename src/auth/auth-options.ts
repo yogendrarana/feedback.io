@@ -1,18 +1,18 @@
 import { NextAuthConfig } from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import Google from "next-auth/providers/google"
+
+const basePath = "/api/auth";
 
 export const authOptions: NextAuthConfig = {
     providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-            authorization: {
-
-            },
+        Google({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
     ],
+    basePath,
     callbacks: {},
-    pages: { signIn: "/join" },
+    pages: { signIn: "/auth" },
     session: { strategy: "jwt" },
     secret: process.env.AUTH_SECRET,
     debug: process.env.NODE_ENV === 'development',
