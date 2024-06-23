@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import { Toaster } from "sonner"
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Feedback",
