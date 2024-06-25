@@ -1,9 +1,9 @@
 "use client";
 
 import { toast } from 'sonner';
-import { signIn } from '@/auth';
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import { signIn } from 'next-auth/react';
 import { GoogleLogo } from '@/components/icon/logos'
 import { useSearchParams } from 'next/navigation';
 
@@ -16,7 +16,7 @@ const GoogleLogin = () => {
         try {
             setLoading(true);
             console.log(callbackUrl)
-            const res = await signIn("google", { callbackUrl });
+            const res = await signIn("google");
             console.log(res);
         } catch (error: any) {
             toast.error(error.message);
