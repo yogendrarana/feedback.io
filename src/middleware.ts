@@ -46,7 +46,7 @@ export default auth(async (req) => {
         return NextResponse.redirect(new URL("/auth/login", nextUrl));
     }
 
-    return null;
+    return;
 });
 
 export const config = {
