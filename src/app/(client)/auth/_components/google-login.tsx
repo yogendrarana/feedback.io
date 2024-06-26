@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react';
 import { GoogleLogo } from '@/components/icon/logos'
 import { useSearchParams } from 'next/navigation';
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 
 const GoogleLogin = () => {
     const searchParams = useSearchParams();
@@ -16,7 +17,9 @@ const GoogleLogin = () => {
         try {
             setLoading(true);
             console.log(callbackUrl)
-            const res = await signIn("google");
+            const res = await signIn("google", {
+                callbackUrl: DEFAULT_LOGIN_REDIRECT
+            });
             console.log(res);
         } catch (error: any) {
             toast.error(error.message);

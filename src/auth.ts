@@ -1,21 +1,34 @@
 import NextAuth from "next-auth"
-import { NextAuthConfig } from "next-auth"
-import Google from "next-auth/providers/google"
+import { authConfig } from "./auth.config";
 
 const basePath = "/api/auth";
 
-export const authConfig: NextAuthConfig = {
-    providers: [
-        Google({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        })
-    ],
+export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
+    callbacks: {
+        async session({ token, session }) {
+            if (token.sub && session.user) {
+                session.user.id = token.sub;
+            }
+
+            if (token.role && session.user) {
+                // session.user.role = token.role as UserRole;
+            }
+
+            return session;
+        },
+
+        async jwt({ token, trigger, session }) {
+            if (trigger === "update" && session?.email) {
+                token.email = session.email;
+            }
+
+            return token
+        },
+    },
     basePath,
     session: { strategy: "jwt" },
     secret: process.env.AUTH_SECRET,
     debug: process.env.NODE_ENV === 'development',
     pages: { signIn: "/auth", error: "/api/auth/error" },
-}
-
-export const { handlers, signIn, signOut, auth } = NextAuth(authConfig)
+    ...authConfig,
+})
