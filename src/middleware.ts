@@ -1,7 +1,7 @@
 import { authConfig } from "@/auth.config"
 import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
-import { AUTH_ROUTES, DEFAULT_LOGIN_REDIRECT, PROTECTED_ROUTES, PUBLIC_ROUTES } from "./routes";
+import { API_AUTH_PREFIX, AUTH_ROUTES, DEFAULT_LOGIN_REDIRECT, PROTECTED_ROUTES, PUBLIC_ROUTES } from "./routes";
 
 const { auth } = NextAuth(authConfig);
 
@@ -12,10 +12,11 @@ export default auth(async (req) => {
 
     const isAuthRoute = AUTH_ROUTES.includes(nextUrl.pathname);
     const isPublicRoute = PUBLIC_ROUTES.includes(nextUrl.pathname);
+    const isApiAuthRoute = nextUrl.pathname.startsWith(API_AUTH_PREFIX);
     const isProtectedRoute = PROTECTED_ROUTES.includes(nextUrl.pathname);
 
-    // Is Public Route. No need to check authentication:
-    if (isPublicRoute) {
+    // If public route or api route. No need to check authentication:
+    if (isPublicRoute || isApiAuthRoute) {
         return;
     }
 
@@ -40,6 +41,12 @@ export default auth(async (req) => {
             new URL(`/auth?callbackUrl=${encodedCallbackUrl}`, nextUrl),
         );
     }
+
+    if (!isLoggedIn && !isPublicRoute) {
+        return NextResponse.redirect(new URL("/auth/login", nextUrl));
+    }
+
+    return null;
 });
 
 export const config = {
