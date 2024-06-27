@@ -1,4 +1,3 @@
-import { buttonVariants } from "@/components/ui/button";
 import { auth } from "@/auth";
 import {
     DropdownMenu,
@@ -8,10 +7,12 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import Avatar from "boring-avatars";
 import UserMenu from "./user-menu";
 import { SignOut } from "./sign-out";
 import { ArrowRight } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { getNameInitials } from "@/hooks";
 
 export default async function UserButton() {
     const session = await auth();
@@ -35,18 +36,18 @@ export default async function UserButton() {
             <DropdownMenu>
                 <DropdownMenuTrigger
                     name={session.user.name ?? "User Menu"}
-                    className={buttonVariants({
-                        variant: "ghost",
-                        size: "icon",
-                    })}
+                    className={buttonVariants({ variant: "ghost", size: "icon" })}
                 >
-                    {session.user.name && (
-                        <Avatar size={22} name={session.user.name} variant="beam" />
+                    {session.user.image && session.user.name && (
+                        <Avatar>
+                            <AvatarImage src={session.user.image} />
+                            <AvatarFallback>{getNameInitials(session.user.name)}</AvatarFallback>
+                        </Avatar>
                     )}
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuContent className="w-56 p-2" sideOffset={20} align="end" forceMount>
                     <DropdownMenuLabel className="font-normal">
-                        <div className="flex flex-col space-y-1">
+                        <div className="flex flex-col space-y-2">
                             <p className="text-sm font-medium leading-none">
                                 {session.user.name}
                             </p>

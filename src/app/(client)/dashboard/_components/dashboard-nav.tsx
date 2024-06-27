@@ -20,8 +20,8 @@ const DashboardRoutes = [
 
 const DashboardNav = () => {
     const pathname = usePathname();
+
     return (
-        <div>
             <div className="flex items-center space-x-8">
                 {DashboardRoutes.map((route) => (
                     <Link
@@ -30,7 +30,7 @@ const DashboardNav = () => {
                         className={cn(
                             "group relative px-1 pb-4 pt-3 text-sm font-medium outline-2 outline-sky-400 transition-colors duration-100 hover:bg-transparent hover:text-neutral-900 focus-visible:outline dark:hover:text-white",
                             pathname === route.path
-                                ? "border-b border-neutral-800 dark:border-white dark:text-white"
+                                ? "border-b-2 border-neutral-800 dark:border-white dark:text-white"
                                 : "text-neutral-500",
                         )}
                     >
@@ -44,7 +44,6 @@ const DashboardNav = () => {
                     </Link>
                 ))}
             </div>
-        </div>
     );
 };
 

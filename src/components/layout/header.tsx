@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Badge } from "../ui/badge";
+import { NotebookText } from "lucide-react";
 import Commandk from "@/components/commadk";
 import UserButton from "@/components/auth/user-btn";
 import { GithubLogo } from "@/components/icon/logos";
 import { buttonVariants } from "@/components/ui/button";
 import { ModeToggle } from "@/components/util/change-theme";
 import { ExternalLink } from "@/components/ui/external-link";
-import { Notebook, NotebookPen, NotebookText } from "lucide-react";
 
 interface HeaderProps {
     className?: string;

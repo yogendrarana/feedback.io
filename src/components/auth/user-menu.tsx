@@ -1,9 +1,7 @@
 "use client";
 
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import {
-    ArrowUpRight,
-    BugIcon,
     HomeIcon,
     LayoutDashboardIcon,
     SettingsIcon,
@@ -15,53 +13,32 @@ const UserMenu = () => {
     const iconSize = 15;
 
     return (
-        <>
+        <DropdownMenuGroup className="space-y-1">
             <DropdownMenuItem asChild>
-                <Link href="/">
+                <Link href="/" className="flex items-center space-x-3 cursor-pointer">
                     <HomeIcon size={iconSize} />
                     <span>Home</span>
                 </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-                <Link href="/dashboard">
+                <Link href="/dashboard" className="flex items-center space-x-3 cursor-pointer">
                     <LayoutDashboardIcon size={iconSize} />
                     <span>Dashboard</span>
                 </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">
+                <Link href="/dashboard/settings" className="flex items-center space-x-3 cursor-pointer">
                     <SettingsIcon size={iconSize} />
                     <span>Settings</span>
                 </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem
-                asChild
-                className="flex w-full items-center justify-between"
-            >
-                <Link
-                    href="https://github.com/pheralb/slug/issues/new/choose"
-                    target="_blank"
-                >
-                    <div className="flex items-center space-x-3">
-                        <BugIcon size={iconSize} />
-                        <span>Report a bug</span>
-                    </div>
-                    <ArrowUpRight size={iconSize} className="opacity-40" />
+            <DropdownMenuItem asChild>
+                <Link className="flex items-center space-x-3 cursor-pointer" href="https://twitter.com/yoogendra_rana" target="_blank">
+                    <TwitterLogo width={iconSize} />
+                    <span>Contact</span>
                 </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem
-                asChild
-                className="flex w-full items-center justify-between"
-            >
-                <Link href="https://twitter.com/pheralb_" target="_blank">
-                    <div className="flex items-center space-x-3">
-                        <TwitterLogo width={iconSize} />
-                        <span>Contact</span>
-                    </div>
-                    <ArrowUpRight size={iconSize} className="opacity-40" />
-                </Link>
-            </DropdownMenuItem>
-        </>
+        </DropdownMenuGroup>
     );
 };
 

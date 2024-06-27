@@ -1,11 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
+import { ZapLogo } from '../icon/icons'
 import { GithubLogo } from '../icon/logos'
 import { buttonVariants } from '../ui/button'
 import { ExternalLink } from '../ui/external-link'
 import { TypographyH1, TypographyP } from '../ui/typography'
-import { Zap } from 'lucide-react'
-import { ZapLogo } from '../icon/icons'
 
 const Hero = () => {
     return (

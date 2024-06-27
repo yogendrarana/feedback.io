@@ -17,8 +17,10 @@ export function SignOut() {
 
     return (
         <DropdownMenuItem onClick={handleLogout}>
-            <LogOutIcon size={iconSize} />
-            <span>Log Out</span>
+            <div className="flex items-center space-x-3 cursor-pointer">
+                <LogOutIcon size={iconSize} />
+                <span>Log Out</span>
+            </div>
         </DropdownMenuItem>
     );
 }
