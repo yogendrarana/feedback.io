@@ -43,7 +43,7 @@ export default auth(async (req) => {
     }
 
     if (!isLoggedIn && !isPublicRoute) {
-        return NextResponse.redirect(new URL("/auth/login", nextUrl));
+        return NextResponse.redirect(new URL("/auth", nextUrl));
     }
 
     return;
