@@ -10,9 +10,9 @@ import Link from "next/link";
 import UserMenu from "./user-menu";
 import { SignOut } from "./sign-out";
 import { ArrowRight } from "lucide-react";
+import { getNameInitials } from "@/helpers";
 import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { getNameInitials } from "@/hooks";
 
 export default async function UserButton() {
     const session = await auth();

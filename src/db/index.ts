@@ -1,4 +1,3 @@
-import { MongoClient } from 'mongodb';
 import mongoose, { Connection } from 'mongoose';
 
 interface MongoConnection {
@@ -6,12 +5,12 @@ interface MongoConnection {
     promise: Promise<Connection> | null;
 }
 
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/gita';
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/feedback";
 if (!uri) {
     throw new Error('Please define the MONGODB_URI environment variable');
 }
 
-let cached: MongoConnection = global.mongoose || { conn: null, promise: null };
+let cached: MongoConnection = (global as any).mongoose || { conn: null, promise: null };
 
 async function connectDb(): Promise<Connection> {
     if (cached.conn) {
@@ -19,22 +18,26 @@ async function connectDb(): Promise<Connection> {
     }
 
     if (!cached.promise) {
-        cached.promise = mongoose.connect(uri).then((mongoose) => mongoose.connection);
+        const opts = {
+            bufferCommands: false,
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        };
+
+        cached.promise = mongoose.connect(uri, opts).then((mongoose) => {
+            return mongoose.connection;
+        });
     }
 
     try {
         cached.conn = await cached.promise;
-        console.log('MongoDB connected');
         return cached.conn;
-    } catch (err: any) {
+    } catch (e) {
         cached.promise = null;
-        throw new Error(`Failed to connect to MongoDB: ${err.message}`);
+        throw e;
     }
 }
 
-if (!global.mongoose) {
-    global.mongoose = cached;
-}
-
+(global as any).mongoose = cached;
 
 export { connectDb };

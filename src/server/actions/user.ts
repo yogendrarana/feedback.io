@@ -1,22 +1,60 @@
 "use server";
 
 import { connectDb } from "@/db";
-import UserModel from "@/db/models/user-model";
+import UserModel, { IUserModel } from "@/db/models/user-model";
 
-export async function getUserById(userId: string) {
+// create user with google provider
+export async function createUser({
+    name,
+    email,
+    authProvider,
+    providerAccountId
+}: Partial<IUserModel>) {
     try {
         await connectDb();
+        const user = await UserModel.create({
+            name,
+            email,
+            authProvider,
+            providerAccountId,
+        });
 
-        const user = await UserModel.findById(userId);
+        console.log("user created", user);
+
+        return user;
+    } catch (err: any) {
+        return null;
+    }
+}
+
+// get user by google id
+export async function getUserByProviderAccountId(providerAccountId: string) {
+    try {
+        await connectDb();
+        const user = await UserModel.findOne({ providerAccountId });
 
         if (!user) {
             return null;
         }
 
-        // Convert the Mongoose document to a plain JavaScript object
-        return JSON.parse(JSON.stringify(user));
-    } catch (error: any) {
-        console.error('Error fetching user:', error);
-        throw new Error('Failed to fetch user');
+        return user;
+    } catch (err: any) {
+        return null;
+    }
+}
+
+// get user by email
+export async function getUserByEmail(email: string) {
+    try {
+        await connectDb();
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            return null;
+        }
+
+        return user;
+    } catch (err: any) {
+        return null;
     }
 }

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Date, Document, Schema } from "mongoose";
 
 // auth provider enum
 export enum AuthProviderEnum {
@@ -18,6 +18,7 @@ export interface IUserModel extends Document {
     name: string;
     email: string;
     password?: string;
+    providerAccountId?: string;
     authProvider?: AuthProviderEnum;
     role?: UserRoleEnum;
     isValidPassword: (password: string) => Promise<boolean>;
@@ -34,6 +35,9 @@ const userSchema: Schema = new Schema<IUserModel>({
         unique: true
     },
     password: {
+        type: Schema.Types.String
+    },
+    providerAccountId: {
         type: Schema.Types.String
     },
     authProvider: {

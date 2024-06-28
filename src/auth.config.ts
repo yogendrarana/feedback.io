@@ -8,4 +8,4 @@ export const authConfig = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
     ]
-} satisfies NextAuthConfig
+} satisfies NextAuthConfig;

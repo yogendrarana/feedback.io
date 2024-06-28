@@ -1,24 +1,36 @@
 import NextAuth from "next-auth"
+import { PROVIDER } from "@/constants";
 import { authConfig } from "./auth.config";
-import { getUserById } from "./server/actions/user";
-import { UserRoleEnum } from "./db/models/user-model";
-
+import { AuthProviderEnum, UserRoleEnum } from "./db/models/user-model";
+import { createUser, getUserByEmail, getUserByProviderAccountId } from "./server/actions/user";
 
 const basePath = "/api/auth";
 
 export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
     callbacks: {
-
-        async signIn({ user }) {
-            const existingUser = await getUserById(user.id as string);
-
-            if (!existingUser) {
-                return false;
+        async signIn({ account, profile }) {
+            if (account?.provider === PROVIDER.GOOGLE && profile?.sub) {
+                const existingUser = await getUserByProviderAccountId(profile?.sub as string);
+                if (!existingUser) {
+                    await createUser({
+                        name: profile.name as string,
+                        email: profile.email as string,
+                        authProvider: AuthProviderEnum.google,
+                        providerAccountId: profile.sub as string,
+                    })
+                }
             }
 
             return true
         },
+        async jwt({ token }) {
+            if (!token.sub) return token;
+            const user = await getUserByEmail(token.email as string);
+            if (!user) return token;
 
+            token.role = user.role;
+            return token
+        },
         async session({ token, session }) {
             if (token.sub && session.user) {
                 session.user.id = token.sub;
@@ -29,16 +41,6 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
             }
 
             return session;
-        },
-
-        async jwt({ token }) {
-
-            if (!token.sub) return token;
-            const existingUser = await getUserById(token.sub);
-            if (!existingUser) return token;
-
-            token.role = existingUser.role;
-            return token
         },
     },
     basePath,
