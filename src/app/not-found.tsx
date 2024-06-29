@@ -6,6 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 const NotFoundPage = async () => {
     const headersList = headers();
     const domain = headersList.get("host");
+    
     return (
         <>
             <div className="h-full mx-auto max-w-screen-xl px-4 py-8 lg:py-16 grid place-items-center">

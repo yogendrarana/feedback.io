@@ -9,3 +9,7 @@ export const CreateProjectSchema = z.object({
         .string()
         .max(100, { message: "The description must be 100 characters or less." }),
 });
+
+export const DeleteProjectSchema = z.object({
+    projectName: z.string().min(1, { message: "Project name is required." }),
+});

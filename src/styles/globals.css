@@ -6,6 +6,13 @@
   /* height */
   --header-height: 100px;
   --footer-height: 100px;
+  --dashboard-nav-height: 50px;
+  --projects-header-height: 40px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ededed transparent;
 }
 
 @layer base {

@@ -33,8 +33,12 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 
-export function CreateProject() {
-    const { data: session, status } = useSession();
+interface CreateProjectProps {
+    children: React.ReactNode;
+}
+
+export function CreateProject(props: CreateProjectProps) {
+    const { data, status } = useSession();
 
     const [open, setOpen] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
@@ -89,20 +93,13 @@ export function CreateProject() {
         await jsConfetti.addConfetti({
             confettiColors: ["#fdd835", "#4caf50", "#2196f3", "#f44336", "#ff9800"],
             confettiRadius: 3,
-            confettiNumber: 50,
+            confettiNumber: 100,
         });
     };
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger>
-                <Button asChild className={cn("bg-[#24252a]")}>
-                    <span>
-                        Create Project
-                        <Plus size={16} className="ml-2" />
-                    </span>
-                </Button>
-            </DialogTrigger>
+            <DialogTrigger>{props.children}</DialogTrigger>
             <DialogContent>
                 <DialogHeader className="mb-2">
                     <DialogTitle>Create New Project</DialogTitle>

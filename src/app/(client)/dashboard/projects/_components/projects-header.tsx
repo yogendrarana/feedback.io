@@ -1,14 +1,14 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import React from 'react'
 import { cn } from '@/lib/utils'
 import { Plus } from 'lucide-react'
-import React from 'react'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import { CreateProject } from './create-project'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const ProjectsHeader = () => {
     return (
-        <div className={cn("max-h-10 flex gap-x-2 items-center justify-between")}>
+        <div className={cn("h-[var(--projects-header-height)] flex gap-x-2 items-center justify-between")}>
             <Input placeholder="Search projects" />
 
             <Select>
@@ -21,7 +21,14 @@ const ProjectsHeader = () => {
                 </SelectContent>
             </Select>
 
-            <CreateProject />
+            <CreateProject>
+                <Button asChild className={cn("bg-[#24252a]")}>
+                    <span>
+                        Create Project
+                        <Plus size={16} className="ml-2" />
+                    </span>
+                </Button>
+            </CreateProject>
         </div>
     )
 }
