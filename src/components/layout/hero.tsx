@@ -18,7 +18,7 @@ const Hero = () => {
             </TypographyP>
             <div className="mt-8 flex items-center justify-center gap-x-3 duration-700 animate-in fade-in-30 sm:flex sm:space-y-0">
                 <Link
-                    href="/dashboard"
+                    href="/dashboard/projects"
                     className={buttonVariants({
                         variant: "outline",
                         size: "lg",

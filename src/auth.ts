@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { User } from "next-auth"
 import { PROVIDER } from "@/constants";
 import { authConfig } from "./auth.config";
 import { AuthProviderEnum, UserRoleEnum } from "./db/models/user-model";
@@ -25,19 +25,23 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
         },
         async jwt({ token }) {
             if (!token.sub) return token;
+
             const user = await getUserByEmail(token.email as string);
             if (!user) return token;
 
             token.role = user.role;
+            token.id = user._id;
             return token
         },
         async session({ token, session }) {
             if (token.sub && session.user) {
-                session.user.id = token.sub;
-            }
-
+                session.user.sub = token.sub as string;
+            } 
             if (token.role && session.user) {
                 session.user.role = token.role as UserRoleEnum;
+            } 
+            if (token.id && session.user) {
+                session.user.id = token.id as string;
             }
 
             return session;

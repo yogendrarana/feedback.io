@@ -4,32 +4,21 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Link2Icon, SettingsIcon } from "lucide-react";
+import { APP_NAV } from "@/config/app-nav";
 
-const DashboardRoutes = [
-    {
-        title: "Links",
-        path: "/dashboard",
-        icon: Link2Icon,
-    },
-    {
-        title: "Settings",
-        path: "/dashboard/settings",
-        icon: SettingsIcon,
-    },
-];
 
 const DashboardNav = () => {
     const pathname = usePathname();
 
     return (
             <div className="flex items-center space-x-8">
-                {DashboardRoutes.map((route) => (
+                {APP_NAV.dashboard_nav.map((route, index) => (
                     <Link
-                        key={route.path}
-                        href={route.path}
+                        key={index}
+                        href={route.href}
                         className={cn(
                             "group relative px-1 pb-4 pt-3 text-sm font-medium outline-2 outline-sky-400 transition-colors duration-100 hover:bg-transparent hover:text-neutral-900 focus-visible:outline dark:hover:text-white",
-                            pathname === route.path
+                            pathname === route.href
                                 ? "border-b-2 border-neutral-800 dark:border-white dark:text-white"
                                 : "text-neutral-500",
                         )}

@@ -28,7 +28,9 @@ const Header = ({ className }: HeaderProps) => {
                 <div className="flex items-center space-x-5">
                     <div className="flex items-center space-x-1 pr-1 md:pr-4">
                         <div className="flex items-center space-x-3 transition-opacity hover:opacity-80 rtl:space-x-reverse">
-                            <NotebookText width={30} />
+                            <Link href="/">
+                                <NotebookText width={30} />
+                            </Link>
                             <Link
                                 href="/"
                                 className="hidden md:flex self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"

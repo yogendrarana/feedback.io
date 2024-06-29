@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 // fonts
 import localFont from "next/font/local";
 import BackgroundProvider from "@/components/providers/background-provider";
+import AuthSessionProvider from "@/components/providers/session-provider";
 
 const interVariable = localFont({
   variable: "--font-sans",
@@ -41,17 +42,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           "selection:bg-neutral-200 dark:selection:bg-neutral-700",
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <BackgroundProvider>
-            {children}
-            <Toaster />
-          </BackgroundProvider>
-        </ThemeProvider>
+        <AuthSessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <BackgroundProvider>
+              {children}
+              <Toaster />
+            </BackgroundProvider>
+          </ThemeProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );

@@ -21,9 +21,15 @@ const UserMenu = () => {
                 </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-                <Link href="/dashboard" className="flex items-center space-x-3 cursor-pointer">
+                <Link href="/dashboard/projects" className="flex items-center space-x-3 cursor-pointer">
                     <LayoutDashboardIcon size={iconSize} />
                     <span>Dashboard</span>
+                </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+                <Link href="/dashboard/feedbacks" className="flex items-center space-x-3 cursor-pointer">
+                    <SettingsIcon size={iconSize} />
+                    <span>Feedbacks</span>
                 </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
