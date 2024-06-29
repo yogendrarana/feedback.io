@@ -17,7 +17,7 @@ export default async function ProjectsPage() {
 
   return (
     <div className={cn("h-full p-2 border overflow-y-auto rounded-md flex flex-col gap-2")}>
-      <ProjectsHeader />
+      <ProjectsHeader projects={projects} />
 
       {projects.length > 0 && (
         <div className='grid grid-cols-1 gap-2 md:grid-cols-3'>

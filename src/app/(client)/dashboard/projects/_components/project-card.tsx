@@ -1,8 +1,9 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { Copy, Settings, Trash } from 'lucide-react'
-import type { IProject } from '@/db/models/project-model'
+import { Copy } from 'lucide-react'
 import DeleteProject from './delete-project'
+import ProjectSetting from './project-setting'
+import type { IProject } from '@/db/models/project-model'
 
 interface ProjectCardProps {
     project: IProject
@@ -14,11 +15,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <div className={cn("flex items-center")}>
                 <p className="mr-auto mb-2.5">{project.name ?? ""}</p>
                 <button className='rounded-sm p-1.5 hover:bg-gray-100 duration-200'>
-                    <Settings size={14} />
-                </button>
-                <button className='rounded-sm p-1.5 hover:bg-gray-100 duration-200'>
                     <Copy size={14} />
                 </button>
+                <ProjectSetting project={project} />
                 <DeleteProject projectName={project.name} projectId={project.id} />
             </div>
 

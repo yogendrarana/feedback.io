@@ -6,6 +6,8 @@ export interface IProject extends Document {
     projectId: string;
     description?: string;
     owner: ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 const projectSchema: Schema = new Schema<IProject>({

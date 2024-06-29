@@ -1,12 +1,19 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { Plus } from 'lucide-react'
 import { Input } from '@/components/ui/input'
+import { Folder, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CreateProject } from './create-project'
+import { IProject } from '@/db/models/project-model'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-const ProjectsHeader = () => {
+interface ProjectsHeaderProps {
+    projects: IProject[]
+}
+
+const ProjectsHeader = (props: ProjectsHeaderProps) => {
+    const { projects } = props;
+
     return (
         <div className={cn("h-[var(--projects-header-height)] flex gap-x-2 items-center justify-between")}>
             <Input placeholder="Search projects" />
@@ -20,6 +27,13 @@ const ProjectsHeader = () => {
                     <SelectItem value="light">Sort by name</SelectItem>
                 </SelectContent>
             </Select>
+
+            <div className='h-full px-3 space-x-2 rounded-md border flex items-center'>
+                <Folder size={16} />
+                <span>{projects.length}/20</span>
+            </div>
+
+            {/* TODO: If number of projects is more than 20 for hobby users, show alert instead of create product form */}
 
             <CreateProject>
                 <Button asChild className={cn("bg-[#24252a]")}>
