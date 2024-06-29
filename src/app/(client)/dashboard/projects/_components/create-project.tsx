@@ -2,9 +2,8 @@
 
 import type { z } from "zod";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { v4 as uuidv4 } from 'uuid';
 import JSConfetti from "js-confetti";
 import { useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
@@ -70,7 +69,6 @@ export function CreateProject() {
             toast.success("Project created successfully", {
                 description: "You can copy the key and use it in your app.",
                 duration: 10000,
-                closeButton: true,
             });
 
             form.reset();

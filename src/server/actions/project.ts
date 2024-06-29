@@ -1,16 +1,17 @@
 "use server"
 
 import { z } from "zod";
+import { auth } from "@/auth";
 import { connectDb } from "@/db";
 import { v4 as uuid } from "uuid";
 import { CreateProjectSchema } from "../schemas";
-import ProjectModel from "@/db/models/project-model";
-import { auth } from "@/auth";
+import ProjectModel, { IProject } from "@/db/models/project-model";
+import { revalidatePath } from "next/cache";
 
 export async function createProject(values: z.infer<typeof CreateProjectSchema>) {
     try {
         await connectDb();
-        
+
         const session = await auth();
         if (!session?.user?.id) {
             return { error: "Not authenticated" };
@@ -19,15 +20,15 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
         let projectId = uuid();
 
         // check if project with the same name exists
-        const projectExists = await getProjectByName(values.name);
-        if (projectExists.exists) {
+        const projectExists = await ProjectModel.findOne({ name: values.name });
+        if (projectExists) {
             return {
                 error: "Project with this name already exists. Please select a different name.",
             };
         }
 
         // check if the project id has already been used
-        const projectIdAlreadyUsed = await getProjectByProjectId(projectId);
+        const projectIdAlreadyUsed = await ProjectModel.findOne({ projectId });
         if (projectIdAlreadyUsed) {
             projectId = uuid();
         }
@@ -43,59 +44,25 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
             return { error: "Failed to create project" };
         }
 
+        // revalidate path
+        revalidatePath("/dashboard/projects");
+
         return { project };
     } catch (error: any) {
-        console.error("Error creating project:", error);
-        return { error: "An unexpected error occurred" };
+        if (error.code === 11000 && error.keyPattern?.projectId) {
+            return { error: "Error while generating Project ID" };
+        }
+        return { error: error.message || "Internal server error" };
     }
 }
 
-// Check if the project with the same name exists
-export async function getProjectByName(name: string) {
+// get projects by owner id
+export async function getProjectsByOwnerId(ownerId: string): Promise<IProject[] | []> {
     try {
         await connectDb();
-
-        const project = await ProjectModel.findOne({ name });
-        if (project) {
-            return {
-                project,
-                exists: true
-            };
-        }
-
-        return {
-            project: null,
-            exists: false
-        };
+        const projects = await ProjectModel.find({ owner: ownerId });
+        return projects;
     } catch (error: any) {
-        return {
-            project: null,
-            exists: false
-        };
-    }
-}
-
-// Check if the project with the same projectId exists
-export async function getProjectByProjectId(projectId: string) {
-    try {
-        await connectDb();
-
-        const project = await ProjectModel.findOne({ projectId });
-        if (project) {
-            return {
-                project: project,
-                exists: true
-            };
-        }
-
-        return {
-            project: null,
-            exists: false
-        };
-    } catch (error: any) {
-        return {
-            project: null,
-            exists: false
-        };
+        return [];
     }
 }

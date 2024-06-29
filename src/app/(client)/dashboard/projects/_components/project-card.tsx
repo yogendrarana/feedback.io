@@ -1,9 +1,10 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { Copy, Settings, Trash } from 'lucide-react'
+import type { IProject } from '@/db/models/project-model'
 
 interface ProjectCardProps {
-    project: any
+    project: IProject
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
