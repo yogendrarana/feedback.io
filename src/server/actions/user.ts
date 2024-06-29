@@ -1,7 +1,7 @@
 "use server";
 
 import { connectDb } from "@/db";
-import UserModel, { IUserModel } from "@/db/models/user-model";
+import UserModel, { IUser } from "@/db/models/user-model";
 
 // create user with google provider
 export async function createUser({
@@ -9,7 +9,7 @@ export async function createUser({
     email,
     authProvider,
     providerAccountId
-}: Partial<IUserModel>) {
+}: Partial<IUser>) {
     try {
         await connectDb();
         const user = await UserModel.create({
