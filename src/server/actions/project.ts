@@ -20,13 +20,13 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
         let projectId = uuid();
 
         // check if project with the same name exists
-        const projectExists = await ProjectModel.findOne({ name: values.name });
+        const projectExists = await ProjectModel.findOne({ name: values.name }).exec();
         if (projectExists) {
             return { error: "Project with this name already exists. Please select a different name." };
         }
 
         // check if the project id has already been used
-        const projectIdAlreadyUsed = await ProjectModel.findOne({ projectId });
+        const projectIdAlreadyUsed = await ProjectModel.findOne({ projectId }).exec();
         if (projectIdAlreadyUsed) {
             projectId = uuid();
         }
@@ -37,7 +37,7 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
             owner: session.user.id
         };
 
-        const project = await ProjectModel.create(projectData);
+        const project = await ProjectModel.create(projectData).exec();
         if (!project) {
             return { error: "Failed to create project" };
         }
@@ -58,7 +58,7 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
 export async function getProjectsByOwnerId(ownerId: string): Promise<IProject[] | []> {
     try {
         await connectDb();
-        const projects = await ProjectModel.find({ owner: ownerId });
+        const projects = await ProjectModel.find({ owner: ownerId }).exec();
         return projects;
     } catch (error: any) {
         return [];
@@ -74,7 +74,9 @@ export async function deleteProject(projectId: string) {
         }
 
         await connectDb();
-        const project = await ProjectModel.findOneAndDelete({ _id: projectId });
+        console.log("projectId", projectId);
+        const project = await ProjectModel.findOneAndDelete({ _id: projectId }).exec();
+        console.log("project", project);
         if (!project) {
             return { error: "Project not found" };
         }

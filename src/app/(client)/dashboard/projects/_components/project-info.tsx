@@ -11,16 +11,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Copy, Settings } from "lucide-react";
-import { IProject } from "@/db/models/project-model";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { Eye } from "lucide-react";
 
-interface ProjectSettingProps {
-    project: IProject
+interface ProjectInfoProps {
+    project: any;
 }
 
-export default function ProjectSetting(props: ProjectSettingProps) {
+export default function ProjectInfo(props: ProjectInfoProps) {
     const { project } = props;
     const [open, setOpen] = useState<boolean>(false);
 
@@ -28,7 +25,7 @@ export default function ProjectSetting(props: ProjectSettingProps) {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <button className='rounded-sm p-1.5 hover:bg-gray-100 duration-200'>
-                    <Settings size={16} />
+                    <Eye size={16} />
                 </button>
             </DialogTrigger>
             <DialogContent>
@@ -39,16 +36,16 @@ export default function ProjectSetting(props: ProjectSettingProps) {
                     </DialogDescription>
                 </DialogHeader>
 
-                <hr className="my-1" />
+                <hr />
 
                 <div className="space-y-4">
-                    <div className="flex items-center justify-between text-sm">
-                        <p>Feedbacks</p>
+                    <div className="flex flex-col gap-2 text-sm">
+                        <p>Total Feedbacks</p>
                         <span className="text-gray-400">21 feedbacks</span>
                     </div>
 
-                    <div className="flex items-center justify-between text-sm">
-                        <p>Created At</p>
+                    <div className="flex flex-col gap-2 text-sm">
+                        <p>Creation Date</p>
                         <span className="text-gray-400">{moment(project.createdAt).format('D MMMM, YYYY')}</span>
                     </div>
 
@@ -60,20 +57,6 @@ export default function ProjectSetting(props: ProjectSettingProps) {
                             </div>
                         )
                     }
-
-                    <div className="flex flex-col gap-2 text-sm">
-                        <div> Project ID </div>
-                        <div className="p-1 flex items-center justify-between border rounded-md">
-                            <input type="text" value={project.projectId} disabled className="text-sm flex-1 text-gray-400 bg-white  " />
-                            <button
-                                onClick={() => {
-                                    toast('Copied to clipboard');
-                                    window.navigator.clipboard.writeText(project.projectId);
-                                }}
-                                className="p-2 rounded-md border bg-white"
-                            ><Copy size={12} /></button>
-                        </div>
-                    </div>
                 </div>
             </DialogContent >
         </Dialog >

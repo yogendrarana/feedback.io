@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import DashboardNav from "./_components/dashboard-nav";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface DashboardLayoutProps {
     children: ReactNode;
