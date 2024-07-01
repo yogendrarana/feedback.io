@@ -37,7 +37,7 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
             owner: session.user.id
         };
 
-        const project = await ProjectModel.create(projectData).exec();
+        const project = await ProjectModel.create(projectData);
         if (!project) {
             return { error: "Failed to create project" };
         }
