@@ -28,22 +28,26 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
+import { IProject } from "@/db/models/project-model";
 import { deleteProject } from "@/server/actions/project";
 
 interface DeleteProjectProps {
-    project: any
+    projectName: string;
+    projectId: string;
 }
 
 export default function DeleteProject(props: DeleteProjectProps) {
     const [open, setOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
+    console.log("props", props);
+
     const form = useForm<z.infer<typeof DeleteProjectSchema>>({
         resolver: zodResolver(DeleteProjectSchema),
     });
 
     const handleDelete = async (values: z.infer<typeof DeleteProjectSchema>) => {
-        if (values.projectName !== props.project.name) {
+        if (values.projectName !== props.projectName) {
             toast.error("The project name does not match.");
             return;
         }
@@ -51,7 +55,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
         try {
             setLoading(true);
 
-            const result = await deleteProject(props.project.projectId);
+            const result = await deleteProject(props.projectId);
             if (result.error) {
                 toast.error(result.error);
                 return;
@@ -59,7 +63,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
             
             setOpen(false);
             toast.success("Project deleted successfully.", {
-                description: `The project ${props.project.name} has been deleted.`,
+                description: `The project ${props.projectName} has been deleted.`,
             });
         } catch (error: any) {
             console.error("error", error);
@@ -78,7 +82,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Delete Project: {props.project.name}</DialogTitle>
+                    <DialogTitle>Delete Project: {props.projectName}</DialogTitle>
                     <DialogDescription className="">
                         Are you sure you want to delete this project? This action cannot
                         be undone and all the feedbacks under this project will also be deleted.
@@ -92,7 +96,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
-                                        Type <span className="mx-1 font-mono">{`"${props.project.name}"`}</span> to confirm:
+                                        Type <span className="mx-1 font-mono">{`"${props.projectName}"`}</span> to confirm:
                                     </FormLabel>
                                     <FormControl>
                                         <Input {...field} disabled={loading} autoComplete="off" />

@@ -13,3 +13,13 @@ export const CreateProjectSchema = z.object({
 export const DeleteProjectSchema = z.object({
     projectName: z.string().min(1, { message: "Project name is required." }),
 });
+
+export const UpdateProfileSchema = z.object({
+    name: z
+        .string()
+        .min(1, { message: "Name is required." })
+        .max(50, { message: "The name must be 50 characters or less." }),
+    email: z
+        .string()
+        .email({ message: "Invalid email address." }),
+});

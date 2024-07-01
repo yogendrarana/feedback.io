@@ -1,6 +1,10 @@
 "use server";
 
+import type { z } from "zod";
+import { auth } from "@/auth";
 import { connectDb } from "@/db";
+import { revalidatePath } from "next/cache";
+import { UpdateProfileSchema } from "../schemas";
 import UserModel, { IUser } from "@/db/models/user-model";
 
 // create user with google provider
@@ -56,5 +60,57 @@ export async function getUserByEmail(email: string) {
         return user;
     } catch (err: any) {
         return null;
+    }
+}
+
+// update profile
+export async function updateProfile(values: z.infer<typeof UpdateProfileSchema>) {
+    const { name, email } = values;
+
+    try {
+        const session = await auth();
+        if (!session) {
+            return { error: "Not authenticated." };
+        }
+
+        await connectDb();
+        const user = await UserModel.findOneAndUpdate(
+            { email },
+            { name },
+            { new: true }
+        ).exec();
+
+
+        if (!user) {
+            return { error: "User not found" };
+        }
+
+        revalidatePath("/dashboard/settings");
+    } catch (error: any) {
+        return { error: error.message || "Internal server error" };
+    }
+}
+
+
+// delete user account
+export async function deleteUserAccount(email: string) {
+    try {
+        const session = await auth();
+        if (!session) {
+            return { error: "Not authenticated." };
+        }
+
+        await connectDb();
+        const user = await UserModel.findOneAndDelete({ email }).exec();
+        if (!user) {
+            return { error: "Project not found" };
+        }
+
+        // revalidate path
+        revalidatePath("/dashboard/settings");
+
+        return { user };
+    } catch (error: any) {
+        return { error: error.message || "Internal server error" };
     }
 }

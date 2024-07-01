@@ -74,9 +74,7 @@ export async function deleteProject(projectId: string) {
         }
 
         await connectDb();
-        console.log("projectId", projectId);
-        const project = await ProjectModel.findOneAndDelete({ _id: projectId }).exec();
-        console.log("project", project);
+        const project = await ProjectModel.findOneAndDelete({ projectId }).exec();
         if (!project) {
             return { error: "Project not found" };
         }

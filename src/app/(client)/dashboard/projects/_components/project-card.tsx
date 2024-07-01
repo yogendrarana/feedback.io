@@ -16,7 +16,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 <p className="mr-auto mb-2.5">{project.name ?? ""}</p>
                 <ProjectInfo project={JSON.stringify(project)} />
                 <CopyProjectId project={JSON.stringify(project)} />
-                <DeleteProject project={JSON.stringify(project)} />
+                <DeleteProject projectName={project.name} projectId={project.projectId} />
             </div>
 
 
