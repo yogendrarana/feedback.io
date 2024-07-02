@@ -51,7 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           >
             <BackgroundProvider>
               {children}
-              <Toaster />
+              <Toaster richColors />
             </BackgroundProvider>
           </ThemeProvider>
         </AuthSessionProvider>

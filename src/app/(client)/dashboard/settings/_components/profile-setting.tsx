@@ -13,13 +13,12 @@ import { UpdateProfileSchema } from "@/server/schemas";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { AlertTriangleIcon, LoaderIcon, SaveIcon } from "lucide-react";
+import { LoaderIcon, Save } from "lucide-react";
 
 
 interface ProfileSettingProps {
@@ -41,9 +40,15 @@ export default function ProfileSetting(props: ProfileSettingProps) {
     const onSubmit = async (values: z.infer<typeof UpdateProfileSchema>) => {
         try {
             setLoading(true);
-            await updateProfile(values);
-            toast.success("Profile updated successfully.");
+            const response = await updateProfile(values);
+            if (!response.success) {
+                setLoading(false);
+                return toast.error(response.message);
+            }
+
+            toast.success(response.message);
         } catch (error: any) {
+            setLoading(false);
             toast.error(error.message || "An unexpected error has occurred. Please try again later.");
         } finally {
             setLoading(false);
@@ -53,7 +58,7 @@ export default function ProfileSetting(props: ProfileSettingProps) {
     return (
         <SettingCard
             title="Profile"
-            description="Update your personal information:"
+            description="Your profile setting:"
         >
             <Form {...hookForm}>
                 <form onSubmit={hookForm.handleSubmit(onSubmit)} className="space-y-5">
@@ -79,10 +84,6 @@ export default function ProfileSetting(props: ProfileSettingProps) {
                                 <FormControl>
                                     <Input placeholder="Email" {...field} disabled />
                                 </FormControl>
-                                <FormDescription className="flex items-center gap-2 pl-1">
-                                    <AlertTriangleIcon size={14} />
-                                    <span>You cannot update the email.</span>
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -95,7 +96,7 @@ export default function ProfileSetting(props: ProfileSettingProps) {
                             {loading ? (
                                 <LoaderIcon size={16} className="animate-spin" />
                             ) : (
-                                <SaveIcon size={16} />
+                                <Save size={16} />
                             )}
                             <span>{loading ? "Saving..." : "Save"}</span>
                         </Button>

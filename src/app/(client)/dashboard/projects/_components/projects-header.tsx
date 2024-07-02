@@ -38,8 +38,8 @@ const ProjectsHeader = (props: ProjectsHeaderProps) => {
             <CreateProject>
                 <Button asChild className={cn("bg-[#24252a]")}>
                     <span>
-                        Create Project
-                        <Plus size={16} className="ml-2" />
+                        <Plus size={16} />
+                        <span className='hidden sm:flex'>Create Project</span>
                     </span>
                 </Button>
             </CreateProject>

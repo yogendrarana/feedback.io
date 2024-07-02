@@ -29,6 +29,7 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
             const user = await getUserByEmail(token.email as string);
             if (!user) return token;
 
+            token.name = user.name;
             token.role = user.role;
             token.id = user._id;
 
@@ -45,13 +46,8 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
                 session.user.id = token.id as string;
             }
 
-            const freshUser = await getUserByEmail(token.email as string);
-            if (freshUser) {
-                session.user.name = freshUser.name
-            }
-            
             return session;
-        },
+        }
     },
     basePath,
     session: { strategy: "jwt" },

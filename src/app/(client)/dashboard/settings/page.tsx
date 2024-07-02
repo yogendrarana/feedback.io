@@ -2,6 +2,7 @@ import React from 'react';
 import { auth } from '@/auth';
 import { cn } from '@/lib/utils';
 import ProfileSetting from './_components/profile-setting';
+import AccountSetting from './_components/account-setting';
 
 export default async function SettingsPage() {
   const session = await auth();
@@ -14,6 +15,8 @@ export default async function SettingsPage() {
         name={session.user.name!}
         email={session.user.email!}
       />
+
+      <AccountSetting session={session} />
     </div>
   )
 }
