@@ -26,6 +26,8 @@ export async function createUser({
             providerAccountId,
         });
 
+        // TODO: send welcome email to user if user is created successfully
+
         return user;
     } catch (err: any) {
         return null;
@@ -119,6 +121,7 @@ export async function deleteUser() {
         await UserModel.findByIdAndDelete(authSession.user.id).session(dbSession).exec();
         await ProjectModel.deleteMany({ owner: authSession.user.id }).session(dbSession).exec();
         // TODO: delete feedbacks belonging to the projects of the user
+        // TODO: send email to user with account deletion confirmation
 
         await dbSession.commitTransaction();
 

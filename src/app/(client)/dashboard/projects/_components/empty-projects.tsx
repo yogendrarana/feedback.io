@@ -17,7 +17,7 @@ export default function EmptyProjects() {
                 </p>
                 <div className="flex items-center justify-center">
                     <CreateProject>
-                        <span className='px-4 py-2 border rounded-md bg-white hover:bg-gray-100 duration-200'>
+                        <span className='px-4 py-2 border rounded-md bg-white hover:bg-gray-100 duration-200 dark:bg-black'>
                             Create Project
                         </span>
                     </CreateProject>

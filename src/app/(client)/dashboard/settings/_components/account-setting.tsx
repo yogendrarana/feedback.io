@@ -2,8 +2,8 @@ import React from 'react'
 import DeleteUser from './delete-user'
 import SettingCard from './setting-card'
 import type { Session } from 'next-auth'
-import { HeartCrackIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Trash } from 'lucide-react'
 
 export default async function AccountSetting({ session }: { session: Session }) {
     if (!session) return null
@@ -15,7 +15,10 @@ export default async function AccountSetting({ session }: { session: Session }) 
                 <DeleteUser
                     email={session.user.email!}
                     trigger={
-                        <Button variant="default">Delete Account</Button>
+                        <Button variant="default">
+                            <Trash size={16} />
+                            <span>Delete Account</span>
+                        </Button>
                     }
                 />
             </div>

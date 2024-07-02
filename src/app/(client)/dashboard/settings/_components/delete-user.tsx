@@ -11,7 +11,7 @@ import {
     DialogDescription,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { LoaderIcon } from "lucide-react";
+import { LoaderIcon, Trash } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
@@ -66,7 +66,7 @@ export default function DeleteUser(props: DeleteUserProps) {
                     <DialogTitle>Delete Account</DialogTitle>
                     <DialogDescription>
                         <span>Do you really want to delete your account?</span>{" "}
-                        This will permanently delete your account and remove all the feedbacks.
+                        This will permanently delete your projects and the feedbacks.
                     </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleDeleteUser}>
@@ -93,7 +93,7 @@ export default function DeleteUser(props: DeleteUserProps) {
                                 type="submit"
                                 variant="default"
                             >
-                                {loading ?? <LoaderIcon size={16} className="animate-spin" />}
+                                {loading ? <LoaderIcon size={16} className="animate-spin" /> : <Trash size={16} />}
                                 <span>{loading ? "Deleting..." : "Delete"}</span>
                             </Button>
                         </DialogFooter>

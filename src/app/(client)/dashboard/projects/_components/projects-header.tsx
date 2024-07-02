@@ -11,7 +11,7 @@ interface ProjectsHeaderProps {
     projects: IProject[]
 }
 
-const ProjectsHeader = (props: ProjectsHeaderProps) => {
+export default function ProjectsHeader (props: ProjectsHeaderProps) {
     const { projects } = props;
 
     return (
@@ -30,7 +30,7 @@ const ProjectsHeader = (props: ProjectsHeaderProps) => {
 
             <div className='h-full px-3 space-x-2 rounded-md border flex items-center'>
                 <Folder size={16} />
-                <span>{projects.length}/20</span>
+                <span>{projects.length}/10</span>
             </div>
 
             {/* TODO: If number of projects is more than 20 for hobby users, show alert instead of create product form */}
@@ -46,5 +46,3 @@ const ProjectsHeader = (props: ProjectsHeaderProps) => {
         </div>
     )
 }
-
-export default ProjectsHeader
