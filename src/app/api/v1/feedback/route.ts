@@ -1,11 +1,10 @@
-import { z } from 'zod';
 import { connectDb } from '@/db';
 import ProjectModel from '@/db/models/project-model';
 import FeedbackModel from '@/db/models/feedback-model';
 import { NextRequest, NextResponse } from 'next/server';
 import { CreateFeedbackSchema } from '@/server/schemas';
 
-export default async function POST(req: NextRequest) {
+export async function POST(req: NextRequest) {
     if (req.method !== 'POST') {
         return NextResponse.json({ success: false, message: 'Invalid method' }, { status: 405 })
     }
