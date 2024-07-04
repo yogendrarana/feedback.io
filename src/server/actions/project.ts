@@ -31,6 +31,8 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
             projectId = uuid();
         }
 
+        // TODO: add project secret as well in future
+
         const projectData = {
             ...values,
             projectId,

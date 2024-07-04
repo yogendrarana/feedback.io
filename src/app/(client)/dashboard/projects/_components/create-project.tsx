@@ -3,7 +3,6 @@
 import type { z } from "zod";
 import { toast } from "sonner";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 import JSConfetti from "js-confetti";
 import { useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
@@ -38,7 +37,7 @@ interface CreateProjectProps {
 }
 
 export function CreateProject(props: CreateProjectProps) {
-    const { data, status } = useSession();
+    const { status } = useSession();
 
     const [open, setOpen] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");

@@ -5,6 +5,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { CreateFeedbackSchema } from '@/server/schemas';
 
 export async function POST(req: NextRequest) {
+    // TODO: Add rate limiting to prevent abuse
+    // TODO: Add CORS headers since this endpoint will be called from different domains
     if (req.method !== 'POST') {
         return NextResponse.json({ success: false, message: 'Invalid method' }, { status: 405 })
     }
@@ -28,7 +30,8 @@ export async function POST(req: NextRequest) {
         const { message, category, userEmail } = await req.json();
         const validate = await CreateFeedbackSchema.safeParse({ message, category, userEmail });
         if (!validate.success) {
-            return NextResponse.json({ success: false, message: validate.error.errors[0].message || 'Invalid request body' }, { status: 400 });
+            const errorMessage = validate.error.errors.map(err => err.message).join(', ');
+            return NextResponse.json({ success: false, message: errorMessage }, { status: 400 });
         }
 
         if (!message || !category || !userEmail) {

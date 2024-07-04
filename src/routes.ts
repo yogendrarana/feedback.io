@@ -3,7 +3,7 @@
  * Not required for authentication.
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT  = "/dashboard/projects";
+export const DEFAULT_LOGIN_REDIRECT = "/dashboard/projects";
 
 
 /**
@@ -15,16 +15,24 @@ export const PUBLIC_ROUTES = ["/", "/docs"];
 
 
 /**
+ * These routes are public api routes.
+ * Not required for authentication.
+ * @type {string[]}
+ */
+export const PUBLIC_API_V1_ROUTES = ["/api/v1/hello"];
+
+
+/**
  * These routes are used for authentication.
  * Not required for authentication.
  * @type {string[]}
  */
 export const AUTH_ROUTES = [
   "/auth",
+  "/reset",
+  "/verify",
   "/register",
   "/auth-error",
-  "/verify",
-  "/reset",
   "/new-password"
 ];
 
@@ -35,7 +43,7 @@ export const AUTH_ROUTES = [
  * @type {string[]}
  */
 export const PROTECTED_ROUTES = [
-    "/dashboard", 
+  "/dashboard",
 ];
 
 
