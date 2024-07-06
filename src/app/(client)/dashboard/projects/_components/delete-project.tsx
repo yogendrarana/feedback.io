@@ -108,7 +108,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
                                     Cancel
                                 </Button>
                             </DialogClose>
-                            <Button disabled={loading} type="submit" variant="destructive">
+                            <Button disabled={loading} type="submit" variant="default">
                                 {loading ? (
                                     <LoaderIcon size={16} className="animate-spin" />
                                 ) : (

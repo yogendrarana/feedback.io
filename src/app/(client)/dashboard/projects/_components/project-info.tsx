@@ -11,7 +11,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Eye } from "lucide-react";
+import { Maximize } from "lucide-react";
 
 interface ProjectInfoProps {
     project: any;
@@ -21,12 +21,11 @@ export default function ProjectInfo(props: ProjectInfoProps) {
     const project = JSON.parse(props.project);
     const [open, setOpen] = useState<boolean>(false);
 
-
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <button className='rounded-sm p-1.5 hover:bg-gray-100 duration-200'>
-                    <Eye size={16} />
+                    <Maximize size={16} />
                 </button>
             </DialogTrigger>
             <DialogContent>

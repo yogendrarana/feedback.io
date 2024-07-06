@@ -9,11 +9,12 @@ interface CopyProjectIdProps {
 }
 
 const CopyProjectId = (props: CopyProjectIdProps) => {
+    const project = JSON.parse(props.project);
     return (
         <button
             onClick={() => {
                 toast('Copied project ID to clipboard');
-                window.navigator.clipboard.writeText(props.project.projectId);
+                window.navigator.clipboard.writeText(project.projectId);
             }}
             className='rounded-sm p-1.5 hover:bg-gray-100 duration-200'
         >

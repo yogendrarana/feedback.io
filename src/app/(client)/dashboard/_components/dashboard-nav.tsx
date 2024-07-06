@@ -15,10 +15,10 @@ const DashboardNav = () => {
                         key={index}
                         href={route.href}
                         className={cn(
-                            "group relative px-1 pb-4 pt-3 text-sm font-medium outline-2 outline-sky-400 transition-colors duration-100 hover:bg-transparent hover:text-neutral-900 focus-visible:outline dark:hover:text-white",
+                            "group relative px-1 text-md outline-2 outline-sky-400 transition-colors duration-100 hover:bg-transparent hover:text-neutral-900 focus-visible:outline dark:hover:text-white",
                             pathname === route.href
-                                ? "border-b border-neutral-800 dark:border-white dark:text-white"
-                                : "text-neutral-500",
+                                ? "dark:border-white dark:text-white"
+                                : "text-neutral-400",
                         )}
                     >
                         <div className="relative z-10 flex items-center space-x-2">

@@ -1,10 +1,10 @@
 import mongoose, { Schema, Document, ObjectId } from 'mongoose';
 
 export interface IFeedback extends Document {
-    projectId: ObjectId;
+    project: ObjectId;
     message: string;
     category: string;
-    userEmail?: string;
+    email?: string;
     createdAt: Date;
 }
 
@@ -13,16 +13,17 @@ const FeedbackSchema: Schema = new Schema({
         type: Schema.Types.String,
         required: true
     },
-    projectId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Project', required: true
-    },
     category: {
         type: Schema.Types.String,
-        required: true
     },
-    userEmail: {
-        type: Schema.Types.String
+    email: {
+        type: Schema.Types.String,
+        require: true
+    },
+    project: {
+        type: Schema.Types.ObjectId,
+        ref: 'Project', 
+        required: true  
     },
 }, {
     timestamps: true
