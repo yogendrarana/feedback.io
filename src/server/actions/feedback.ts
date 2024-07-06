@@ -26,7 +26,7 @@ export const getAllFeedbacksByOwnerId = async () => {
         }
 
         const ownedProjects = await ProjectModel.find({ owner: session.user.id });
-        const feedbacks = await FeedbackModel.find({ project: { $in: ownedProjects.map(p => p._id)}});
+        const feedbacks = await FeedbackModel.find({ project: { $in: ownedProjects.map(p => p._id)}}).populate("project").select("-__v");
         return { success: true, message: "Feedbacks fetched successfully", feedbacks };
     } catch (err: any) {
         return { success: false, message: err.message, feedbacks: [] };

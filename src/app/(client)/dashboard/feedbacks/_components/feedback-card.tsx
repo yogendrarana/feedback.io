@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils';
-import { Mail, PencilLine, Trash } from 'lucide-react';
+import { Mail, Trash } from 'lucide-react';
 import { IFeedback } from '@/db/models/feedback-model';
 
 interface FeedbackCardProps {

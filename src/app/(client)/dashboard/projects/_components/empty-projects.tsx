@@ -7,9 +7,9 @@ export default function EmptyProjects() {
     return (
         <div className={cn("h-full grid place-items-center")}>
             <div className="mx-auto max-w-screen-sm text-center space-y-4">
-                <CircleOff size={64} className="mx-auto" />
+                <CircleOff size={64} className="mx-auto text-gray-500" />
 
-                <p className="font-medium tracking-tight text-gray-900 dark:text-white md:text-4xl">
+                <p className="font-medium tracking-tight text-gray-500 dark:text-white md:text-4xl">
                     No project yet.
                 </p>
                 <p className="font-mono text-sm font-light text-gray-500 dark:text-gray-400">

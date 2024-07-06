@@ -57,13 +57,19 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
 }
 
 // get projects by owner id
-export async function getProjectsByOwnerId(ownerId: string): Promise<IProject[] | []> {
+export async function getProjectsByOwnerId() {
     try {
         await connectDb();
-        const projects = await ProjectModel.find({ owner: ownerId }).exec();
-        return projects;
+        const session = await auth();
+
+        if (!session?.user?.id) {
+            return { success: false, message: "User not authenticated", projects: [] };
+        }
+
+        const projects = await ProjectModel.find({ owner: session.user.id }).exec();
+        return { success: true, message: "Projects fetched successfully", projects };
     } catch (error: any) {
-        return [];
+        return { success: false, message: error.message || "Internal Server Error", projects: [] };
     }
 }
 

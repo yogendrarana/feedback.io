@@ -12,7 +12,8 @@ export default async function ProjectsPage() {
   const session = await auth();
 
   if (session?.user?.id) {
-    projects = await getProjectsByOwnerId(session.user.id);
+    const response = await getProjectsByOwnerId();
+    projects = response.projects;
   }
 
   return (
@@ -20,7 +21,7 @@ export default async function ProjectsPage() {
       <ProjectsHeader projects={projects} />
 
       {projects.length > 0 && (
-        <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
