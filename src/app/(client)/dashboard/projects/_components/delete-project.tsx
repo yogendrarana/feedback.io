@@ -39,9 +39,6 @@ interface DeleteProjectProps {
 export default function DeleteProject(props: DeleteProjectProps) {
     const [open, setOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-
-    console.log("props", props);
-
     const form = useForm<z.infer<typeof DeleteProjectSchema>>({
         resolver: zodResolver(DeleteProjectSchema),
     });

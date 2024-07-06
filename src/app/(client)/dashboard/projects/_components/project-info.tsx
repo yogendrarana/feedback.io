@@ -18,8 +18,9 @@ interface ProjectInfoProps {
 }
 
 export default function ProjectInfo(props: ProjectInfoProps) {
-    const { project } = props;
+    const project = JSON.parse(props.project);
     const [open, setOpen] = useState<boolean>(false);
+
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -30,7 +31,7 @@ export default function ProjectInfo(props: ProjectInfoProps) {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader className="overflow-hidden">
-                    <DialogTitle className="text-2xl">{project.name ?? ""}</DialogTitle>
+                    <DialogTitle className="text-2xl">{project?.name ?? ""}</DialogTitle>
                     <DialogDescription className="block truncate">
                         About this project
                     </DialogDescription>
@@ -39,12 +40,12 @@ export default function ProjectInfo(props: ProjectInfoProps) {
                 <hr />
 
                 <div className="space-y-4">
-                    <div className="flex flex-col gap-2 text-sm">
+                    <div className="flex flex-col text-sm">
                         <p>Total Feedbacks</p>
                         <span className="text-gray-400">21 feedbacks</span>
                     </div>
 
-                    <div className="flex flex-col gap-2 text-sm">
+                    <div className="flex flex-col text-sm">
                         <p>Creation Date</p>
                         <span className="text-gray-400">{moment(project.createdAt).format('D MMMM, YYYY')}</span>
                     </div>

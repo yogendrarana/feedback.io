@@ -1,14 +1,14 @@
 /**
  * The default redirect URL after logging in.
- * Not required for authentication.
+ * Authentication required.
  * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT = "/dashboard/projects";
 
-
 /**
  * These routes are public.
- * Not required for authentication.
+ * Authentication not required.
+ * 
  * @type {string[]}
  */
 export const PUBLIC_ROUTES = ["/", "/docs"];
@@ -16,15 +16,18 @@ export const PUBLIC_ROUTES = ["/", "/docs"];
 
 /**
  * These routes are public api routes.
- * Not required for authentication.
+ * Authentication not required.
  * @type {string[]}
  */
-export const PUBLIC_API_V1_ROUTES = ["/api/v1/hello"];
+export const PUBLIC_ROUTE_HANDLERS = [
+  "/api/v1/hello",
+  "/api/v1/feedback",
+];
 
 
 /**
  * These routes are used for authentication.
- * Not required for authentication.
+ * Authentication not required.
  * @type {string[]}
  */
 export const AUTH_ROUTES = [
@@ -43,14 +46,15 @@ export const AUTH_ROUTES = [
  * @type {string[]}
  */
 export const PROTECTED_ROUTES = [
-  "/dashboard",
+  "/dashboard/projects",
+  "/dashboard/settings",
 ];
 
 
 /**
- * These prefix for API authentication routes.
+ * The prefix for API authentication routes.
  * Routes that start with this prefix are used for API authentication purposes.
- * Not required for authentication.
+ * Authentication not required.
  * @type {string}
  */
-export const API_AUTH_PREFIX = "/api/auth";
+export const API_AUTH_PREFIX_ROUTE = "/api/auth";
