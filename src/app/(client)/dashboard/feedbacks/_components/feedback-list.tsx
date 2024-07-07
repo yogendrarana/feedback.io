@@ -59,11 +59,11 @@ export default function FeedbackList({ projects, feedbacks }: FeedbackListProps)
             {displayedFeedbacks.length > 0 ? (
                 <div className="space-y-2">
                     {displayedFeedbacks.map((feedback, index) => (
-                        <FeedbackCard key={index} feedback={feedback} />
+                        <FeedbackCard key={index} feedback={JSON.stringify(feedback)} />
                     ))}
                 </div>
             ) : (
-                <EmptyFeedback className="h-[65vh] border" />
+                <EmptyFeedback className="h-[65vh] border rounded-md" />
             )}
         </div>
     );

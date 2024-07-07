@@ -4,6 +4,7 @@ import { DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-me
 import {
     HomeIcon,
     LayoutDashboardIcon,
+    MessageCircleIcon,
     SettingsIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -28,7 +29,7 @@ const UserMenu = () => {
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
                 <Link href="/dashboard/feedbacks" className="flex items-center space-x-3 cursor-pointer">
-                    <SettingsIcon size={iconSize} />
+                    <MessageCircleIcon size={iconSize} />
                     <span>Feedbacks</span>
                 </Link>
             </DropdownMenuItem>

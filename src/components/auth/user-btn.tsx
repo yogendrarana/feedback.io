@@ -58,6 +58,7 @@ export default async function UserButton() {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <UserMenu />
+                    <DropdownMenuSeparator />
                     <SignOut />
                 </DropdownMenuContent>
             </DropdownMenu>
