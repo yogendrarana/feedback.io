@@ -14,10 +14,10 @@ export default async function FeedbacksPage() {
   const session = await auth();
 
   if (session?.user?.id) {
-    const res = await getAllFeedbacksByOwnerId();
+    const res = await getAllFeedbacksByOwnerId(session.user.id);
     feedbacks = res.feedbacks;
 
-    const response = await getProjectsByOwnerId()
+    const response = await getProjectsByOwnerId(session.user.id)
     projects = response.projects;
   }
 

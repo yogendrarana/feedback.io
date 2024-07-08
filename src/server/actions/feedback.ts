@@ -16,7 +16,7 @@ export const getFeedbackByProjectId = async (projectId: string) => {
 }
 
 
-export const getAllFeedbacksByOwnerId = async () => {
+export const getAllFeedbacksByOwnerId = async (ownerId: string) => {
     try {
         await connectDb();
         const session = await auth();
@@ -25,8 +25,11 @@ export const getAllFeedbacksByOwnerId = async () => {
             return { success: false, message: "User not authenticated", feedbacks: [] };
         }
 
-        const ownedProjects = await ProjectModel.find({ owner: session.user.id });
-        const feedbacks = await FeedbackModel.find({ project: { $in: ownedProjects.map(p => p._id)}}).populate("project").select("-__v");
+        const ownedProjects = await ProjectModel.find({ owner: ownerId });
+        const feedbacks = await FeedbackModel.find({ project: { $in: ownedProjects.map(p => p._id) } })
+            .populate("project")
+            .select("-__v")
+            .sort({ createdAt: -1 });
         return { success: true, message: "Feedbacks fetched successfully", feedbacks };
     } catch (err: any) {
         return { success: false, message: err.message, feedbacks: [] };

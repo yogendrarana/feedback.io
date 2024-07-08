@@ -39,12 +39,16 @@ export async function POST(req: NextRequest) {
         }
 
         // Create the feedback
-        await FeedbackModel.create({
+        const feedback = await FeedbackModel.create({
             project: project._id,
             message,
             category,
             email: email || undefined,
         });
+
+        // Add the feedback to the project model feedbacks array
+        project.feedbacks.push(feedback._id);
+        await project.save();
 
         // TODO: Send email to project owner with feedback details
 

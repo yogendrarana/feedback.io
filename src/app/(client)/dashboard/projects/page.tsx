@@ -12,7 +12,7 @@ export default async function ProjectsPage() {
   const session = await auth();
 
   if (session?.user?.id) {
-    const response = await getProjectsByOwnerId();
+    const response = await getProjectsByOwnerId(session.user.id);
     projects = response.projects;
   }
 

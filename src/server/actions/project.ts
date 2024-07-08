@@ -57,7 +57,7 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
 }
 
 // get projects by owner id
-export async function getProjectsByOwnerId() {
+export async function getProjectsByOwnerId(ownerId: string) {
     try {
         await connectDb();
         const session = await auth();
@@ -66,7 +66,7 @@ export async function getProjectsByOwnerId() {
             return { success: false, message: "User not authenticated", projects: [] };
         }
 
-        const projects = await ProjectModel.find({ owner: session.user.id }).exec();
+        const projects = await ProjectModel.find({ owner: ownerId }).populate("feedbacks").exec();
         return { success: true, message: "Projects fetched successfully", projects };
     } catch (error: any) {
         return { success: false, message: error.message || "Internal Server Error", projects: [] };

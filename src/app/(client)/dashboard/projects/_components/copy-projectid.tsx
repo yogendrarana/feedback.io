@@ -23,4 +23,4 @@ const CopyProjectId = (props: CopyProjectIdProps) => {
     )
 }
 
-export default CopyProjectId
+export default CopyProjectId;

@@ -6,6 +6,7 @@ export interface IProject extends Document {
     projectId: string;
     description?: string;
     owner: ObjectId;
+    feedbacks: ObjectId[];
     createdAt: Date;
     updatedAt: Date;
 }
@@ -27,7 +28,11 @@ const projectSchema: Schema = new Schema<IProject>({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    }
+    },
+    feedbacks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Feedback'
+    }]
 }, {
     timestamps: true
 })

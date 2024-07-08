@@ -1,11 +1,11 @@
-import { Briefcase, MessageCircle, Settings, Text } from "lucide-react";
+import { BriefcaseBusiness, MessageCircle, Settings } from "lucide-react";
 
 export const APP_NAV = {
     dashboard_nav: [
         {
             title: "Projects",
             href: "/dashboard/projects",
-            icon: Briefcase,
+            icon: BriefcaseBusiness,
         },
         {
             title: "Feedbacks",

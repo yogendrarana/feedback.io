@@ -19,8 +19,8 @@ const FeedbackCard = (props: FeedbackCardProps) => {
     }
 
     return (
-        <div className={cn("p-1.5 flex flex-col justify-between border rounded-md font-medium bg-white")}>
-            <div className='mb-2'>
+        <div className={cn("p-3 flex flex-col justify-between border rounded-md font-medium bg-white")}>
+            <div className='text-gray-400'>
                 <div className={cn("flex items-center gap-2 text-sm")}>
                     On:
                     <p>{parsedFeedback.project.name}</p>
@@ -29,9 +29,10 @@ const FeedbackCard = (props: FeedbackCardProps) => {
                     From:
                     <p>{parsedFeedback.email}</p>
                 </div>
-            </div>
-            <div className={cn("p-3 border flex items-center gap-2 text-sm text-gray-800 bg-gray-50 rounded-md")}>
-                <p>{parsedFeedback.message}</p>
+                <div className={cn("mt-2 flex items-center gap-2 text-sm text-black")}>
+                    Message:
+                    <p>{parsedFeedback.message}</p>
+                </div>
             </div>
         </div>
     )

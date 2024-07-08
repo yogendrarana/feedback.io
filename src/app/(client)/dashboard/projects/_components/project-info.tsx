@@ -14,7 +14,7 @@ import {
 import { Maximize } from "lucide-react";
 
 interface ProjectInfoProps {
-    project: any;
+    project: string;
 }
 
 export default function ProjectInfo(props: ProjectInfoProps) {
@@ -31,9 +31,6 @@ export default function ProjectInfo(props: ProjectInfoProps) {
             <DialogContent>
                 <DialogHeader className="overflow-hidden">
                     <DialogTitle className="text-2xl">{project?.name ?? ""}</DialogTitle>
-                    <DialogDescription className="block truncate">
-                        About this project
-                    </DialogDescription>
                 </DialogHeader>
 
                 <hr />
@@ -41,7 +38,7 @@ export default function ProjectInfo(props: ProjectInfoProps) {
                 <div className="space-y-4">
                     <div className="flex flex-col text-sm">
                         <p>Total Feedbacks</p>
-                        <span className="text-gray-400">21 feedbacks</span>
+                        <span className="text-gray-400">{project.feedbacks.length || 0}</span>
                     </div>
 
                     <div className="flex flex-col text-sm">
@@ -53,7 +50,7 @@ export default function ProjectInfo(props: ProjectInfoProps) {
                         project.description && (
                             <div className="text-sm">
                                 <div>Description</div>
-                                <span className="text-sm text-gray-400">{project.description}</span>
+                                <span className="text-sm text-gray-400">{project.description || ""}</span>
                             </div>
                         )
                     }
