@@ -9,7 +9,7 @@ interface AuthLayoutProps {
 
 const AuthLayout = (props: AuthLayoutProps) => {
     return (
-        <section className={cn("h-full flex flex-col")}>
+        <section className={cn("h-full flex flex-col", "container")}>
             <Header />
             <div className={cn("w-full flex-1 items-center justify-center space-y-8")} >
                 {props.children}

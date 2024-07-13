@@ -8,12 +8,16 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
       center: true,
-      padding: "1rem",
+      padding: {
+        DEFAULT: '1rem',  // This is equivalent to px-4
+        md: '10rem',      // This is equivalent to md:px-40
+        lg: '15rem',      // This is equivalent to lg:px-60
+      },
       screens: {
         "2xl": "1400px",
       },

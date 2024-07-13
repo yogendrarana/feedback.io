@@ -5,7 +5,7 @@ import { TypographyH2, TypographyP } from '@/components/ui/typography'
 
 const Docslayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className={cn("min-h-full", "container")}>
+        <div className={cn("container")}>
             <Header />
             <div className='h-[30vh] border rounded-md shadow-sm flex flex-col justify-center items-center bg-white'>
                 <TypographyH2 className="text-2xl font-bold">Documentation</TypographyH2>

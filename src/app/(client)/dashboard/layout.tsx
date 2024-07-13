@@ -10,7 +10,7 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = (props: DashboardLayoutProps) => {
     return (
-        <>
+        <div className={cn("container")}>
             <Header />
             <main className={cn("md:px-0 h-[calc(100vh-200px)] flex flex-col", "container")}>
                 <div className="h-[var(--dashboard-nav-height)] mb-2">
@@ -21,7 +21,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
                 </div>
             </main>
             <Footer />
-        </>
+        </div>
     );
 };
 
