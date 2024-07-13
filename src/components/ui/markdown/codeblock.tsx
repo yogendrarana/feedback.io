@@ -3,7 +3,7 @@
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Copy } from "lucide-react";
-import React, { useMemo, ReactNode, isValidElement } from "react";
+import React, { useMemo, ReactNode, isValidElement, createElement } from "react";
 
 interface CodeBlockProps {
     children: React.ReactNode;
@@ -20,31 +20,33 @@ export default function CodeBlock({ children, className, filename, switcher, cop
         if (typeof children === 'string') {
             return children;
         }
-
+    
         if (isValidElement(children)) {
             if (typeof children.type === 'function') {
                 try {
                     console.log("checkpoint 1")
-                    const renderedContent = children.type({});
+                    // Use createElement instead of directly calling the type
+                    const renderedContent = createElement(children.type, children.props);
                     return getCodeString(renderedContent);
                 } catch (error) {
                     console.error("Error rendering MDX component:", error);
                     return '';
                 }
             }
-
+    
             if (children.props.children) {
                 return getCodeString(children.props.children);
             }
         }
-
+    
         if (Array.isArray(children)) {
             return children.map(getCodeString).join('');
         }
-
+    
         return '';
     };
-
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const codeString = useMemo(() => getCodeString(children), [children]);
 
     const addLineNumbers = (code: string) => {
