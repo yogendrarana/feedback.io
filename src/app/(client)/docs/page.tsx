@@ -8,12 +8,12 @@ import Footer from '@/components/layout/footer'
 const DocPage = () => {
     return (
         <div className={cn("mt-10")}>
-            <Tabs defaultValue="manual" className='flex flex-col'>
+            <Tabs defaultValue="manual" className='w-full flex flex-col'>
                 <TabsList className='self-center'>
                     <TabsTrigger value="manual">Using Manually</TabsTrigger>
                     <TabsTrigger value="package">Using package</TabsTrigger>
                 </TabsList>
-                <TabsContent value="manual" className='mt-10'>
+                <TabsContent value="manual" className={cn("mt-10", "prose prose-lg")} style={{ maxWidth: '100%' }}>
                     <ManualUsage />
                     <Footer />
                 </TabsContent>
