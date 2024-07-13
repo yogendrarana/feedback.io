@@ -17,27 +17,27 @@ const Header = ({ className }: HeaderProps) => {
     return (
         <nav
             className={cn(
-                "h-[var(--header-height)]",
+                "h-[var(--header-height)] bg-white",
                 "flex w-full",
                 "sticky top-0 z-50",
                 "dark:bg-neutral-900",
                 className,
+                "container"
             )}
         >
-            <div className={cn("flex w-full items-center justify-between", "container")}>
+            <div className={cn("flex w-full items-center justify-between")}>
                 <div className="flex items-center space-x-5">
                     <div className="flex items-center space-x-1 pr-1 md:pr-4">
                         <div className="flex items-center space-x-3 transition-opacity hover:opacity-80 rtl:space-x-reverse">
-                            <Link href="/">
+                            <Link href={"/"}>
                                 <NotebookText width={30} />
                             </Link>
                             <Link
                                 href="/"
-                                className="hidden md:flex self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"
+                                className="hidden space-x-2 md:flex md:items-center self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"
                             >
-                                feedback.io
+                                <span>feedback.io</span>
                             </Link>
-                            <Badge className="hidden cursor-pointer md:block">under construction</Badge>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ const Header = ({ className }: HeaderProps) => {
                     <UserButton />
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 };
 

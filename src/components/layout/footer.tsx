@@ -16,9 +16,10 @@ const Footer = (props: FooterProps) => {
                 "group w-full text-sm text-neutral-600 animate-in fade-in-25 dark:text-neutral-400",
                 "bg-white/60 backdrop-blur-md dark:bg-neutral-900/60",
                 props.className,
+                "container"
             )}
         >
-            <div className={cn("h-full container flex items-center justify-between")}>
+            <div className={cn("h-full flex items-center justify-between")}>
                 <div className="flex items-center space-x-2">
                     <ExternalLink
                         href="https://yogendrarana.vercel.app"

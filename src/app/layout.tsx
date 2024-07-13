@@ -13,8 +13,11 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 
 // fonts
 import localFont from "next/font/local";
-import BackgroundProvider from "@/components/providers/background-provider";
+
+// components
+import { Analytics } from "@/components/analytics/analytics";
 import AuthSessionProvider from "@/components/providers/session-provider";
+import BackgroundProvider from "@/components/providers/background-provider";
 
 const interVariable = localFont({
   variable: "--font-sans",
@@ -52,6 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <BackgroundProvider>
               {children}
               <Toaster richColors />
+              <Analytics />
             </BackgroundProvider>
           </ThemeProvider>
         </AuthSessionProvider>

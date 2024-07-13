@@ -3,6 +3,7 @@ import ProjectModel from '@/db/models/project-model';
 import FeedbackModel from '@/db/models/feedback-model';
 import { NextRequest, NextResponse } from 'next/server';
 import { CreateFeedbackSchema } from '@/server/schemas';
+import UserModel from '@/db/models/user-model';
 
 export async function POST(req: NextRequest) {
     // TODO: Add rate limiting to prevent abuse
@@ -13,17 +14,23 @@ export async function POST(req: NextRequest) {
 
     await connectDb();
     const projectId = req.headers.get('x-project-id');
-    // const projectSecret = req.headers.get('x-project-secret');
+    const accountId = req.headers.get('x-account-id');
 
-    if (!projectId) {
-        return NextResponse.json({ success: false, message: 'Missing project ID or secret' }, { status: 400 });
+    if (!projectId || !accountId) {
+        return NextResponse.json({ success: false, message: 'Missing project id or project id' }, { status: 400 });
     }
 
     try {
+        // find the account and verify the secret
+        const account = await UserModel.findOne({ accountId });
+        if (!account) {
+            return NextResponse.json({ success: false, message: `Account with id ${accountId} not found.` }, { status: 404 });
+        }
+
         // Find the project and verify the secret
         const project = await ProjectModel.findOne({ projectId });
         if (!project) {
-            return NextResponse.json({ success: false, message: 'Project not found or invalid secret' }, { status: 404 });
+            return NextResponse.json({ success: false, message: `Project with id ${projectId} not found.` }, { status: 404 });
         }
 
         // Validate the request body
