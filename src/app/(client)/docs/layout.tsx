@@ -8,8 +8,7 @@ const Docslayout = ({ children }: { children: React.ReactNode }) => {
         <div className={cn("container")}>
             <Header />
             <div className='h-[30vh] rounded-lg shadow-sm flex flex-col justify-center items-center bg-gray-100'>
-                <TypographyH2 className="text-2xl font-bold text-gray-800">Documentation</TypographyH2>
-                <TypographyP className="text-gray-500">Learn how to use our API</TypographyP>
+                <TypographyH2 className="text-xl font-bold text-gray-800">Documentation</TypographyH2>
             </div>
             <div>
                 {children}

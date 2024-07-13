@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import { ZapLogo } from '../icon/icons'
+import { cn } from '@/lib/utils'
+import { Book } from 'lucide-react'
 import { GithubLogo } from '../icon/logos'
 import { buttonVariants } from '../ui/button'
 import { ExternalLink } from '../ui/external-link'
 import { TypographyH1, TypographyP } from '../ui/typography'
-import { cn } from '@/lib/utils'
 
 const Hero = () => {
     return (
@@ -25,11 +25,11 @@ const Hero = () => {
                         size: "lg",
                     })}
                 >
-                     <ZapLogo
+                     <Book
                         height={18}
                         className="duration-300 group-hover:-rotate-[10deg]"
                     />
-                    <span>Get Started</span>
+                    <span>Explore Docs</span>
                 </Link>
                 <ExternalLink
                     href="https://github.com/yogendrarana/feedback.io"

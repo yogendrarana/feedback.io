@@ -2,6 +2,7 @@
 
 import { DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import {
+    Book,
     HomeIcon,
     LayoutDashboardIcon,
     MessageCircleIcon,
@@ -19,6 +20,12 @@ const UserMenu = () => {
                 <Link href="/" className="flex items-center space-x-3 cursor-pointer">
                     <HomeIcon size={iconSize} />
                     <span>Home</span>
+                </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+                <Link href="/docs" className="flex items-center space-x-3 cursor-pointer">
+                    <Book size={iconSize} />
+                    <span>Docs</span>
                 </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
