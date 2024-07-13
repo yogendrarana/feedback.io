@@ -5,7 +5,7 @@ import Header from "@/components/layout/header";
 
 export default async function HomePage() {
   return (
-    <main className={cn("")}>
+    <main className={cn("container")}>
       <Header />
       <Hero />
       <Footer />

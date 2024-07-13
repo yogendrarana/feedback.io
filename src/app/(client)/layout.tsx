@@ -21,7 +21,7 @@ import BackgroundProvider from "@/components/providers/background-provider";
 
 const interVariable = localFont({
   variable: "--font-sans",
-  src: "../fonts/InterVariable.woff2",
+  src: "../../fonts/InterVariable.woff2",
   weight: "100 900",
   display: "swap",
   preload: true,
@@ -29,7 +29,7 @@ const interVariable = localFont({
 
 const geistMonoVariable = localFont({
   variable: "--font-geist-mono",
-  src: "../fonts/GeistMonoVF.woff2",
+  src: "../../fonts/GeistMonoVF.woff2",
   weight: "100 900",
   display: "swap",
   preload: true,

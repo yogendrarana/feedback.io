@@ -5,10 +5,11 @@ import { GithubLogo } from '../icon/logos'
 import { buttonVariants } from '../ui/button'
 import { ExternalLink } from '../ui/external-link'
 import { TypographyH1, TypographyP } from '../ui/typography'
+import { cn } from '@/lib/utils'
 
 const Hero = () => {
     return (
-        <section className="h-[calc(100vh-200px)] flex flex-col justify-center items-center text-center" >
+        <section className={cn("h-[calc(100vh-200px)] flex flex-col justify-center items-center text-center")}>
             <TypographyH1 className="duration-500 animate-in fade-in-5 slide-in-from-bottom-2">
                 Collect Feedback From Your Users
             </TypographyH1>

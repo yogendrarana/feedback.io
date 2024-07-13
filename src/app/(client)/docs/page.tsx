@@ -15,7 +15,7 @@ const DocPage = () => {
                 </TabsList>
                 <TabsContent value="manual" className='mt-10'>
                     <ManualUsage />
-                    <Footer className='px-0' />
+                    <Footer />
                 </TabsContent>
                 <TabsContent value="package" className='mt-10'>
                     <PackageUsage />

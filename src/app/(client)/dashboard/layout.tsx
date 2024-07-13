@@ -12,7 +12,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
     return (
         <>
             <Header />
-            <main className={cn("h-[calc(100vh-200px)] flex flex-col", "container")}>
+            <main className={cn("md:px-0 h-[calc(100vh-200px)] flex flex-col", "container")}>
                 <div className="h-[var(--dashboard-nav-height)] mb-2">
                     <DashboardNav />
                 </div>

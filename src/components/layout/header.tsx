@@ -22,7 +22,6 @@ const Header = ({ className }: HeaderProps) => {
                 "sticky top-0 z-50",
                 "dark:bg-neutral-900",
                 className,
-                "container"
             )}
         >
             <div className={cn("flex w-full items-center justify-between")}>
