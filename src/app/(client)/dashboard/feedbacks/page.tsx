@@ -2,28 +2,27 @@ import React from 'react'
 import { auth } from '@/auth';
 import { cn } from '@/lib/utils';
 import { IProject } from '@/db/models/project-model';
-import FeedbackList from './_components/feedback-list';
 import EmptyFeedback from './_components/empty-feedback';
-import type { IFeedback } from '@/db/models/feedback-model';
-import { getProjectsByOwnerId } from '@/server/actions/project';
+import FeedbackTable from './_components/feedback-table';
 import { getAllFeedbacksByOwnerId } from '@/server/actions/feedback';
 
 export default async function FeedbacksPage() {
-  let projects: IProject[] = [];
-  let feedbacks: IFeedback[] = [];
+  let feedbacks: any[] = [];
   const session = await auth();
 
   if (session?.user?.id) {
     const res = await getAllFeedbacksByOwnerId(session.user.id);
-    feedbacks = res.feedbacks;
-
-    const response = await getProjectsByOwnerId(session.user.id)
-    projects = response.projects;
+    feedbacks = res.feedbacks.map(f => ({
+      category: f.category,
+      project: f.project.name,
+      message: f.message,
+      createdAt: f.createdAt
+    }));
   }
 
   return (
     <div className={cn("h-full overflow-y-auto rounded-md flex flex-col gap-2")}>
-      <FeedbackList projects={JSON.stringify(projects)} feedbacks={JSON.stringify(feedbacks)} />
+      {feedbacks.length && <FeedbackTable data={feedbacks} />}
       {feedbacks.length === 0 && <EmptyFeedback />}
     </div>
   )

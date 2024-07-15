@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 import Header from '@/components/layout/header'
-import { TypographyH2, TypographyP } from '@/components/ui/typography'
+import { TypographyH2 } from '@/components/ui/typography'
 
 const Docslayout = ({ children }: { children: React.ReactNode }) => {
     return (
