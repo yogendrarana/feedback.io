@@ -41,3 +41,8 @@ export const CreateFeedbackSchema = z.object({
         .string()
         .email({ message: "Invalid email address." }),
 });
+
+// delete feedback schema
+export const DeleteFeedbackSchema = z.object({
+    feedbackId: z.string().min(1, { message: "Feedback id is required." }),
+});

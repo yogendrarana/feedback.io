@@ -4,10 +4,11 @@ import { z } from "zod"
 import React from "react"
 import moment from "moment"
 import { ColumnDef } from "@tanstack/react-table"
+import { FeedbackRowActions } from "./feedback-row-actions"
 import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column"
-import { DataTableRowActions } from "@/components/ui/data-table/data-table-row-actions"
 
 export const FeedbackSchema = z.object({
+    id: z.string(),
     project: z.string(),
     category: z.string(),
     email: z.string(),
@@ -58,7 +59,7 @@ export const feedbackColumns: ColumnDef<FeedbackColumnType>[] = [
     },
     {
         id: "actions",
-        cell: ({ row }) => <DataTableRowActions row={row} />,
+        cell: ({ row }) => <FeedbackRowActions row={row} />,
         enableHiding: false,
     },
 ]

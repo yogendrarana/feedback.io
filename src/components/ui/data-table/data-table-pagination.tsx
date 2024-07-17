@@ -16,9 +16,7 @@ interface DataTablePaginationProps<T> {
     table: Table<T>
 }
 
-export function DataTablePagination<T>({
-    table,
-}: DataTablePaginationProps<T>) {
+export function DataTablePagination<T>({ table }: DataTablePaginationProps<T>) {
     return (
         <div className="flex items-center justify-between p-2">
             <div className="flex-1 text-sm text-muted-foreground">
@@ -39,7 +37,7 @@ export function DataTablePagination<T>({
                             <SelectValue placeholder={table.getState().pagination.pageSize} />
                         </SelectTrigger>
                         <SelectContent side="top" className="w-[80px] bg-white p-2" sideOffset={5}>
-                            {[20, 30, 40, 50].map((pageSize) => (
+                            {[10, 20, 30, 40].map((pageSize) => (
                                 <SelectItem key={pageSize} value={`${pageSize}`} className="cursor-pointer">
                                     {pageSize}
                                 </SelectItem>

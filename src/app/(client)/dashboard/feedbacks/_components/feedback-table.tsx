@@ -35,7 +35,7 @@ export default function FeedbackTable ({ data }: FeedbackTableProps) {
         initialState: {
             pagination: {
                 pageIndex: 0,
-                pageSize: 20,
+                pageSize: 10,
             },
         },
         state: {

@@ -3,11 +3,13 @@
 import type { z } from "zod";
 import mongoose from "mongoose";
 import { connectDb } from "@/db";
+import { v4 as uuid } from "uuid";
 import { auth, signOut } from "@/auth";
 import { revalidatePath } from "next/cache";
 import { UpdateProfileSchema } from "../schemas";
 import ProjectModel from "@/db/models/project-model";
 import UserModel, { IUser } from "@/db/models/user-model";
+import FeedbackModel from "@/db/models/feedback-model";
 
 
 // create user with google provider
@@ -19,18 +21,19 @@ export async function createUser({
 }: Partial<IUser>) {
     try {
         await connectDb();
-        const user = await UserModel.create({
+        await UserModel.create({
             name,
             email,
             authProvider,
             providerAccountId,
+            accountId: uuid()
         });
 
         // TODO: send welcome email to user if user is created successfully
 
-        return user;
+        return { success: true, message: "User created successfully." };
     } catch (err: any) {
-        return null;
+        return { success: false, message: err.message || "Internal server error" };
     }
 }
 
@@ -121,6 +124,8 @@ export async function deleteUser() {
         await UserModel.findByIdAndDelete(authSession.user.id).session(dbSession).exec();
         await ProjectModel.deleteMany({ owner: authSession.user.id }).session(dbSession).exec();
         // TODO: delete feedbacks belonging to the projects of the user
+        await FeedbackModel.deleteMany({ project: { $in: user.projects } }).session(dbSession).exec();
+
         // TODO: send email to user with account deletion confirmation
 
         await dbSession.commitTransaction();

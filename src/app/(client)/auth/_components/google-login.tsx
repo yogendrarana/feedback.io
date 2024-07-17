@@ -16,11 +16,9 @@ const GoogleLogin = () => {
     const handleGoogleLogin = async () => {
         try {
             setLoading(true);
-            console.log(callbackUrl)
             const res = await signIn("google", {
                 callbackUrl: DEFAULT_LOGIN_REDIRECT
             });
-            console.log(res);
         } catch (error: any) {
             toast.error(error.message);
         }

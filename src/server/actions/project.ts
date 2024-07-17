@@ -6,7 +6,8 @@ import { connectDb } from "@/db";
 import { v4 as uuid } from "uuid";
 import { revalidatePath } from "next/cache";
 import { CreateProjectSchema } from "../schemas";
-import ProjectModel, { IProject } from "@/db/models/project-model";
+import ProjectModel from "@/db/models/project-model";
+import UserModel from "@/db/models/user-model";
 
 export async function createProject(values: z.infer<typeof CreateProjectSchema>) {
     try {
@@ -25,12 +26,6 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
             return { error: "Project with this name already exists. Please select a different name." };
         }
 
-        // check if the project id has already been used
-        const projectIdAlreadyUsed = await ProjectModel.findOne({ projectId }).exec();
-        if (projectIdAlreadyUsed) {
-            projectId = uuid();
-        }
-
         // TODO: add project secret as well in future
 
         const projectData = {
@@ -43,6 +38,9 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
         if (!project) {
             return { error: "Failed to create project" };
         }
+
+        // insert project id in user's project list
+        await UserModel.findByIdAndUpdate(session.user.id, { $push: { projects: project._id } }).exec();
 
         // revalidate path
         revalidatePath("/dashboard/projects");

@@ -15,16 +15,23 @@ export enum UserRoleEnum {
 
 // user schema 
 export interface IUser extends Document {
+    accountId: string;
     name: string;
     email: string;
     password?: string;
     providerAccountId?: string;
     authProvider?: AuthProviderEnum;
     role?: UserRoleEnum;
+    projects?: string[];
     isValidPassword: (password: string) => Promise<boolean>;
 }
 
 const userSchema: Schema = new Schema<IUser>({
+    accountId: {
+        type: Schema.Types.String,
+        required: true,
+        unique: true
+    },
     name: {
         type: Schema.Types.String,
         required: true
@@ -51,6 +58,12 @@ const userSchema: Schema = new Schema<IUser>({
         enum: UserRoleEnum,
         default: UserRoleEnum.user
     },
+
+    // references
+    projects: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Project'
+    }]
 }, {
     timestamps: true
 })

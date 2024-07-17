@@ -1,16 +1,16 @@
 import NextAuth from "next-auth"
 import { PROVIDER } from "@/constants";
 import { authConfig } from "./auth.config";
+import { createUser, getUserByEmail } from "./server/actions/user";
 import { AuthProviderEnum, UserRoleEnum } from "./db/models/user-model";
-import { createUser, getUserByEmail, getUserByProviderAccountId } from "./server/actions/user";
 
 const basePath = "/api/auth";
 
 export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
     callbacks: {
         async signIn({ account, profile }) {
-            if (account?.provider === PROVIDER.GOOGLE && profile?.sub) {
-                const existingUser = await getUserByProviderAccountId(profile?.sub as string);
+            if (account?.provider === PROVIDER.GOOGLE && profile?.email) {
+                const existingUser = await getUserByEmail(profile?.email as string);
                 if (!existingUser) {
                     await createUser({
                         name: profile.name as string,

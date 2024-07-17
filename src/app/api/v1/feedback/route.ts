@@ -1,9 +1,10 @@
 import { connectDb } from '@/db';
+import { FEEDBACK_TYPE } from '@/constants';
+import UserModel from '@/db/models/user-model';
 import ProjectModel from '@/db/models/project-model';
 import FeedbackModel from '@/db/models/feedback-model';
 import { NextRequest, NextResponse } from 'next/server';
 import { CreateFeedbackSchema } from '@/server/schemas';
-import UserModel from '@/db/models/user-model';
 
 export async function POST(req: NextRequest) {
     // TODO: Add rate limiting to prevent abuse
@@ -24,25 +25,30 @@ export async function POST(req: NextRequest) {
         // find the account and verify the secret
         const account = await UserModel.findOne({ accountId });
         if (!account) {
-            return NextResponse.json({ success: false, message: `Account with id ${accountId} not found.` }, { status: 404 });
+            return NextResponse.json({ success: false, message: `Invalid account id.` }, { status: 404 });
         }
 
         // Find the project and verify the secret
         const project = await ProjectModel.findOne({ projectId });
         if (!project) {
-            return NextResponse.json({ success: false, message: `Project with id ${projectId} not found.` }, { status: 404 });
+            return NextResponse.json({ success: false, message: `Invalid project id.` }, { status: 404 });
         }
 
         // Validate the request body
         const { message, category, email } = await req.json();
-        const validate = await CreateFeedbackSchema.safeParse({ message, category, email });
-        if (!validate.success) {
-            const errorMessage = validate.error.errors.map(err => err.message).join(', ');
-            return NextResponse.json({ success: false, message: errorMessage }, { status: 400 });
+
+        if (!FEEDBACK_TYPE.includes(category)) {
+            return NextResponse.json({ success: false, message: 'Invalid feedback category' }, { status: 400 });
         }
 
         if (!message || !category || !email) {
             return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
+        }
+
+        const validate = await CreateFeedbackSchema.safeParse({ message, category, email });
+        if (!validate.success) {
+            const errorMessage = validate.error.errors.map(err => err.message).join(', ');
+            return NextResponse.json({ success: false, message: errorMessage }, { status: 400 });
         }
 
         // Create the feedback
@@ -50,7 +56,7 @@ export async function POST(req: NextRequest) {
             project: project._id,
             message,
             category,
-            email: email || undefined,
+            email: email || null,
         });
 
         // Add the feedback to the project model feedbacks array

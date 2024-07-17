@@ -24,6 +24,8 @@ const projectSchema: Schema = new Schema<IProject>({
         required: true,
         unique: true
     },
+    
+    // references 
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',
