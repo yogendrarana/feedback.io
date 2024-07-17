@@ -9,6 +9,9 @@
   --dashboard-nav-height: 50px;
   --projects-header-height: 40px;
   --feedbacks-header-height: 40px;
+
+  /* size */
+  --size-button: 35px;
 }
 
 * {
