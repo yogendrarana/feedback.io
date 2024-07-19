@@ -1,5 +1,5 @@
 import { connectDb } from '@/db';
-import { FEEDBACK_TYPE } from '@/constants';
+import { FEEDBACK } from '@/constants';
 import UserModel from '@/db/models/user-model';
 import ProjectModel from '@/db/models/project-model';
 import FeedbackModel from '@/db/models/feedback-model';
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
         // Validate the request body
         const { message, category, email } = await req.json();
 
-        if (!FEEDBACK_TYPE.includes(category)) {
+        if (!FEEDBACK.includes(category)) {
             return NextResponse.json({ success: false, message: 'Invalid feedback category' }, { status: 400 });
         }
 

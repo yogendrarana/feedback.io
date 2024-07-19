@@ -1,6 +1,7 @@
 import * as React from "react"
-import { Check, CirclePlus } from "lucide-react"
+import { cn } from "@/lib/utils"
 import { Column } from "@tanstack/react-table"
+import { Check, CirclePlus } from "lucide-react"
 
 import {
     Command,
@@ -10,16 +11,15 @@ import {
     CommandItem,
     CommandList,
     CommandSeparator,
-} from "../command"
+} from "@/components/ui/command"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "../popover"
-import { Badge } from "../badge"
-import { Button } from "../button"
-import { Separator } from "../separator"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/popover"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 
 interface DataTableFacetedFilterProps<TData, TValue> {
     column?: Column<TData, TValue>
@@ -31,7 +31,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
     }[]
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
+export function FeedbackTableFacetedFilter<TData, TValue>({
     column,
     title,
     options,
@@ -44,17 +44,17 @@ export function DataTableFacetedFilter<TData, TValue>({
             <PopoverTrigger asChild>
                 <Button
                     variant="outline"
-                    className="flex gap-1 border border-dashed items-center rounded-md cursor-pointer hover:bg-gray-100"
+                    className="flex gap-2 border border-dashed items-center rounded-md cursor-pointer hover:bg-gray-100"
                 >
-                    <CirclePlus className="mr-2 h-4 w-4" />
+                    <CirclePlus className="h-4 w-4" />
                     {title}
                     {selectedValues?.size > 0 && (
                         <>
-                            <Separator orientation="vertical" className="mx-2 h-4" />
-                            <div className="space-x-1 flex gap-1">
+                            <Separator orientation="vertical" className="h-4" />
+                            <div className="flex gap-1">
                                 {selectedValues.size > 2 ? (
                                     <Badge
-                                        variant="default"
+                                        variant="secondary"
                                         className="rounded-md font-normal bg-gray-100"
                                     >
                                         {selectedValues.size} selected
@@ -66,7 +66,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                                             <Badge
                                                 variant="secondary"
                                                 key={option.value}
-                                                className="rounded-md font-normal bg-gray-100"
+                                                className="rounded-sm font-normal bg-gray-100"
                                             >
                                                 {option.label}
                                             </Badge>
@@ -77,14 +77,15 @@ export function DataTableFacetedFilter<TData, TValue>({
                     )}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-1 bg-white" align="start">
-                <Command>
-                    <CommandInput placeholder={title} className="p-2" />
+            <PopoverContent className="w-[200px]" align="start">
+                <Command className="bg-white">
+                    <CommandInput placeholder={title} />
                     <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
                         <CommandGroup>
                             {options.map((option) => {
                                 const isSelected = selectedValues.has(option.value)
+
                                 return (
                                     <CommandItem
                                         key={option.value}
@@ -99,7 +100,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                                                 filterValues.length ? filterValues : undefined
                                             )
                                         }}
-                                        className="p-1"
+                                        className="py-2 cursor-pointer"
                                     >
                                         <div
                                             className={cn(

@@ -4,7 +4,7 @@ import { z } from "zod"
 import React from "react"
 import moment from "moment"
 import { ColumnDef } from "@tanstack/react-table"
-import { FeedbackRowActions } from "./feedback-row-actions"
+import { FeedbackTableRowActions } from "./feedback-table-row-actions"
 import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column"
 
 export const FeedbackSchema = z.object({
@@ -16,13 +16,13 @@ export const FeedbackSchema = z.object({
     createdAt: z.date()
 })
 
-export type FeedbackColumnType = z.infer<typeof FeedbackSchema>
+export type FeedbackTableColumnType = z.infer<typeof FeedbackSchema>
 
-export const feedbackColumns: ColumnDef<FeedbackColumnType>[] = [
+export const feedbackTableColumns: ColumnDef<FeedbackTableColumnType>[] = [
     {
         accessorKey: "project",
         header: () => (
-            <div>Project</div>
+            <span>Project</span>
         ),
         filterFn: (row, id, value) => {
             return value.includes(row.getValue(id))
@@ -32,7 +32,7 @@ export const feedbackColumns: ColumnDef<FeedbackColumnType>[] = [
     {
         accessorKey: "category",
         header: () => (
-            <div>Category</div>
+            <span>Category</span>
         ),
         filterFn: (row, id, value) => {
             return value.includes(row.getValue(id))
@@ -42,11 +42,8 @@ export const feedbackColumns: ColumnDef<FeedbackColumnType>[] = [
     {
         accessorKey: "message",
         header: () => (
-            <div>Message</div>
+            <span>Message</span>
         ),
-        filterFn: (row, id, value) => {
-            return value.includes(row.getValue(id))
-        },
         enableHiding: false,
     },
     {
@@ -54,12 +51,12 @@ export const feedbackColumns: ColumnDef<FeedbackColumnType>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Created At" />
         ),
-        cell: ({ row }) => <div>{moment(row.getValue("createdAt")).format("DD MMMM, YYYY")}</div>,
+        cell: ({ row }) => <span>{moment(row.getValue("createdAt")).format("DD MMMM, YYYY")}</span>,
         enableHiding: false
     },
     {
         id: "actions",
-        cell: ({ row }) => <FeedbackRowActions row={row} />,
+        cell: ({ row }) => <FeedbackTableRowActions row={row} />,
         enableHiding: false,
     },
 ]

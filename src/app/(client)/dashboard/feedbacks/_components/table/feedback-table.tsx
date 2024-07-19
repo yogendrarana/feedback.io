@@ -14,24 +14,28 @@ import {
     useReactTable,
 } from "@tanstack/react-table"
 
-import { feedbackColumns } from './feedback-columns'
+import { feedbackCategory } from './data'
+import { feedbackTableColumns } from './feedback-table-columns'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { FeedbackTablePagination } from './feedback-table-pagination'
 import { DataTable } from '@/components/ui/data-table/data-table'
-import { DataTablePagination } from '@/components/ui/data-table/data-table-pagination'
+import { FeedbackTableToolbar } from './feedback-table-toolbar'
 
 interface FeedbackTableProps {
-    data: any[]
+    feedbacks: any
 }
 
-export default function FeedbackTable ({ data }: FeedbackTableProps) {
+export default function FeedbackTable(props: FeedbackTableProps) {
     const [rowSelection, setRowSelection] = React.useState({});
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
 
+    const feedbacks = props.feedbacks
+
     const table = useReactTable({
-        data,
-        columns: feedbackColumns,
+        data: feedbacks,
+        columns: feedbackTableColumns,
         initialState: {
             pagination: {
                 pageIndex: 0,
@@ -57,17 +61,20 @@ export default function FeedbackTable ({ data }: FeedbackTableProps) {
         getFacetedUniqueValues: getFacetedUniqueValues(),
     })
 
-
     return (
-        <div className="h-full flex flex-col gap-2 justify-between">
+        <div className="h-full flex flex-col gap-2 justify-between bg-white">
+            <div>
+                <FeedbackTableToolbar table={table} category={feedbackCategory} />
+            </div>
+
             <div className='h-full w-full flex-1 overflow-y-auto'>
                 <ScrollArea>
-                    <DataTable table={table} columns={feedbackColumns} />
+                    <DataTable table={table} columns={feedbackTableColumns} />
                 </ScrollArea>
             </div>
 
             <div className="sticky bottom-0 bg-white rounded-lg border">
-                <DataTablePagination table={table} />
+                <FeedbackTablePagination table={table} />
             </div>
         </div>
     )

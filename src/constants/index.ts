@@ -4,4 +4,4 @@ export const PROVIDER = {
     CREDENTIALS: 'credentials',
 }
 
-export const FEEDBACK_TYPE = ['bug', 'feature', 'suggestion', 'message'] as const;
+export const FEEDBACK = ['bug', 'feature', 'suggestion', 'message'] as const;

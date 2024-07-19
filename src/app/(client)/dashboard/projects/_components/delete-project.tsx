@@ -28,7 +28,6 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { IProject } from "@/db/models/project-model";
 import { deleteProject } from "@/server/actions/project";
 
 interface DeleteProjectProps {
