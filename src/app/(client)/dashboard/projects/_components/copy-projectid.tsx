@@ -5,16 +5,15 @@ import { toast } from 'sonner';
 import { Copy } from 'lucide-react';
 
 interface CopyProjectIdProps {
-    project: any
+    projectId: string
 }
 
 const CopyProjectId = (props: CopyProjectIdProps) => {
-    const project = JSON.parse(props.project);
     return (
         <button
             onClick={() => {
                 toast('Copied project id to clipboard');
-                window.navigator.clipboard.writeText(project.projectId);
+                window.navigator.clipboard.writeText(props.projectId);
             }}
             className='rounded-sm p-1.5 hover:bg-gray-100 duration-200'
         >

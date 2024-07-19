@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { X } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Cross, X } from "lucide-react"
 import { Table } from "@tanstack/react-table"
+import { Button } from "@/components/ui/button"
 import { FeedbackTableFacetedFilter } from "./feedback-table-faceted-filter"
 
 interface DataTableToolbarProps<TData> {

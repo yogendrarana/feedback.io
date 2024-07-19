@@ -1,52 +1,50 @@
 "use client"
 
-import React from 'react'
+import React from "react";
 import {
     ColumnFiltersState,
-    SortingState,
-    VisibilityState,
     getCoreRowModel,
     getFacetedRowModel,
     getFacetedUniqueValues,
     getFilteredRowModel,
     getPaginationRowModel,
     getSortedRowModel,
+    SortingState,
     useReactTable,
+    VisibilityState
 } from "@tanstack/react-table"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { projectTableColumns } from "./project-table-columns"
+import { DataTable } from "@/components/ui/data-table/data-table"
+import { ProjectTablePagination } from "./project-table-pagination";
+import ProjectTableToolbar from "./project-table-toolbar";
 
-import { feedbackCategory } from './data'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { feedbackTableColumns } from './feedback-table-columns'
-import { FeedbackTableToolbar } from './feedback-table-toolbar'
-import { DataTable } from '@/components/ui/data-table/data-table'
-import { FeedbackTablePagination } from './feedback-table-pagination'
-
-interface FeedbackTableProps {
-    feedbacks: any
+interface ProjectTableProps {
+    projects: any
 }
 
-export default function FeedbackTable(props: FeedbackTableProps) {
-    const [rowSelection, setRowSelection] = React.useState({});
+export default function ProjectTable(props: ProjectTableProps) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [rowSelection, setRowSelection] = React.useState({});
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-    
-    const feedbacks = props.feedbacks
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+
+    const projects = props.projects
 
     const table = useReactTable({
-        data: feedbacks,
-        columns: feedbackTableColumns,
+        data: projects,
+        columns: projectTableColumns,
         initialState: {
             pagination: {
                 pageIndex: 0,
                 pageSize: 10,
-            },
+            }
         },
         state: {
             sorting,
             columnVisibility,
-            rowSelection,
             columnFilters,
+            rowSelection
         },
         enableRowSelection: true,
         onRowSelectionChange: setRowSelection,
@@ -64,17 +62,17 @@ export default function FeedbackTable(props: FeedbackTableProps) {
     return (
         <div className="h-full flex flex-col gap-2 justify-between bg-white">
             <div>
-                <FeedbackTableToolbar table={table} category={feedbackCategory} />
+                <ProjectTableToolbar table={table} numberOfProjects={projects.length || 0} />
             </div>
 
             <div className='h-full w-full flex-1 overflow-y-auto'>
                 <ScrollArea>
-                    <DataTable table={table} columns={feedbackTableColumns} />
+                    <DataTable table={table} columns={projectTableColumns} />
                 </ScrollArea>
             </div>
 
             <div className="sticky bottom-0 bg-white rounded-lg border">
-                <FeedbackTablePagination table={table} />
+                <ProjectTablePagination table={table} />
             </div>
         </div>
     )
