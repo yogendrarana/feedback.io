@@ -77,7 +77,7 @@ export function FeedbackTableFacetedFilter<TData, TValue>({
                     )}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px]" align="start">
+            <PopoverContent className="w-[200px] p-0" align="start">
                 <Command className="bg-white">
                     <CommandInput placeholder={title} />
                     <CommandList>
@@ -104,14 +104,14 @@ export function FeedbackTableFacetedFilter<TData, TValue>({
                                     >
                                         <div
                                             className={cn(
-                                                "mr-2 flex h-4 w-4 items-center justify-center rounded-md border cursor-pointer",
-                                                isSelected ? "bg-black text-white" : "opacity-0 [&_svg]:invisible"
+                                                "flex h-4 w-4 items-center justify-center rounded-md border cursor-pointer",
+                                                isSelected ? "bg-black text-white" : "[&_svg]:invisible"
                                             )}
                                         >
                                             {isSelected && <Check className={cn("h-4 w-4")} />}
                                         </div>
                                         {option.icon && (
-                                            <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                                            <option.icon className="mx-3 h-4 w-4 text-muted-foreground" />
                                         )}
                                         <span>{option.label}</span>
                                         {facets?.get(option.value) && (
