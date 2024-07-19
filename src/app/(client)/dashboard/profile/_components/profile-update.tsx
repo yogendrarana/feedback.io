@@ -26,15 +26,12 @@ interface ProfileSettingProps {
     email: string;
 }
 
-export default function ProfileSetting(props: ProfileSettingProps) {
+export default function ProfileU({ name, email }: ProfileSettingProps) {
     const [loading, setLoading] = useState<boolean>(false);
 
     const hookForm = useForm<z.infer<typeof UpdateProfileSchema>>({
         resolver: zodResolver(UpdateProfileSchema),
-        defaultValues: {
-            name: props.name,
-            email: props.email
-        },
+        defaultValues: { name, email },
     });
 
     const onSubmit = async (values: z.infer<typeof UpdateProfileSchema>) => {
@@ -57,7 +54,7 @@ export default function ProfileSetting(props: ProfileSettingProps) {
 
     return (
         <SettingCard
-            title="Profile"
+            title="Update Profile"
             description="Your profile setting:"
         >
             <Form {...hookForm}>
@@ -91,7 +88,7 @@ export default function ProfileSetting(props: ProfileSettingProps) {
                     <div className="flex items-center justify-end">
                         <Button
                             type="submit"
-                            disabled={loading || hookForm.getValues().name === props.name}
+                            disabled={loading || hookForm.getValues().name === name}
                         >
                             {loading ? (
                                 <LoaderIcon size={16} className="animate-spin" />
