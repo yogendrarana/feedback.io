@@ -48,8 +48,7 @@ const Header = ({ className }: HeaderProps) => {
                         <GithubLogo width={20} name="GitHub Repository" />
                     </ExternalLink>
                     <Commandk />
-                    {/* TODO: make dark mode more beautiful */}
-                    {/* <ModeToggle /> */}
+                    <ModeToggle />
                     <UserButton />
                 </div>
             </div>

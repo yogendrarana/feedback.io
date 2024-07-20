@@ -4,9 +4,9 @@ import {
     LayoutDashboardIcon,
     MonitorIcon,
     MoonIcon,
-    SettingsIcon,
     SproutIcon,
     SunIcon,
+    User2,
 } from "lucide-react";
 import { GithubLogo, TwitterLogo } from "@/components/icon/logos";
 
@@ -17,14 +17,14 @@ export const Pages = [
         icon: HomeIcon,
     },
     {
+        name: "Profile",
+        href: "/dashboard/profile",
+        icon: User2,
+    },
+    {
         name: "Dashboard",
         href: "/dashboard",
         icon: LayoutDashboardIcon,
-    },
-    {
-        name: "Settings",
-        href: "/dashboard/settings",
-        icon: SettingsIcon,
     }
 ];
 
@@ -49,7 +49,7 @@ export const ChangeTheme = [
 export const DocumentationPages = [
     {
         name: "Getting Started",
-        href: "https://github.com/yogendrarana/slug?tab=readme-ov-file#-getting-started",
+        href: "https://github.com/yogendrarana/feedback.io#getting-started",
         icon: SproutIcon,
     },
     {
