@@ -64,7 +64,7 @@ export async function getProjectsByOwnerId(ownerId: string) {
             return { success: false, message: "User not authenticated", projects: [] };
         }
 
-        const projects = await ProjectModel.find({ owner: ownerId }).populate("feedbacks").exec();
+        const projects = await ProjectModel.find({ owner: ownerId }).populate("feedbacks").sort({ createdAt: -1 }).exec();
         return { success: true, message: "Projects fetched successfully", projects };
     } catch (error: any) {
         return { success: false, message: error.message || "Internal Server Error", projects: [] };
@@ -80,6 +80,7 @@ export async function deleteProject(projectId: string) {
         }
 
         await connectDb();
+        console.log(projectId)
         const project = await ProjectModel.findOneAndDelete({ projectId }).exec();
         if (!project) {
             return { error: "Project not found" };

@@ -17,20 +17,20 @@ const ProfileInfo = ({ user }: GeneralInfoProps) => {
         <p className="text-sm opacity-70">Your general information</p>
       </div>
 
-      <div className='space-y-4'>
+      <div className='space-y-6'>
         <div className='space-y-1'>
           <p className='font-medium'>Your Name:</p>
-          <p>{user.name}</p>
+          <p className='text-sm opacity-50'>{user.name}</p>
         </div>
 
         <div className='space-y-1'>
           <p className='font-medium'>Your Email:</p>
-          <p>{user.email}</p>
+          <p className='text-sm opacity-50'>{user.email}</p>
         </div>
 
         <div className='space-y-1'>
           <p className='font-medium'>Your Account ID:</p>
-          <p>{user.accountId}</p>
+          <p className='text-sm opacity-50'>{user.accountId}</p>
         </div>
       </div>
     </div>

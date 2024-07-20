@@ -15,7 +15,7 @@ export function ProjectTableRowActions<T extends ProjectTableColumnType>({ row }
     return (
         <div className="space-x-2">
             {row.original.projectId && <CopyProjectId projectId={row.original.projectId} />}
-            {row.original.id && <DeleteProject projectId={row.original.id} projectName={row.original.name} />}
+            {row.original.id && <DeleteProject projectId={row.original.projectId} projectName={row.original.name} />}
         </div>
     )
 }

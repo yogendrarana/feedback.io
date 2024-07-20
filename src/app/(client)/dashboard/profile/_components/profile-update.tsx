@@ -54,7 +54,7 @@ export default function ProfileU({ name, email }: ProfileSettingProps) {
 
     return (
         <SettingCard
-            title="Update Profile"
+            title="Update"
             description="Your profile setting:"
         >
             <Form {...hookForm}>
