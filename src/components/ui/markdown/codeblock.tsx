@@ -11,20 +11,27 @@ interface CodeBlockProps {
     filename?: string;
     switcher?: React.ReactNode;
     copyable?: boolean;
+    showLineNumbers?: boolean;
 }
 
-export default function CodeBlock({ children, className, filename, switcher, copyable }: CodeBlockProps) {
+export default function CodeBlock({
+    children,
+    className,
+    filename,
+    switcher,
+    copyable,
+    showLineNumbers = true
+}: CodeBlockProps) {
     const language = className?.replace(/language-/, '') || '';
 
     const getCodeString = (children: ReactNode): string => {
         if (typeof children === 'string') {
             return children;
         }
-    
+
         if (isValidElement(children)) {
             if (typeof children.type === 'function') {
                 try {
-                    console.log("checkpoint 1")
                     // Use createElement instead of directly calling the type
                     const renderedContent = createElement(children.type, children.props);
                     return getCodeString(renderedContent);
@@ -33,19 +40,19 @@ export default function CodeBlock({ children, className, filename, switcher, cop
                     return '';
                 }
             }
-    
+
             if (children.props.children) {
                 return getCodeString(children.props.children);
             }
         }
-    
+
         if (Array.isArray(children)) {
             return children.map(getCodeString).join('');
         }
-    
+
         return '';
     };
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const codeString = useMemo(() => getCodeString(children), [children]);
 
@@ -58,9 +65,6 @@ export default function CodeBlock({ children, className, filename, switcher, cop
             </React.Fragment>
         ));
     };
-
-
-
 
     return (
         <div className={cn("rounded-lg border text-black", className)}>
@@ -87,7 +91,9 @@ export default function CodeBlock({ children, className, filename, switcher, cop
             </div>
             <pre className={`language-${language} p-4 overflow-x-auto`}>
                 <code className="text-sm text-black font-mono">
-                    {addLineNumbers(codeString)}
+                    {
+                        showLineNumbers ? addLineNumbers(codeString) : codeString
+                    }
                 </code>
             </pre>
         </div>
