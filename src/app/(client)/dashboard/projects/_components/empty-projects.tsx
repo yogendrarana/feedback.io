@@ -1,11 +1,12 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import { CircleOff, Plus } from 'lucide-react'
 import { CreateProject } from './create-project'
-import { CircleOff } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function EmptyProjects() {
     return (
-        <div className={cn("h-full grid place-items-center")}>
+        <div className={cn("h-[72vh] grid place-items-center")}>
             <div className="mx-auto max-w-screen-sm text-center space-y-4">
                 <CircleOff size={64} className="mx-auto text-gray-500" />
 
@@ -17,7 +18,8 @@ export default function EmptyProjects() {
                 </p>
                 <div className="flex items-center justify-center">
                     <CreateProject>
-                        <span className='px-4 py-2 border rounded-md bg-white hover:bg-gray-100 duration-200 dark:bg-black'>
+                        <span className='px-4 py-2 border rounded-md flex items-center dark:bg-white dark:text-black'>
+                            <Plus size={16} className="mr-2" />
                             Create Project
                         </span>
                     </CreateProject>

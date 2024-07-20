@@ -3,9 +3,8 @@
 import * as React from "react"
 import { Row } from "@tanstack/react-table"
 import DeleteProject from "../delete-project"
-import { ProjectTableColumnType } from "./project-table-columns"
-import ProjectInfo from "../project-info"
 import CopyProjectId from "../copy-projectid"
+import { ProjectTableColumnType } from "./project-table-columns"
 
 interface DataTableRowActionsProps<T> {
     row: Row<T>

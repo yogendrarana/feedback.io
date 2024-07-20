@@ -8,7 +8,7 @@ interface EmptyFeedbackProps {
 
 export default function EmptyFeedback({ className }: EmptyFeedbackProps) {
     return (
-        <div className={cn("h-full grid place-items-center", className)}>
+        <div className={cn("h-[72vh] grid place-items-center", className)}>
             <div className="mx-auto max-w-screen-sm text-center space-y-4">
                 <CircleOff size={64} className="mx-auto text-gray-500" />
 
