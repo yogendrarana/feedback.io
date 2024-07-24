@@ -11,7 +11,7 @@ export const FeedbackSchema = z.object({
     id: z.string(),
     project: z.string(),
     category: z.string(),
-    email: z.string(),
+    sender: z.string(),
     message: z.string(),
     createdAt: z.date()
 })
@@ -47,11 +47,18 @@ export const feedbackTableColumns: ColumnDef<FeedbackTableColumnType>[] = [
         enableHiding: false,
     },
     {
+        accessorKey: "sender",
+        header: () => (
+            <span>Sender</span>
+        ),
+        enableHiding: false
+    },
+    {
         accessorKey: "createdAt",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Created At" />
         ),
-        cell: ({ row }) => <span>{moment(row.getValue("createdAt")).format("DD MMMM, YYYY")}</span>,
+        cell: ({ row }) => <span>{moment(row.getValue("createdAt")).format("YYYY-MM-DD")}</span>,
         enableHiding: false
     },
     {

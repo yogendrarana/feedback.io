@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+// email schema
+export const EmailSchema = z.string().email({ message: "Invalid email address" })
+
 // create project schema
 export const CreateProjectSchema = z.object({
     name: z

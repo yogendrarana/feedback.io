@@ -72,7 +72,7 @@ export default function FeedbackTable(props: FeedbackTableProps) {
                     <DataTable table={table} columns={feedbackTableColumns} />
                 </ScrollArea>
             </div>
-
+        
             <div className="sticky bottom-0 bg-white rounded-lg border">
                 <FeedbackTablePagination table={table} />
             </div>

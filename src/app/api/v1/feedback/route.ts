@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
             project: project._id,
             message,
             category,
-            email: email || null,
+            sender: email || null,
         });
 
         // Add the feedback to the project model feedbacks array

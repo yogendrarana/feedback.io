@@ -4,7 +4,7 @@ export interface IFeedback extends Document {
     project: ObjectId;
     message: string;
     category: string;
-    email?: string;
+    sender?: string;
     createdAt: Date;
 }
 
@@ -16,7 +16,7 @@ const FeedbackSchema: Schema = new Schema({
     category: {
         type: Schema.Types.String,
     },
-    email: {
+    sender: {
         type: Schema.Types.String,
         require: true
     },
