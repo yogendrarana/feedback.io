@@ -67,7 +67,7 @@ export default function CodeBlock({
     };
 
     return (
-        <div className={cn("rounded-lg border text-black", className)}>
+        <div className={cn("rounded-lg border text-black bg-white", className)}>
             <div className="h-[50px] px-4 flex items-center justify-between text-sm font-mono bg-gray-100 rounded-t-md">
                 {filename && <div>{filename}</div>}
 

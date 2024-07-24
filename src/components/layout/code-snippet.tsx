@@ -4,8 +4,6 @@ import CodeBlock from '../ui/markdown/codeblock'
 import { TypographyH2, TypographyP } from '../ui/typography'
 
 const CodeSnippet = () => {
-
-
     const postCode = dedent`
         axios.post('https://feeeedback.vercel.app/feedback', {
             senderEmail: 'abc@gmail.com',
@@ -21,8 +19,8 @@ const CodeSnippet = () => {
     `;
 
     return (
-        <div className={cn("mt-8")}>
-            <div className='flex items-center justify-between'>
+        <section className={cn("h-[calc(100vh-400px)] flex items-center")}>
+            <div className='w-full flex items-center justify-between'>
                 <div>
                     <TypographyH2>Simple Integration</TypographyH2>
                     <TypographyH2>Powerful Results</TypographyH2>
@@ -41,7 +39,7 @@ const CodeSnippet = () => {
                     </CodeBlock>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
