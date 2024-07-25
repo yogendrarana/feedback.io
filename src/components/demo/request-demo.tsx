@@ -55,7 +55,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                 return
             }
     
-            await delay(3000);
+            await delay(1000);
 
             setFeedbacks(prev => [
                 ...prev,
@@ -77,12 +77,12 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
     };
 
     return (
-        <div className={cn("w-[450px] p-4 border rounded-xl flex flex-col")}>
+        <div className={cn("w-full lg:w-[450px] p-4 border rounded-xl flex flex-col")}>
             <div className="flex items-center justify-between gap-2 mb-4">
                 <div className=" flex items-center gap-2 flex-1 border rounded-lg overflow-hidden">
                     <span className="px-4 py-2 bg-gray-100">POST</span>
                     <span className=""> / feedback</span>
-                    <Copy size={16} className="ml-auto mr-4 cursor-pointer" />
+                    {/* <Copy size={16} className="ml-auto mr-4 cursor-pointer" /> */}
                 </div>
                 <Button
                     variant="default"

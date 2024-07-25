@@ -11,11 +11,11 @@ const Demo = () => {
   const [feedbacks, setFeedbacks] = React.useState(DATA.feedbacks)
 
   return (
-    <section className={cn("space-y-8 flex flex-col justify-center items-center")}>
+    <section className={cn("my-8 space-y-8 flex flex-col justify-center items-center")}>
       <TypographyH3 className='text-center'>Explore API Endpoints</TypographyH3>
 
-      <div className='w-full flex gap-4 justify-between items-start'>
-        <div>
+      <div className='w-full flex flex-col lg:flex-row gap-4 justify-between items-start'>
+        <div className={cn('w-full lg:w-auto')}>
           <RequestDemo setFeedbacks={setFeedbacks} />
         </div>
 

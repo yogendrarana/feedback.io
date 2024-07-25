@@ -18,14 +18,14 @@ export const DATA = {
         {
             project: "Project C",
             category: "suggestion",
-            message: "Maybe you should use SSR to make site fase",
+            message: "Maybe you should use SSR to make site faster",
             sender: "lucky@gamil.com",
             createdAt: "2024-04-10"
         },
         {
             project: "Project D",
             category: "message",
-            message: "Yout are doing great whith this project",
+            message: "You are doing great with this project",
             sender: "abc@gamil.com",
             createdAt: "2024-05-12"
         },
