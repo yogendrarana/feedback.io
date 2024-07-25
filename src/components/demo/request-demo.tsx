@@ -117,7 +117,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                 <Accordion type="single" defaultValue="value1" className="w-full">
                     <AccordionItem value="value1" className="border rounded-lg overflow-hidden">
                         <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Body</AccordionTrigger>
-                        <AccordionContent className="p-2 space-y-3">
+                        <AccordionContent className="p-4 space-y-3">
                             <Input
                                 type="text"
                                 name="senderEmail"
