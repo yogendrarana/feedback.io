@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Badge } from "../ui/badge";
-import { NotebookText } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 import Commandk from "@/components/commadk";
 import UserButton from "@/components/auth/user-btn";
 import { GithubLogo } from "@/components/icon/logos";
 import { buttonVariants } from "@/components/ui/button";
 import { ModeToggle } from "@/components/util/change-theme";
 import { ExternalLink } from "@/components/ui/external-link";
+import { LightBulb, LightBulbOutline } from "@/assets";
+import Image from "next/image";
 
 interface HeaderProps {
     className?: string;
@@ -29,7 +30,7 @@ const Header = ({ className }: HeaderProps) => {
                     <div className="flex items-center space-x-1 pr-1 md:pr-4">
                         <div className="flex items-center space-x-3 transition-opacity hover:opacity-80 rtl:space-x-reverse">
                             <Link href={"/"}>
-                                <NotebookText width={30} />
+                                <Lightbulb width={30} />
                             </Link>
                             <Link
                                 href="/"

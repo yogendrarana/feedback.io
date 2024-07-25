@@ -128,6 +128,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                             />
 
                             <Select
+                                defaultValue="bug"
                                 onValueChange={(value) => setFromData({ ...formData, feedbackCategory: value })}
                             >
                                 <SelectTrigger className="w-full focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0">
