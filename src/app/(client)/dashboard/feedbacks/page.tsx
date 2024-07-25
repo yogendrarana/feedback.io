@@ -16,6 +16,7 @@ export default async function FeedbacksPage() {
       category: f.category,
       project: f.project.name,
       message: f.message,
+      sender: f.sender,
       createdAt: f.createdAt.toISOString()
     }));
   }
