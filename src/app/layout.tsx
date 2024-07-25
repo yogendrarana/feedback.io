@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import { Toaster } from "sonner"
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "Feedback",
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               {children}
               <Toaster richColors />
               <Analytics />
+              <SpeedInsights />
             </BackgroundProvider>
           </ThemeProvider>
         </AuthSessionProvider>
