@@ -33,7 +33,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
         const projectSuffix = ['E', 'F', 'G', 'H', 'I', 'X'];
         const randomSuffix = projectSuffix[Math.floor(Math.random() * projectSuffix.length)];
         return `Project ${randomSuffix}`;
-      };
+    };
 
     const handleFeedbackPost = async () => {
         setLoading(true);
@@ -54,7 +54,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                 toast.warning(errorMessage)
                 return
             }
-    
+
             await delay(1000);
 
             setFeedbacks(prev => [
@@ -77,13 +77,13 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
     };
 
     return (
-        <div className={cn("w-full lg:w-[450px] p-4 border rounded-xl flex flex-col")}>
-            <div className="flex items-center justify-between gap-2 mb-4">
+        <div className={cn("w-full lg:w-[450px] p-3 space-y-3 border rounded-xl flex flex-col")}>
+            <div className="flex items-center justify-between gap-2">
                 <div className=" flex items-center gap-2 flex-1 border rounded-lg overflow-hidden">
                     <span className="px-3 py-2 bg-gray-100 rounded-l-md">POST</span>
                     <span className="text-gray-400">/api/v1/feedback</span>
-                    <Button 
-                        variant="ghost" 
+                    <Button
+                        variant="ghost"
                         className="ml-auto cursor-pointer hover:bg-white"
                         onClick={() => {
                             navigator.clipboard.writeText(APP_DATA.feedback_endpoint)
@@ -104,65 +104,63 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                     Send
                 </Button>
             </div>
-            <div className="flex-grow overflow-y-auto space-y-2">
-                <Accordion type="single" defaultValue="value1" collapsible className="w-full">
-                    <AccordionItem value="value1" className="border rounded-lg overflow-hidden">
-                        <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Header</AccordionTrigger>
-                        <AccordionContent className="p-2 space-y-3">
-                            <Input
-                                type="text"
-                                placeholder="x-client-id (*required)"
-                                className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
-                            />
-                            <Input
-                                type="text"
-                                placeholder="x-project-id (*required)"
-                                className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
-                            />
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
+            <Accordion type="single" defaultValue="value1" collapsible className="w-full">
+                <AccordionItem value="value1" className="border rounded-lg overflow-hidden">
+                    <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Header</AccordionTrigger>
+                    <AccordionContent className="p-3 space-y-3">
+                        <Input
+                            type="text"
+                            placeholder="x-client-id (*required)"
+                            className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
+                        />
+                        <Input
+                            type="text"
+                            placeholder="x-project-id (*required)"
+                            className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
+                        />
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
 
-                <Accordion type="single" defaultValue="value2" collapsible className="w-full">
-                    <AccordionItem value="value2" className="border rounded-lg overflow-hidden">
-                        <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Body</AccordionTrigger>
-                        <AccordionContent className="p-4 space-y-3">
-                            <Input
-                                type="text"
-                                name="email"
-                                placeholder="Sender email"
-                                value={formData.email}
-                                onChange={(e) => setFromData({ ...formData, [e.target.name]: e.target.value })}
-                                className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-1"
-                            />
+            <Accordion type="single" defaultValue="value2" collapsible className="w-full">
+                <AccordionItem value="value2" className="border rounded-lg overflow-hidden">
+                    <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Body</AccordionTrigger>
+                    <AccordionContent className="p-3 space-y-3">
+                        <Input
+                            type="text"
+                            name="email"
+                            placeholder="Sender email"
+                            value={formData.email}
+                            onChange={(e) => setFromData({ ...formData, [e.target.name]: e.target.value })}
+                            className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-1"
+                        />
 
-                            <Select
-                                defaultValue="bug"
-                                value={formData.type}
-                                name="type"
-                                onValueChange={(value) => setFromData({ ...formData, type: value })}
-                            >
-                                <SelectTrigger className="w-full focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0">
-                                    <SelectValue placeholder="Feedback category" />
-                                </SelectTrigger>
-                                <SelectContent className="w-full">
-                                    <SelectItem value="bug">Bug</SelectItem>
-                                    <SelectItem value="feature">Feature</SelectItem>
-                                    <SelectItem value="message">Message</SelectItem>
-                                </SelectContent>
-                            </Select>
+                        <Select
+                            defaultValue="bug"
+                            value={formData.type}
+                            name="type"
+                            onValueChange={(value) => setFromData({ ...formData, type: value })}
+                        >
+                            <SelectTrigger className="w-full focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0">
+                                <SelectValue placeholder="Feedback category" />
+                            </SelectTrigger>
+                            <SelectContent className="w-full">
+                                <SelectItem value="bug">Bug</SelectItem>
+                                <SelectItem value="feature">Feature</SelectItem>
+                                <SelectItem value="message">Message</SelectItem>
+                            </SelectContent>
+                        </Select>
 
-                            <Textarea
-                                name="feedback"
-                                placeholder="Feedback message"
-                                value={formData.feedback}
-                                onChange={(e) => setFromData({ ...formData, [e.target.name]: e.target.value })}
-                                className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
-                            />
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
-            </div>
+                        <Textarea
+                            name="feedback"
+                            placeholder="Feedback message"
+                            value={formData.feedback}
+                            onChange={(e) => setFromData({ ...formData, [e.target.name]: e.target.value })}
+                            className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
+                        />
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
         </div >
     );
 }
