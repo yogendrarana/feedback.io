@@ -61,9 +61,9 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                 ...prev,
                 {
                     project: generateRandomProjectName(),
-                    category: formData.type,
-                    message: formData.feedback,
-                    sender: formData.email,
+                    type: formData.type,
+                    feedback: formData.feedback,
+                    email: formData.email,
                     createdAt: new Date()
                 }
             ]);
@@ -139,6 +139,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                             <Select
                                 defaultValue="bug"
                                 value={formData.type}
+                                name="type"
                                 onValueChange={(value) => setFromData({ ...formData, type: value })}
                             >
                                 <SelectTrigger className="w-full focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0">

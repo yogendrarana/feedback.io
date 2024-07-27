@@ -49,7 +49,7 @@ export const feedbackTableColumns: ColumnDef<FeedbackTableColumnType>[] = [
     {
         accessorKey: "email",
         header: () => (
-            <span>Sender</span>
+            <span>Email</span>
         ),
         enableHiding: false
     },
