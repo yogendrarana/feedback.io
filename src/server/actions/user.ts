@@ -21,13 +21,17 @@ export async function createUser({
 }: Partial<IUser>) {
     try {
         await connectDb();
-        await UserModel.create({
+        const user = await UserModel.create({
             name,
             email,
             authProvider,
             providerAccountId,
-            accountId: uuid()
+            clientId: uuid()
         });
+
+        if (!user) {
+            return { success: false, message: "Failed to create user." };
+        }
 
         // TODO: send welcome email to user if user is created successfully
 

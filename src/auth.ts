@@ -11,13 +11,20 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
         async signIn({ account, profile }) {
             if (account?.provider === PROVIDER.GOOGLE && profile?.email) {
                 const existingUser = await getUserByEmail(profile?.email as string);
+
                 if (!existingUser) {
-                    await createUser({
+                    const res = await createUser({
                         name: profile.name as string,
                         email: profile.email as string,
                         authProvider: AuthProviderEnum.google,
                         providerAccountId: profile.sub as string,
                     })
+
+                    if (res.success) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             }
 

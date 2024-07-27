@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 export const getFeedbackByProjectId = async (projectId: string) => {
     try {
         await connectDb();
-        const feedbacks = await FeedbackModel.find({ projectId });
+        const feedbacks = await FeedbackModel.find({ project: projectId });
         return feedbacks;
     } catch (err: any) {
         return [];
