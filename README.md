@@ -16,7 +16,7 @@ Include these in your request headers as **x-client-id** and **x-project-id** re
 To submit feedback, send a POST request to the following endpoint.
 
 ```http
-  POST https://feedback.io/feedback
+  POST https://feedbackio.vercel.app/api/v1/feedback
 ```
 
 | Header | Type     | Description                |
