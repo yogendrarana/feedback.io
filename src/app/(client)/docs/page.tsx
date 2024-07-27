@@ -4,6 +4,7 @@ import Footer from '@/components/layout/footer'
 import ManualUsage from './_components/manual.mdx'
 import PackageUsage from './_components/package.mdx'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import MdxProvider from '@/components/providers/mdx-provider'
 
 const DocPage = () => {
     return (
@@ -13,8 +14,10 @@ const DocPage = () => {
                     <TabsTrigger value="manual">Using Manually</TabsTrigger>
                     <TabsTrigger value="package">Using package</TabsTrigger>
                 </TabsList>
-                <TabsContent value="manual" className={cn("mt-10", "prose prose-lg")} style={{ maxWidth: '100%' }}>
-                    <ManualUsage />
+                <TabsContent value="manual" className={cn("mt-10")}>
+                    <MdxProvider className='max-w-none'>
+                        <ManualUsage />
+                    </MdxProvider>
                     <Footer />
                 </TabsContent>
                 <TabsContent value="package" className='mt-10'>

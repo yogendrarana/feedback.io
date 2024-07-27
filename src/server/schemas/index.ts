@@ -36,7 +36,7 @@ export const CreateFeedbackSchema = z.object({
         .string()
         .min(1, { message: "Message is required." })
         .max(500, { message: "The message must be 500 characters or less." }),
-    category: z
+    type: z
         .string()
         .min(1, { message: "Category is required." })
         .max(50, { message: "The category must be 50 characters or less." }),

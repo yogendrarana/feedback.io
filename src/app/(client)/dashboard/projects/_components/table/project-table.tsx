@@ -15,7 +15,7 @@ import {
 } from "@tanstack/react-table"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { projectTableColumns } from "./project-table-columns"
-import { DataTable } from "@/components/ui/data-table/data-table"
+import { DataTable } from "@/components/table/data-table"
 import { ProjectTablePagination } from "./project-table-pagination";
 import ProjectTableToolbar from "./project-table-toolbar";
 

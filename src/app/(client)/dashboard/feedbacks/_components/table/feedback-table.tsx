@@ -18,7 +18,7 @@ import { feedbackCategory } from './data'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { feedbackTableColumns } from './feedback-table-columns'
 import { FeedbackTableToolbar } from './feedback-table-toolbar'
-import { DataTable } from '@/components/ui/data-table/data-table'
+import { DataTable } from '@/components/table/data-table'
 import { FeedbackTablePagination } from './feedback-table-pagination'
 
 interface FeedbackTableProps {

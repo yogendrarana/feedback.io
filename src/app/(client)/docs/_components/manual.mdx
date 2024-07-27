@@ -1,15 +1,19 @@
-import CodeBlock from '@/components/ui/markdown/codeblock';
+import { APP_DATA } from '@/data/app-data';
+import MdxTable from '@/components/ui/mdx/mdx-table';
+import CodeBlock from '@/components/ui/mdx/codeblock';
+import { FeedbackEndpoint } from './feedback-endpoint';
+import FeedbackPost from '@/components/markdown/feedback-post';
 
 ## Getting Started
 1. Create an account on our platform. [Click here](/auth) to create an account.
-2. Create a new project and note down your Account ID and Project ID.
+2. Create a new project and note down your Client ID and Project ID.
 
 ## Using Feedback API
 feedback.io exposes an endpoint for submitting feedback. You will need to provide:
-- Account ID
+- Client ID
 - Project ID
 
-Include these in your request headers as **x-account-id** and **x-project-id** respectively. For security, do not hardcode these IDs in your code. Use environment variables to store them securely.
+Include these in your request headers as **x-client-id** and **x-project-id** respectively. For security, do not hardcode these IDs in your code. Use environment variables to store them securely.
 
 ## Submitting Feedback
 
@@ -17,16 +21,31 @@ Include these in your request headers as **x-account-id** and **x-project-id** r
 
 To submit feedback, send a POST request to the following endpoint with mentioned request headers.
 
-```http
-  POST https://feedback.io/feedback
-```
+<FeedbackEndpoint />
 
-```
-| Header       | Type   | Description                   |
-| ------------ | ------ | ----------------------------- |
-| x-account-id | string | **Required.** Your Account ID |
-| x-project-id | string | **Required.** Your Project ID |
-```
+<div className="overflow-x-auto">
+  <table className="min-w-full border-collapse border border-gray-300">
+    <thead>
+      <tr className="bg-gray-100">
+        <th className="border border-gray-300 px-4 py-2 text-left">Header</th>
+        <th className="border border-gray-300 px-4 py-2 text-left">Type</th>
+        <th className="border border-gray-300 px-4 py-2 text-left">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td className="border border-gray-300 px-4 py-2">x-client-id</td>
+        <td className="border border-gray-300 px-4 py-2">string</td>
+        <td className="border border-gray-300 px-4 py-2"><strong>Required.</strong> Your Account ID</td>
+      </tr>
+      <tr>
+        <td className="border border-gray-300 px-4 py-2">x-project-id</td>
+        <td className="border border-gray-300 px-4 py-2">string</td>
+        <td className="border border-gray-300 px-4 py-2"><strong>Required.</strong> Your Project ID</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <br />
 #### Request Body and Parameters
@@ -34,19 +53,41 @@ Your request body should be a JSON object with the following structure:
 
 ```javascript
 {
-    "senderEmail": "example@gmail.com",
-    "feedbackType": "bug",
-    "feedbackMessage": "Some message"
+    "email": "example@gmail.com",
+    "type": "bug",
+    "feedback": "Some message"
 }
 ```
 
-```
-| Parameter       | Type     | Description                                                              |
-| --------------- | -------- | ------------------------------------------------------------------------ |
-| senderEmail     | `string` | **Required**. Email address of the feedback sender                       |
-| feedbackMessage | `string` | **Required**. Content of the feedback message                            |
-| feedbackType    | `string` | **Optional**. Type of feedback: **bug** or **suggestion** or **message** |
-```
+<div className="overflow-x-auto">
+  <table className="min-w-full border-collapse border border-gray-300">
+    <thead>
+      <tr className="bg-gray-100">
+        <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Parameter</th>
+        <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Type</th>
+        <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td className="border border-gray-300 px-4 py-2">email</td>
+        <td className="border border-gray-300 px-4 py-2"><code className="bg-gray-100 rounded px-1">string</code></td>
+        <td className="border border-gray-300 px-4 py-2"><strong>Required</strong>. Email address of the feedback sender</td>
+      </tr>
+      <tr>
+        <td className="border border-gray-300 px-4 py-2">type</td>
+        <td className="border border-gray-300 px-4 py-2"><code className="bg-gray-100 rounded px-1">string</code></td>
+        <td className="border border-gray-300 px-4 py-2"> <strong>Required</strong>. Type of feedback: <strong>bug</strong> or <strong>feature</strong> or <strong>message</strong> </td>
+      </tr>
+      <tr>
+        <td className="border border-gray-300 px-4 py-2">feedback</td>
+        <td className="border border-gray-300 px-4 py-2"><code className="bg-gray-100 rounded px-1">string</code></td>
+        <td className="border border-gray-300 px-4 py-2"><strong>Required</strong>. Content of the feedback message</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 <br />
 #### Successful Response
@@ -61,7 +102,10 @@ If your POST request is successful, you will receive a 200 status code along wit
 
 <br />
 #### Error Response
-If the POST request fails, you will receive an appropriate status code depending on the error type, along with a JSON response:
+If the POST request fails, you will receive an appropriate status code depending on the error type, along with a JSON response. Common error status codes:
+    - 400: Bad Request (e.g., missing required fields)
+    - 401: Unauthorized (invalid Account ID or Project ID)
+    - 500: Internal Server Error
 
 ```javascript
 {
@@ -69,11 +113,6 @@ If the POST request fails, you will receive an appropriate status code depending
     "message": "Some error message"
 }
 ```
-
-Common error status codes:
-- 400: Bad Request (e.g., missing required fields)
-- 401: Unauthorized (invalid Account ID or Project ID)
-- 500: Internal Server Error
 
 
 ## Best Practices
@@ -83,45 +122,4 @@ Common error status codes:
 
 ## Code Example
 
-<div className="mt-2 space-y-4">
-  <CodeBlock filename="using-axios.js" copyable className="flex-1 bg-white">
-    ```javascript
-    import axios from 'axios';
-
-    axios.post('https://feeeedback.vercel.app/feedback', {
-        senderEmail: 'abc@gmail.com',
-        feedbackType: "message",
-        feedbackMessage: "Your site is cool."
-    }, {
-        headers: {
-            'Content-Type': 'application/json',
-            'account': 'Your-Account-ID',
-            'project': 'Your-Project-ID'
-        },
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-    ```
-  </CodeBlock>
-  <CodeBlock filename="using-fetch.js" copyable className="flex-1 bg-white">
-    ```javascript
-    fetch('https://feeeedback.vercel.app/feedback', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'account': 'Your-Account-ID',
-            'project': 'Your-Project-ID'
-        },
-        body: JSON.stringify({
-            senderEmail: 'abc@gmail.com',
-            feedbackType: "message",
-            feedbackMessage: "Your site is cool."
-        })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-    ```
-  </CodeBlock>
-</div>
+ <FeedbackPost copyable showLineNumbers filename='feedback.js' className='w-full bg-white' />

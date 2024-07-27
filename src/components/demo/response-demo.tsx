@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn, dedent } from '@/lib/utils';
-import CodeBlock from '../ui/markdown/codeblock'
+import CodeBlock from '../ui/mdx/codeblock'
 
 const ResponseDemo = () => {
   const responseCode = dedent`

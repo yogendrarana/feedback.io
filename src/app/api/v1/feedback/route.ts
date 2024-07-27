@@ -16,9 +16,10 @@ export async function POST(req: NextRequest) {
     await connectDb();
     const projectId = req.headers.get('x-project-id');
     const accountId = req.headers.get('x-account-id');
+    const accountSecret = req.headers.get('x-account-secret');
 
-    if (!projectId || !accountId) {
-        return NextResponse.json({ success: false, message: 'Missing project id or project id' }, { status: 400 });
+    if (!projectId || !accountId || !accountSecret) {
+        return NextResponse.json({ success: false, message: 'Missing project id, account id, or account secret' }, { status: 400 });
     }
 
     try {
@@ -29,23 +30,23 @@ export async function POST(req: NextRequest) {
         }
 
         // Find the project and verify the secret
-        const project = await ProjectModel.findOne({ projectId });
+        const project = await ProjectModel.findOne({ projectId, owner: account._id });
         if (!project) {
-            return NextResponse.json({ success: false, message: `Invalid project id.` }, { status: 404 });
+            return NextResponse.json({ success: false, message: `Invalid project id or project does not belong to this account.` }, { status: 404 });
         }
 
         // Validate the request body
-        const { message, category, email } = await req.json();
+        const { message, category, sender } = await req.json();
 
         if (!FEEDBACK.includes(category)) {
             return NextResponse.json({ success: false, message: 'Invalid feedback category' }, { status: 400 });
         }
 
-        if (!message || !category || !email) {
+        if (!message || !category || !sender) {
             return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
         }
 
-        const validate = await CreateFeedbackSchema.safeParse({ message, category, email });
+        const validate = await CreateFeedbackSchema.safeParse({ message, category, email: sender });
         if (!validate.success) {
             const errorMessage = validate.error.errors.map(err => err.message).join(', ');
             return NextResponse.json({ success: false, message: errorMessage }, { status: 400 });
@@ -56,7 +57,7 @@ export async function POST(req: NextRequest) {
             project: project._id,
             message,
             category,
-            sender: email || null,
+            sender: sender || null,
         });
 
         // Add the feedback to the project model feedbacks array
@@ -67,6 +68,6 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ success: true, message: 'Feedback sent successfully' }, { status: 201 });
     } catch (error: any) {
-        return NextResponse.json({ success: false, message: error.message || 'Internal server error' });
+        return NextResponse.json({ success: false, message: error.message || 'Internal server error' }, { status: 500 });
     }
 }

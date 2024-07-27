@@ -5,7 +5,7 @@ import React from "react"
 import moment from "moment"
 import { ColumnDef } from "@tanstack/react-table"
 import { FeedbackTableRowActions } from "./feedback-table-row-actions"
-import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column"
+import { DataTableColumnHeader } from "@/components/table/data-table-column"
 
 export const FeedbackSchema = z.object({
     id: z.string(),

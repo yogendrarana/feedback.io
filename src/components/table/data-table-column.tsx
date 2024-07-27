@@ -4,10 +4,10 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "../dropdown-menu"
+} from "../ui/dropdown-menu"
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { Button } from "../button"
+import { Button } from "../ui/button"
 import { Column } from "@tanstack/react-table"
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react"
 

@@ -1,14 +1,14 @@
 "use client"
 
 import React from 'react'
-import { DATA } from "@/data"
 import { cn } from '@/lib/utils'
 import RequestDemo from './request-demo'
-import { TypographyH3, TypographyP } from '../ui/typography'
+import { DEMO_DATA } from "@/data/demo-data"
 import FeedbackTableDemo from './feedback-table-demo'
+import { TypographyH3, TypographyP } from '../ui/typography'
 
 const Demo = () => {
-  const [feedbacks, setFeedbacks] = React.useState(DATA.feedbacks)
+  const [feedbacks, setFeedbacks] = React.useState(DEMO_DATA.feedbacks)
 
   return (
     <section className={cn("my-8 space-y-8 flex flex-col justify-center items-center")}>

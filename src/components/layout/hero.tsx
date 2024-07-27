@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Book } from 'lucide-react'
 import { GithubLogo } from '../icon/logos'
+import { APP_DATA } from '@/data/app-data'
 import { buttonVariants } from '../ui/button'
 import { ExternalLink } from '../ui/external-link'
 import { TypographyH1, TypographyP } from '../ui/typography'
@@ -34,7 +35,7 @@ const Hero = () => {
                     <span>Explore Docs</span>
                 </Link>
                 <ExternalLink
-                    href="https://github.com/yogendrarana/feedback.io"
+                    href={APP_DATA.github_repo}
                     className={buttonVariants({
                         variant: "default",
                         size: "lg",

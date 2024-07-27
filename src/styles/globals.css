@@ -19,6 +19,23 @@
   scrollbar-color: #ededed transparent;
 }
 
+/* Custom styles for MDX tables */
+.prose table {
+  @apply border-collapse table-auto w-full;
+}
+
+.prose thead {
+  @apply bg-gray-50;
+}
+
+.prose th {
+  @apply border border-gray-300 px-4 py-2 text-left;
+}
+
+.prose td {
+  @apply border border-gray-300 px-4 py-2;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

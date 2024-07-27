@@ -14,7 +14,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "../table"
+} from "../ui/table"
 
 interface DataTableProps<TData, TValue> {
     table: TableType<TData>,

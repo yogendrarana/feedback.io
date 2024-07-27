@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { EmailSchema } from "@/server/schemas";
 import { Copy, LoaderIcon, SendHorizonal } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { APP_DATA } from "@/data/app-data";
 
 interface RequestDemoProps {
     setFeedbacks: React.Dispatch<React.SetStateAction<any[]>>
@@ -23,9 +24,9 @@ interface RequestDemoProps {
 export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
     const [loading, setLoading] = useState(false);
     const [formData, setFromData] = useState({
-        senderEmail: 'abc@gmail.com',
-        feedbackCategory: 'bug',
-        feedbackMessage: 'There is a bug in the application.',
+        email: 'abc@gmail.com',
+        type: 'bug',
+        feedback: 'There is a bug in the application.',
     })
 
     const generateRandomProjectName = () => {
@@ -41,13 +42,13 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
         const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
         try {
-            if (!formData.senderEmail || !formData.feedbackCategory || !formData.feedbackMessage) {
+            if (!formData.email || !formData.type || !formData.feedback) {
                 toast.warning("Please provide required fields.");
                 return;
             }
 
             // usig zod validate email
-            const isValidEmail = await EmailSchema.safeParse(formData.senderEmail)
+            const isValidEmail = await EmailSchema.safeParse(formData.email)
             if (!isValidEmail.success) {
                 const errorMessage = isValidEmail.error.errors.map(err => err.message).join(', ');
                 toast.warning(errorMessage)
@@ -60,9 +61,9 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                 ...prev,
                 {
                     project: generateRandomProjectName(),
-                    category: formData.feedbackCategory,
-                    message: formData.feedbackMessage,
-                    sender: formData.senderEmail,
+                    category: formData.type,
+                    message: formData.feedback,
+                    sender: formData.email,
                     createdAt: new Date()
                 }
             ]);
@@ -85,7 +86,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                         variant="ghost" 
                         className="ml-auto cursor-pointer hover:bg-white"
                         onClick={() => {
-                            navigator.clipboard.writeText("https://feedbackio.vercel.app/api/v1/feedback")
+                            navigator.clipboard.writeText(APP_DATA.feedback_endpoint)
                             toast.success("Copied to clipboard!")
                         }}
                     >
@@ -115,7 +116,7 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                             />
                             <Input
                                 type="text"
-                                placeholder="x-account-id (*required)"
+                                placeholder="x-client-id (*required)"
                                 className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
                             />
                         </AccordionContent>
@@ -128,17 +129,17 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                         <AccordionContent className="p-4 space-y-3">
                             <Input
                                 type="text"
-                                name="senderEmail"
+                                name="email"
                                 placeholder="Sender email"
-                                value={formData.senderEmail}
+                                value={formData.email}
                                 onChange={(e) => setFromData({ ...formData, [e.target.name]: e.target.value })}
                                 className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-1"
                             />
 
                             <Select
                                 defaultValue="bug"
-                                value={formData.feedbackCategory}
-                                onValueChange={(value) => setFromData({ ...formData, feedbackCategory: value })}
+                                value={formData.type}
+                                onValueChange={(value) => setFromData({ ...formData, type: value })}
                             >
                                 <SelectTrigger className="w-full focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0">
                                     <SelectValue placeholder="Feedback category" />
@@ -152,9 +153,9 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                             </Select>
 
                             <Textarea
-                                name="feedbackMessage"
+                                name="feedback"
                                 placeholder="Feedback message"
-                                value={formData.feedbackMessage}
+                                value={formData.feedback}
                                 onChange={(e) => setFromData({ ...formData, [e.target.name]: e.target.value })}
                                 className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
                             />

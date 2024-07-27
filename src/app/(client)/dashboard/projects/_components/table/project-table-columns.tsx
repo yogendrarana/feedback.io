@@ -2,7 +2,7 @@ import { z } from "zod";
 import moment from "moment";
 import { ColumnDef } from "@tanstack/react-table";
 import { ProjectTableRowActions } from "./project-table-row-actions";
-import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column";
+import { DataTableColumnHeader } from "@/components/table/data-table-column";
 
 export const ProjectSchema = z.object({
     id: z.string(),
