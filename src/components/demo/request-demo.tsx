@@ -104,7 +104,8 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                     Send
                 </Button>
             </div>
-            <Accordion type="single" defaultValue="value1" collapsible className="w-full">
+
+            <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="value1" className="border rounded-lg overflow-hidden">
                     <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Header</AccordionTrigger>
                     <AccordionContent className="p-3 space-y-3">
