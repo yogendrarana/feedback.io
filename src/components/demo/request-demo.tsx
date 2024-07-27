@@ -148,7 +148,6 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                                     <SelectItem value="bug">Bug</SelectItem>
                                     <SelectItem value="feature">Feature</SelectItem>
                                     <SelectItem value="message">Message</SelectItem>
-                                    <SelectItem value="suggestion">Suggestion</SelectItem>
                                 </SelectContent>
                             </Select>
 
