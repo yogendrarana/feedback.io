@@ -21,12 +21,17 @@ import {
 import { LoaderIcon, Save } from "lucide-react";
 
 
-interface ProfileSettingProps {
-    name: string;
-    email: string;
-}
+interface ProfileUpdateProps {
+    user: {
+      name: string;
+      email: string;
+      clientId?: string;
+    }
+  }
+  
 
-export default function ProfileU({ name, email }: ProfileSettingProps) {
+export default function ProfileUpdate({ user }: ProfileUpdateProps) {
+    const { name, email } = user;
     const [loading, setLoading] = useState<boolean>(false);
 
     const hookForm = useForm<z.infer<typeof UpdateProfileSchema>>({
@@ -85,6 +90,7 @@ export default function ProfileU({ name, email }: ProfileSettingProps) {
                             </FormItem>
                         )}
                     />
+
                     <div className="flex items-center justify-end">
                         <Button
                             type="submit"

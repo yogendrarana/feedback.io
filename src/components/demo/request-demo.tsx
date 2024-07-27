@@ -111,12 +111,12 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
                         <AccordionContent className="p-2 space-y-3">
                             <Input
                                 type="text"
-                                placeholder="x-project-id (*required)"
+                                placeholder="x-client-id (*required)"
                                 className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
                             />
                             <Input
                                 type="text"
-                                placeholder="x-client-id (*required)"
+                                placeholder="x-project-id (*required)"
                                 className="focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-offset-0"
                             />
                         </AccordionContent>

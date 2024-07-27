@@ -26,7 +26,7 @@ export default function ProjectTableToolbar<T>({
                 onChange={(event) =>
                     table.getColumn("name")?.setFilterValue(event.target.value)
                 }
-                className="flex-1"
+                className="flex-1 focus-visible:ring-0 focus-visible:outline-none focus-visible:ring-offset-0"
             />
 
             {isFiltered && (

@@ -2,21 +2,22 @@ import mongoose, { Schema, Document, ObjectId } from 'mongoose';
 
 export interface IFeedback extends Document {
     project: ObjectId;
-    message: string;
-    category: string;
-    sender?: string;
+    feedback: string;
+    type: string;
+    email?: string;
     createdAt: Date;
 }
 
 const FeedbackSchema: Schema = new Schema({
-    message: {
+    feedback: {
         type: Schema.Types.String,
         required: true
     },
-    category: {
+    type: {
         type: Schema.Types.String,
+        required: true
     },
-    sender: {
+    email: {
         type: Schema.Types.String,
         require: true
     },

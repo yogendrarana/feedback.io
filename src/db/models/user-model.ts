@@ -15,7 +15,7 @@ export enum UserRoleEnum {
 
 // user schema 
 export interface IUser extends Document {
-    accountId: string;
+    clientId: string;
     name: string;
     email: string;
     password?: string;
@@ -27,7 +27,7 @@ export interface IUser extends Document {
 }
 
 const userSchema: Schema = new Schema<IUser>({
-    accountId: {
+    clientId: {
         type: Schema.Types.String,
         required: true,
         unique: true

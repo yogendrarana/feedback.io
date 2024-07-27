@@ -32,7 +32,7 @@ export const UpdateProfileSchema = z.object({
 
 // create feedback schema
 export const CreateFeedbackSchema = z.object({
-    message: z
+    feedback: z
         .string()
         .min(1, { message: "Message is required." })
         .max(500, { message: "The message must be 500 characters or less." }),

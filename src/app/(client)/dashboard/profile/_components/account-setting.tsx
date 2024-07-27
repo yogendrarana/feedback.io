@@ -9,7 +9,7 @@ export default async function AccountSetting({ session }: { session: Session }) 
     if (!session) return null
 
     return (
-        <SettingCard title="Account" description="Your account settings:">
+        <SettingCard title="Setting" description="Your account settings:">
             <div className="flex w-52 flex-col space-y-2">
                 <p>Delete account:</p>
                 <DeleteUser

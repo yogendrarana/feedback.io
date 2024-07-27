@@ -17,14 +17,14 @@ export default async function SettingsPage() {
     user = {
       name: res.name,
       email: res.email,
-      accountId: res.accountId
+      clientId: res.clientId
     }
   }
 
   return (
     <div className={cn("h-full overflow-y-auto rounded-md flex flex-col gap-2")}>
       {user && <ProfileInfo user={user} />}
-      {user && <ProfileUpdate name={user.name} email={user.email} />}
+      {user && <ProfileUpdate user={user} />}
       {session && <AccountSetting session={session} />}
     </div>
   )

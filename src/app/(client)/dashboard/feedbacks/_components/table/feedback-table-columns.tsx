@@ -10,9 +10,9 @@ import { DataTableColumnHeader } from "@/components/table/data-table-column"
 export const FeedbackSchema = z.object({
     id: z.string(),
     project: z.string(),
-    category: z.string(),
-    sender: z.string(),
-    message: z.string(),
+    type: z.string(),
+    email: z.string(),
+    feedback: z.string(),
     createdAt: z.date()
 })
 
@@ -30,9 +30,9 @@ export const feedbackTableColumns: ColumnDef<FeedbackTableColumnType>[] = [
         enableHiding: false,
     },
     {
-        accessorKey: "category",
+        accessorKey: "type",
         header: () => (
-            <span>Category</span>
+            <span>Type</span>
         ),
         filterFn: (row, id, value) => {
             return value.includes(row.getValue(id))
@@ -40,14 +40,14 @@ export const feedbackTableColumns: ColumnDef<FeedbackTableColumnType>[] = [
         enableHiding: false,
     },
     {
-        accessorKey: "message",
+        accessorKey: "feedback",
         header: () => (
-            <span>Message</span>
+            <span>Feedback</span>
         ),
         enableHiding: false,
     },
     {
-        accessorKey: "sender",
+        accessorKey: "email",
         header: () => (
             <span>Sender</span>
         ),

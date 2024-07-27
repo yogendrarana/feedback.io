@@ -13,10 +13,10 @@ export default async function FeedbacksPage() {
     const res = await getAllFeedbacksByOwnerId(session.user.id);
     feedbacks = res.feedbacks.map(f => ({
       id: f._id.toString(),
-      category: f.category,
+      type: f.type,
       project: f.project.name,
-      message: f.message,
-      sender: f.sender,
+      feedback: f.feedback,
+      email: f.email,
       createdAt: f.createdAt.toISOString()
     }));
   }

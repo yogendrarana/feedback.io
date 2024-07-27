@@ -14,17 +14,16 @@ export async function POST(req: NextRequest) {
     }
 
     await connectDb();
+    const clientId = req.headers.get('x-client-id');
     const projectId = req.headers.get('x-project-id');
-    const accountId = req.headers.get('x-account-id');
-    const accountSecret = req.headers.get('x-account-secret');
 
-    if (!projectId || !accountId || !accountSecret) {
+    if (!projectId || !clientId) {
         return NextResponse.json({ success: false, message: 'Missing project id, account id, or account secret' }, { status: 400 });
     }
 
     try {
         // find the account and verify the secret
-        const account = await UserModel.findOne({ accountId });
+        const account = await UserModel.findOne({ clientId });
         if (!account) {
             return NextResponse.json({ success: false, message: `Invalid account id.` }, { status: 404 });
         }
@@ -36,28 +35,28 @@ export async function POST(req: NextRequest) {
         }
 
         // Validate the request body
-        const { message, category, sender } = await req.json();
+        const { feedback, type, email } = await req.json();
 
-        if (!FEEDBACK.includes(category)) {
-            return NextResponse.json({ success: false, message: 'Invalid feedback category' }, { status: 400 });
+        if (!FEEDBACK.includes(type)) {
+            return NextResponse.json({ success: false, message: 'Invalid feedback type' }, { status: 400 });
         }
 
-        if (!message || !category || !sender) {
+        if (!feedback || !type || !email) {
             return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
         }
 
-        const validate = await CreateFeedbackSchema.safeParse({ message, category, email: sender });
+        const validate = await CreateFeedbackSchema.safeParse({ feedback, type, email });
         if (!validate.success) {
             const errorMessage = validate.error.errors.map(err => err.message).join(', ');
             return NextResponse.json({ success: false, message: errorMessage }, { status: 400 });
         }
 
         // Create the feedback
-        const feedback = await FeedbackModel.create({
+        await FeedbackModel.create({
             project: project._id,
-            message,
-            category,
-            sender: sender || null,
+            feedback,
+            type,
+            email,
         });
 
         // Add the feedback to the project model feedbacks array
