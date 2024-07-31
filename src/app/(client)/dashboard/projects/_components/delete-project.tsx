@@ -17,8 +17,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { deleteProject } from "@/server/actions/project";
 import { LoaderIcon, Trash, TrashIcon } from "lucide-react";
 import {
     Form,
@@ -28,11 +30,12 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { deleteProject } from "@/server/actions/project";
 
 interface DeleteProjectProps {
     projectName: string;
-    projectId: string;
+    id: string;
+    className?: string;
+    children?: React.ReactNode;
 }
 
 export default function DeleteProject(props: DeleteProjectProps) {
@@ -51,19 +54,18 @@ export default function DeleteProject(props: DeleteProjectProps) {
         try {
             setLoading(true);
 
-            const result = await deleteProject(props.projectId);
-            if (result.error) {
-                toast.error(result.error);
+            const result = await deleteProject(props.id);
+            if (!result.success) {
+                toast.error(result.message);
                 return;
             }
-            
+
             setOpen(false);
-            toast.success("Project deleted successfully.", {
+            toast.success(result.message, {
                 description: `The project ${props.projectName} has been deleted.`,
             });
         } catch (error: any) {
-            console.error("error", error);
-            toast.error("An error occurred while deleting the project. Please try again.");
+            toast.error(error.message || "An error occurred while deleting the project. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -72,9 +74,15 @@ export default function DeleteProject(props: DeleteProjectProps) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <button className='rounded-sm p-1.5 hover:bg-gray-100 duration-200'>
-                    <Trash size={16} />
-                </button>
+                {
+                    props.children
+                        ? (props.children)
+                        : (
+                            <button className={cn("border rounded-sm p-1.5 hover:bg-gray-100 duration-200", props.className)}>
+                                <Trash size={16} />
+                            </button>
+                        )
+                }
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

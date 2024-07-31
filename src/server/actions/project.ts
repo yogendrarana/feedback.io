@@ -8,6 +8,7 @@ import { revalidatePath } from "next/cache";
 import { CreateProjectSchema } from "../schemas";
 import ProjectModel from "@/db/models/project-model";
 import UserModel from "@/db/models/user-model";
+import FeedbackModel from "@/db/models/feedback-model";
 
 export async function createProject(values: z.infer<typeof CreateProjectSchema>) {
     try {
@@ -22,11 +23,10 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
 
         // check if project with the same name exists
         const projectExists = await ProjectModel.findOne({ name: values.name }).exec();
+        console.log(projectExists);
         if (projectExists) {
             return { error: "Project with this name already exists. Please select a different name." };
         }
-
-        // TODO: add project secret as well in future
 
         const projectData = {
             ...values,
@@ -72,26 +72,27 @@ export async function getProjectsByOwnerId(ownerId: string) {
 }
 
 // delete project
-export async function deleteProject(projectId: string) {
+export async function deleteProject(id: string) {
     try {
         const currentUser = await auth();
         if (!currentUser) {
-            return { error: "Not authenticated." };
+            return { success: false, message: "Not authenticated." };
         }
 
         await connectDb();
-        const project = await ProjectModel.findOneAndDelete({ projectId }).exec();
+        const project = await ProjectModel.findById(id).exec();
         if (!project) {
-            return { error: "Project not found" };
+            return { success: false, message: "Project not found" };
         }
 
-        // TODO: delete all feedback messages related to this project
+        await FeedbackModel.deleteMany({ project: project._id }).exec();
+        await ProjectModel.findByIdAndDelete(id).exec();
 
         // revalidate path
         revalidatePath("/dashboard/projects");
 
-        return { project };
+        return { success: true, message: "Project deleted successfully" };
     } catch (error: any) {
-        return { error: error.message || "Internal server error" };
+        return { success: false, message: error.message || "Internal server error" };
     }
 }

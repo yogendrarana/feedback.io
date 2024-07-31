@@ -5,7 +5,10 @@ interface MongoConnection {
     promise: Promise<Connection> | null;
 }
 
-const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/feedback";
+const uri = process.env.NODE_ENV === 'production'
+    ? process.env.MONGODB_URI
+    : "mongodb://localhost:27017/feedback";
+
 if (!uri) {
     throw new Error('Please define the MONGODB_URI environment variable');
 }
@@ -22,7 +25,7 @@ async function connectDb(): Promise<Connection> {
             bufferCommands: false,
         };
 
-        cached.promise = mongoose.connect(uri, opts).then((mongoose) => {
+        cached.promise = mongoose.connect(uri!, opts).then((mongoose) => {
             return mongoose.connection;
         });
     }
