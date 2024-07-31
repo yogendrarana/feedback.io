@@ -62,14 +62,14 @@ export function CreateProject(props: CreateProjectProps) {
 
         try {
             setLoading(true);
+            
             const result = await createProject(values);
-
-            if (result.error) {
-                toast.error(result.error);
+            if (!result.success) {
+                toast.error(result.message);
                 return;
             }
 
-            toast.success("Project created successfully", {
+            toast.success(result.message, {
                 description: "You can copy the key and use it in your app.",
                 duration: 10000,
             });
@@ -77,8 +77,8 @@ export function CreateProject(props: CreateProjectProps) {
             form.reset();
             setOpen(false);
             await generateConfetti();
-        } catch (error) {
-            toast.error("An unexpected error has occurred. Please try again later.");
+        } catch (error: any) {
+            toast.error(error.message || "An unexpected error has occurred. Please try again later.");
         } finally {
             setError(false);
             setMessage("");

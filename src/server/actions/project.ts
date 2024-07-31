@@ -16,7 +16,7 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
 
         const session = await auth();
         if (!session?.user?.id) {
-            return { error: "Not authenticated" };
+            return { success: false, message: "Not authenticated" };
         }
 
         let projectId = uuid();
@@ -24,7 +24,7 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
         // check if project with the same name exists
         const projectExists = await ProjectModel.findOne({ name: values.name }).exec();
         if (projectExists) {
-            return { error: "Project with this name already exists. Please select a different name." };
+            return { success: false, message: "Project with this name already exists. Please select a different name." };
         }
 
         const projectData = {
@@ -35,7 +35,7 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
 
         const project = await ProjectModel.create(projectData);
         if (!project) {
-            return { error: "Failed to create project" };
+            return { success: false, message: "Failed to create project" };
         }
 
         // insert project id in user's project list
@@ -44,12 +44,12 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
         // revalidate path
         revalidatePath("/dashboard/projects");
 
-        return { project };
+        return { success: true, message: "Project created successfully" };
     } catch (error: any) {
         if (error.code === 11000 && error.keyPattern?.projectId) {
-            return { error: "Error while generating Project ID" };
+            return { success: false, message: "Error while generating Project ID" };
         }
-        return { error: error.message || "Internal server error" };
+        return { success:false, message: error.message || "Internal server error" };
     }
 }
 
