@@ -23,7 +23,6 @@ export async function createProject(values: z.infer<typeof CreateProjectSchema>)
 
         // check if project with the same name exists
         const projectExists = await ProjectModel.findOne({ name: values.name }).exec();
-        console.log(projectExists);
         if (projectExists) {
             return { error: "Project with this name already exists. Please select a different name." };
         }
