@@ -1,5 +1,8 @@
 {
     "$schema": "https://turbo.build/schema.json",
+    "globalEnv": [
+        "MONGODB_URI"
+    ],
     "tasks": {
         "build": {
             "dependsOn": [
@@ -8,6 +11,12 @@
             "outputs": [
                 ".next/**",
                 "!.next/cache/**"
+            ],
+            "env": [
+                "AUTH_SECRET",
+                "GOOGLE_CLIENT_ID",
+                "GOOGLE_CLIENT_SECRET",
+                "GOOGLE_CALLBACK_URL"
             ]
         },
         "check-types": {
