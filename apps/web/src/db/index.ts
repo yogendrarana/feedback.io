@@ -5,13 +5,20 @@ interface MongoConnection {
     promise: Promise<Connection> | null;
 }
 
-const uri = process.env.NODE_ENV === 'production'
-    ? process.env.MONGODB_URI
-    : "mongodb://localhost:27017/feedback";
+const productionDbUri = process.env.MONGODB_URI;
+const localDbUri = "mongodb://localhost:27017/feedback";
 
-if (!uri) {
-    throw new Error('Please define the MONGODB_URI environment variable');
+if (!productionDbUri) {
+    throw new Error('Please define the production MONGODB_URI environment variable');
 }
+
+if (!localDbUri) {
+    throw new Error('Please define the local MONGODB_URI environment variable');
+}
+
+const uri = process.env.NODE_ENV === 'production'
+    ? productionDbUri
+    : localDbUri;
 
 let cached: MongoConnection = (global as any).mongoose || { conn: null, promise: null };
 
