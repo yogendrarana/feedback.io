@@ -26,22 +26,22 @@ To submit feedback, send a POST request to the following endpoint with mentioned
 <div className="overflow-x-auto">
   <table className="min-w-full border-collapse border border-gray-300">
     <thead>
-      <tr className="bg-gray-100">
-        <th className="border border-gray-300 px-4 py-2 text-left">Header</th>
-        <th className="border border-gray-300 px-4 py-2 text-left">Type</th>
-        <th className="border border-gray-300 px-4 py-2 text-left">Description</th>
+      <tr className="bg-gray-100 dark:bg-gray-800">
+        <th className="border border-gray-300 px-4 py-2 text-left dark:text-white">Header</th>
+        <th className="border border-gray-300 px-4 py-2 text-left dark:text-white">Type</th>
+        <th className="border border-gray-300 px-4 py-2 text-left dark:text-white">Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td className="border border-gray-300 px-4 py-2">x-client-id</td>
         <td className="border border-gray-300 px-4 py-2">string</td>
-        <td className="border border-gray-300 px-4 py-2"><strong>Required.</strong> Your Account ID</td>
+        <td className="border border-gray-300 px-4 py-2"><strong className='dark:text-white'>Required.</strong> Your Account ID</td>
       </tr>
       <tr>
         <td className="border border-gray-300 px-4 py-2">x-project-id</td>
         <td className="border border-gray-300 px-4 py-2">string</td>
-        <td className="border border-gray-300 px-4 py-2"><strong>Required.</strong> Your Project ID</td>
+        <td className="border border-gray-300 px-4 py-2"><strong className='dark:text-white'>Required.</strong> Your Project ID</td>
       </tr>
     </tbody>
   </table>
@@ -62,27 +62,27 @@ Your request body should be a JSON object with the following structure:
 <div className="overflow-x-auto">
   <table className="min-w-full border-collapse border border-gray-300">
     <thead>
-      <tr className="bg-gray-100">
-        <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Parameter</th>
-        <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Type</th>
-        <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Description</th>
+      <tr className="bg-gray-100 dark:bg-gray-800">
+        <th className="border border-gray-300 px-4 py-2 text-left font-semibold dark:text-white">Parameter</th>
+        <th className="border border-gray-300 px-4 py-2 text-left font-semibold dark:text-white">Type</th>
+        <th className="border border-gray-300 px-4 py-2 text-left font-semibold dark:text-white">Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td className="border border-gray-300 px-4 py-2">email</td>
         <td className="border border-gray-300 px-4 py-2"><code className="bg-gray-100 rounded px-1">string</code></td>
-        <td className="border border-gray-300 px-4 py-2"><strong>Required</strong>. Email address of the feedback sender</td>
+        <td className="border border-gray-300 px-4 py-2"><strong className='dark:text-white'>Required</strong>. Email address of the feedback sender</td>
       </tr>
       <tr>
         <td className="border border-gray-300 px-4 py-2">type</td>
         <td className="border border-gray-300 px-4 py-2"><code className="bg-gray-100 rounded px-1">string</code></td>
-        <td className="border border-gray-300 px-4 py-2"> <strong>Required</strong>. Type of feedback: <strong>bug</strong> or <strong>feature</strong> or <strong>message</strong> </td>
+        <td className="border border-gray-300 px-4 py-2"> <strong className='dark:text-white'>Required</strong>. Type of feedback: <strong className='dark:text-white'>bug</strong> or <strong className='dark:text-white'>feature</strong> or <strong className='dark:text-white'>message</strong> </td>
       </tr>
       <tr>
         <td className="border border-gray-300 px-4 py-2">feedback</td>
         <td className="border border-gray-300 px-4 py-2"><code className="bg-gray-100 rounded px-1">string</code></td>
-        <td className="border border-gray-300 px-4 py-2"><strong>Required</strong>. Content of the feedback message</td>
+        <td className="border border-gray-300 px-4 py-2"><strong className='dark:text-white'>Required</strong>. Content of the feedback message</td>
       </tr>
     </tbody>
   </table>
@@ -122,4 +122,4 @@ If the POST request fails, you will receive an appropriate status code depending
 
 ## Code Example
 
- <FeedbackPost copyable showLineNumbers filename='feedback.js' className='w-full bg-white' />
+ <FeedbackPost copyable showLineNumbers filename='index.js' className='w-full bg-white dark:bg-white' />

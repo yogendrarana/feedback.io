@@ -5,13 +5,13 @@ import { cn } from '@/lib/utils'
 import RequestDemo from './request-demo'
 import { DEMO_DATA } from "@/data/demo-data"
 import FeedbackTableDemo from './feedback-table-demo'
-import { TypographyH3, TypographyP } from '../ui/typography'
+import { TypographyH3, TypographyP } from '../../ui/typography'
 
 const Demo = () => {
   const [feedbacks, setFeedbacks] = React.useState(DEMO_DATA.feedbacks)
 
   return (
-    <section className={cn("my-8 space-y-8 flex flex-col justify-center items-center")}>
+    <section className={cn("my-28 space-y-8 flex flex-col justify-center items-center")}>
       <TypographyH3 className='text-center -mb-4'>Explore API Endpoint</TypographyH3>
       <TypographyP className='hidden md:flex text-center opacity-70'>Send feedback with required data and see the table get updated</TypographyP>
 

@@ -11,7 +11,7 @@ import { TypographyH1, TypographyP } from '../ui/typography'
 const Hero = () => {
     return (
         <section className={cn("h-[calc(100vh-200px)] flex flex-col justify-center items-center text-center")}>
-            <p className='px-4 py-1 bg-white border rounded-full'>⚠️ Beta Version: Features may be unstable.</p>
+            <p className='px-4 py-1 bg-white border rounded-full dark:bg-gray-600 dark:border-none'>⚠️ Beta Version: Features may be unstable.</p>
 
             <TypographyH1 className="duration-500 animate-in fade-in-5 slide-in-from-bottom-2">
                 Collect Feedback From Your Users

@@ -21,7 +21,7 @@ export function FeedbackTablePagination<T>({ table }: DataTablePaginationProps<T
         <div className="flex items-center justify-between p-2">
             <div className="flex-1 text-sm text-muted-foreground">
                 <div className="flex items-center space-x-2">
-                    <p className="text-sm font-medium text-black">Rows per page</p>
+                    <p className="text-sm font-medium">Rows per page</p>
                     <Select
                         value={`${table.getState().pagination.pageSize}`}
                         onValueChange={(value) => {
@@ -31,7 +31,7 @@ export function FeedbackTablePagination<T>({ table }: DataTablePaginationProps<T
                         <SelectTrigger className="h-[--size-button] w-[80px]">
                             <SelectValue placeholder={table.getState().pagination.pageSize} />
                         </SelectTrigger>
-                        <SelectContent side="top" className="w-[80px] bg-white p-2" sideOffset={5}>
+                        <SelectContent side="top" className="w-[80px] p-2 dark:bg-gray-800" sideOffset={5}>
                             {[10, 20, 30, 40].map((pageSize) => (
                                 <SelectItem key={pageSize} value={`${pageSize}`} className="cursor-pointer">
                                     {pageSize}
@@ -67,7 +67,7 @@ export function FeedbackTablePagination<T>({ table }: DataTablePaginationProps<T
                         <ChevronLeft size={16} />
                     </Button>
                     <Button
-                        variant="outline"
+                        variant="outline"   
                         size="icon"
                         className="size-[var(--size-button)] flex items-center justify-center border rounded-md cursor-pointer bg-white hover:bg-gray-100"
                         onClick={() => table.nextPage()}

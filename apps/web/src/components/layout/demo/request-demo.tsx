@@ -2,9 +2,9 @@
 
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
+import { Textarea } from "../../ui/textarea";
 import {
     Accordion,
     AccordionContent,
@@ -14,7 +14,7 @@ import {
 import { toast } from "sonner";
 import { EmailSchema } from "@/server/schemas";
 import { Copy, LoaderIcon, SendHorizonal } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import { APP_DATA } from "@/data/app-data";
 
 interface RequestDemoProps {
@@ -77,10 +77,10 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
     };
 
     return (
-        <div className={cn("w-full lg:w-[450px] p-3 space-y-3 border rounded-xl flex flex-col")}>
+        <div className={cn("w-full lg:w-[450px] p-3 space-y-3 border dark:border-gray-800 rounded-xl flex flex-col")}>
             <div className="flex items-center justify-between gap-2">
-                <div className=" flex items-center gap-2 flex-1 border rounded-lg overflow-hidden">
-                    <span className="px-3 py-2 bg-gray-100 rounded-l-md">POST</span>
+                <div className=" flex items-center gap-2 flex-1 border dark:border-gray-800 rounded-lg overflow-hidden">
+                    <span className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-l-md">POST</span>
                     <span className="text-gray-400">/api/v1/feedback</span>
                     <Button
                         variant="ghost"
@@ -106,8 +106,8 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
             </div>
 
             <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="value1" className="border rounded-lg overflow-hidden">
-                    <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Header</AccordionTrigger>
+                <AccordionItem value="value1" className="border dark:border-gray-800 rounded-lg overflow-hidden">
+                    <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100 dark:bg-gray-800">Request Header</AccordionTrigger>
                     <AccordionContent className="p-3 space-y-3">
                         <Input
                             type="text"
@@ -124,8 +124,8 @@ export default function RequestDemo({ setFeedbacks }: RequestDemoProps) {
             </Accordion>
 
             <Accordion type="single" defaultValue="value2" collapsible className="w-full">
-                <AccordionItem value="value2" className="border rounded-lg overflow-hidden">
-                    <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100">Request Body</AccordionTrigger>
+                <AccordionItem value="value2" className="border dark:border-gray-800 rounded-lg overflow-hidden">
+                    <AccordionTrigger className="h-12 px-4 rounded-t-lg bg-gray-100 dark:bg-gray-800">Request Body</AccordionTrigger>
                     <AccordionContent className="p-3 space-y-3">
                         <Input
                             type="text"

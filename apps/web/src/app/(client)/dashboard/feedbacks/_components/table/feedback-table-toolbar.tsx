@@ -29,7 +29,7 @@ export function FeedbackTableToolbar<TData>({
                     onChange={(event) =>
                         table.getColumn("project")?.setFilterValue(event.target.value)
                     }
-                    className="w-[200px] lg:w-[250px] focus-visible:ring-0 focus-visible:outline-none focus-visible:ring-offset-0"
+                    className="w-[200px] lg:w-[250px] focus-visible:ring-0 focus-visible:outline-none focus-visible:ring-offset-0 dark:bg-slate-900"
                 />
                 {table.getColumn("category") && (
                     <FeedbackTableFacetedFilter

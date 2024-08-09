@@ -7,7 +7,7 @@ interface FeedbackTableDemoProps {
 
 const FeedbackTableDemo = (props: FeedbackTableDemoProps) => {
     return (
-        <div className='border p-3 rounded-lg'>
+        <div className='border dark:border-none dark:bg-gray-800 p-3 rounded-lg'>
             <FeedbackTable feedbacks={props.feedbacks} />
         </div>
     )

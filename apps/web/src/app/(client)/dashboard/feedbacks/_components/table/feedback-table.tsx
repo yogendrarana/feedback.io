@@ -14,7 +14,7 @@ import {
     useReactTable,
 } from "@tanstack/react-table"
 
-import { feedbackCategory } from './data'
+import { feedbackCategory } from './feedback-table-data'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { feedbackTableColumns } from './feedback-table-columns'
 import { FeedbackTableToolbar } from './feedback-table-toolbar'
@@ -62,7 +62,7 @@ export default function FeedbackTable(props: FeedbackTableProps) {
     })
 
     return (
-        <div className="h-full flex flex-col gap-2 justify-between bg-white">
+        <div className="h-full p-1 flex flex-col gap-2 justify-between bg-white dark:bg-gray-800">
             <div>
                 <FeedbackTableToolbar table={table} category={feedbackCategory} />
             </div>
@@ -73,7 +73,7 @@ export default function FeedbackTable(props: FeedbackTableProps) {
                 </ScrollArea>
             </div>
         
-            <div className="sticky bottom-0 bg-white rounded-lg border">
+            <div className="sticky bottom-0 bg-white dark:bg-gray-800 rounded-lg border dark:border-none">
                 <FeedbackTablePagination table={table} />
             </div>
         </div>

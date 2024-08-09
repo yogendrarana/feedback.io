@@ -15,7 +15,7 @@ const DocPage = () => {
                     <TabsTrigger value="package">Using package</TabsTrigger>
                 </TabsList>
                 <TabsContent value="manual" className={cn("mt-10")}>
-                    <MdxProvider className='max-w-none'>
+                    <MdxProvider className='max-w-none dark:text-white'>
                         <ManualUsage />
                     </MdxProvider>
                     <Footer />

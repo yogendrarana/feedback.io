@@ -18,7 +18,7 @@ const CodeSnippet = () => {
                     <FeedbackPost
                         copyable
                         showLineNumbers
-                        filename='feedback.js'
+                        filename='index.js'
                         className='w-full'
                     />
                 </div>

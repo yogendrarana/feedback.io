@@ -3,8 +3,8 @@
 import * as React from "react"
 import {
     ColumnDef,
-    Table as TableType,
     flexRender,
+    Table as TableType,
 } from "@tanstack/react-table"
 
 import {
@@ -22,15 +22,15 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({
-    columns,
-    table
+    table,
+    columns
 }: DataTableProps<TData, TValue>) {
     return (
-        <div className="h-full rounded-md border">
+        <div className="h-full rounded-md border dark:border-gray-700">
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow key={headerGroup.id} className="bg-gray-100">
+                        <TableRow key={headerGroup.id} className="bg-gray-100 dark:bg-gray-800 border-none">
                             {headerGroup.headers.map((header) => {
                                 return (
                                     <TableHead key={header.id} colSpan={header.colSpan} className="py-4">
@@ -52,6 +52,7 @@ export function DataTable<TData, TValue>({
                             <TableRow
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
+                                className="border-t dark:border-gray-700"
                             >
                                 {row.getVisibleCells().map((cell) => (
                                     <TableCell key={cell.id}>

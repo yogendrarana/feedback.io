@@ -15,7 +15,7 @@ const FeedbackPost = ({ className, ...props }: FeedbackPostProps) => {
     const postCode = dedent`
         import axios from 'axios';
 
-    axios.post(${APP_DATA.root_url}, {
+    axios.post(${APP_DATA.feedback_endpoint}, {
         email: 'abc@gmail.com',
         type: "bug",
         feedback: "There is a bug in the login page."

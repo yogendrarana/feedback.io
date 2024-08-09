@@ -78,13 +78,13 @@ export default function DeleteProject(props: DeleteProjectProps) {
                     props.children
                         ? (props.children)
                         : (
-                            <button className={cn("border rounded-sm p-1.5 hover:bg-gray-100 duration-200", props.className)}>
-                                <Trash size={16} />
+                            <button className={cn("border dark:border-none rounded-sm p-1.5 hover:bg-gray-100 dark:bg-gray-700 duration-200", props.className)}>
+                                <Trash size={16} className="dark:text-gray-400" />
                             </button>
                         )
                 }
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="dark:bg-gray-800 border-none">
                 <DialogHeader>
                     <DialogTitle>Delete Project: {props.projectName}</DialogTitle>
                     <DialogDescription className="">
@@ -103,7 +103,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
                                         Type <span className="mx-1 font-mono">{`"${props.projectName}"`}</span> to confirm:
                                     </FormLabel>
                                     <FormControl>
-                                        <Input {...field} disabled={loading} autoComplete="off" />
+                                        <Input {...field} disabled={loading} autoComplete="off" className="dark:bg-gray-700" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -115,7 +115,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
                                     Cancel
                                 </Button>
                             </DialogClose>
-                            <Button disabled={loading} type="submit" variant="default">
+                            <Button disabled={loading} type="submit" variant="default" className="dark:bg-black">
                                 {loading ? (
                                     <LoaderIcon size={16} className="animate-spin" />
                                 ) : (

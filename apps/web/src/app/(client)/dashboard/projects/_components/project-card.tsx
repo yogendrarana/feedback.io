@@ -14,17 +14,17 @@ const ProjectCard = (prop: ProjectCardProps) => {
     const project = prop.project;
 
     return (
-        <div className={cn("p-4 space-y-3 border rounded-lg bg-white")}>
+        <div className={cn("p-4 space-y-3 border rounded-lg bg-white dark:bg-gray-800 dark:border-none")}>
             <div className={cn("flex items-center")}>
                 <h1 className={cn("text-xl font-semibold")}>{project.name}</h1>
                 <button
-                    className="ml-auto mr-1 border rounded-sm p-1.5 hover:bg-gray-100 duration-200"
+                    className="ml-auto mr-1 border dark:border-none rounded-sm p-1.5 dark:bg-gray-700 hover:bg-gray-100 dark:hover: duration-200"
                     onClick={() => {
                         navigator.clipboard.writeText(project.projectId)
                         toast.success("Copied project id to clipboard.")
                     }}
                 >
-                    <Copy size={16} />
+                    <Copy size={16} className='dark:text-gray-400' />
                 </button>
                 <DeleteProject id={project.id} projectName={project.name} />
             </div>

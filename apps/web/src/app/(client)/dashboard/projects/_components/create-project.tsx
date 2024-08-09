@@ -99,7 +99,7 @@ export function CreateProject(props: CreateProjectProps) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>{props.children}</DialogTrigger>
-            <DialogContent>
+            <DialogContent className="dark:bg-gray-800 border-none">
                 <DialogHeader className="mb-2">
                     <DialogTitle>Create New Project</DialogTitle>
                 </DialogHeader>
@@ -118,6 +118,7 @@ export function CreateProject(props: CreateProjectProps) {
                                                 autoComplete="off"
                                                 placeholder="My Project"
                                                 disabled={loading}
+                                                className="dark:bg-gray-700"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -135,6 +136,7 @@ export function CreateProject(props: CreateProjectProps) {
                                                 {...field}
                                                 placeholder="Enter a description"
                                                 disabled={loading}
+                                                className="dark:bg-gray-700"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -149,7 +151,7 @@ export function CreateProject(props: CreateProjectProps) {
                                     Cancel
                                 </Button>
                             </DialogClose>
-                            <Button type="submit" disabled={loading}>
+                            <Button type="submit" disabled={loading} className="dark:bg-black">
                                 {loading ? (
                                     <LoaderIcon size={16} className="animate-spin" />
                                 ) : (

@@ -32,7 +32,6 @@ export default function CodeBlock({
         if (isValidElement(children)) {
             if (typeof children.type === 'function') {
                 try {
-                    // Use createElement instead of directly calling the type
                     const renderedContent = createElement(children.type, children.props);
                     return getCodeString(renderedContent);
                 } catch (error) {
@@ -67,9 +66,15 @@ export default function CodeBlock({
     };
 
     return (
-        <div className={cn("rounded-lg border text-black bg-white", className)}>
-            <div className="h-[50px] px-4 flex items-center justify-between text-sm font-mono bg-gray-100 rounded-t-md">
-                {filename && <div>{filename}</div>}
+        <div className={cn("rounded-lg border text-black bg-white dark:bg-gray-200", className)}>
+            <div className="h-[50px] px-4 flex items-center text-sm font-mono bg-gray-100 rounded-t-md">
+                {filename && <div className="mr-auto">{filename}</div>}
+
+                {switcher && (
+                    <div className="ml-auto px-4 py-2 text-sm font-mono text-right">
+                        {switcher}
+                    </div>
+                )}
 
                 {copyable && (
                     <button
@@ -81,12 +86,6 @@ export default function CodeBlock({
                     >
                         <Copy size={14} />
                     </button>
-                )}
-
-                {switcher && (
-                    <div className="px-4 py-2 text-sm font-mono text-right">
-                        {switcher}
-                    </div>
                 )}
             </div>
             <pre className={`language-${language} p-4 overflow-x-auto`}>
