@@ -77,7 +77,6 @@ If the POST request fails, you will receive an appropriate status code depending
 ## Code Example
 
 ```javascript
-axios.js
 import axios from 'axios';
 
 axios.post('https://feedbackio.vercel.app/api/v1/feedback', {
@@ -87,8 +86,8 @@ axios.post('https://feedbackio.vercel.app/api/v1/feedback', {
 }, {
     headers: {
         'Content-Type': 'application/json',
-        'account': 'Your-Client-ID',
-        'project': 'Your-Project-ID'
+      'account-id': 'Your-Client-ID',
+        'project-id': 'Your-Project-ID'
     },
 })
 .then(response => response.json())
