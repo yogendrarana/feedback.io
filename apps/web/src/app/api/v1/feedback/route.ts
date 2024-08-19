@@ -9,7 +9,19 @@ import { CreateFeedbackSchema } from '@/server/schemas';
 
 export async function POST(req: NextRequest) {
     // TODO: Add rate limiting to prevent abuse
-    // TODO: Add CORS headers since this endpoint will be called from different domains
+
+    // Add CORS headers since this endpoint will be called from different domains
+    const headers = new Headers();
+    headers.set('Access-Control-Allow-Origin', '*');
+    headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    headers.set('Access-Control-Allow-Headers', 'Content-Type, x-client-id, x-project-id');
+
+    if (req.method === 'OPTIONS') {
+        // Handle preflight request
+        return NextResponse.json({}, { status: 204, headers });
+    }
+
+
     if (req.method !== 'POST') {
         return NextResponse.json({ success: false, message: 'Invalid method' }, { status: 405 })
     }
