@@ -30,11 +30,11 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  Form: () => Form
+  ReactForm: () => ReactForm
 });
 module.exports = __toCommonJS(src_exports);
 
-// src/components/form.tsx
+// src/react/react-form.tsx
 var import_react = require("react");
 
 // src/ui/dropdown-menu.tsx
@@ -198,7 +198,7 @@ var Input = React2.forwardRef(
 );
 Input.displayName = "Input";
 
-// src/components/form.tsx
+// src/react/react-form.tsx
 var import_js_confetti = __toESM(require("js-confetti"));
 
 // src/ui/button.tsx
@@ -314,7 +314,7 @@ var Textarea = React4.forwardRef(
 );
 Textarea.displayName = "Textarea";
 
-// src/components/form.tsx
+// src/react/react-form.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
 var generateConfetti = async () => {
   const jsConfetti = new import_js_confetti.default();
@@ -324,7 +324,7 @@ var generateConfetti = async () => {
     confettiNumber: 100
   });
 };
-var Form = (props) => {
+var ReactForm = (props) => {
   const { clientId, projectId, contentClassName, triggerClassName } = props;
   const [open, setOpen] = (0, import_react.useState)(false);
   const [loading, setLoading] = (0, import_react.useState)(false);
@@ -446,5 +446,5 @@ var Form = (props) => {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  Form
+  ReactForm
 });

@@ -1,4 +1,4 @@
-// src/components/form.tsx
+// src/react/react-form.tsx
 import { useState } from "react";
 
 // src/ui/dropdown-menu.tsx
@@ -162,7 +162,7 @@ var Input = React2.forwardRef(
 );
 Input.displayName = "Input";
 
-// src/components/form.tsx
+// src/react/react-form.tsx
 import JSConfetti from "js-confetti";
 
 // src/ui/button.tsx
@@ -278,7 +278,7 @@ var Textarea = React4.forwardRef(
 );
 Textarea.displayName = "Textarea";
 
-// src/components/form.tsx
+// src/react/react-form.tsx
 import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
 var generateConfetti = async () => {
   const jsConfetti = new JSConfetti();
@@ -288,7 +288,7 @@ var generateConfetti = async () => {
     confettiNumber: 100
   });
 };
-var Form = (props) => {
+var ReactForm = (props) => {
   const { clientId, projectId, contentClassName, triggerClassName } = props;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -409,5 +409,5 @@ var Form = (props) => {
   ] });
 };
 export {
-  Form
+  ReactForm
 };
