@@ -37,7 +37,7 @@ module.exports = __toCommonJS(src_exports);
 // src/components/form.tsx
 var import_react = require("react");
 
-// src/ui/dropdown.tsx
+// src/ui/dropdown-menu.tsx
 var React = __toESM(require("react"));
 var DropdownMenuPrimitive = __toESM(require("@radix-ui/react-dropdown-menu"));
 var import_lucide_react = require("lucide-react");
@@ -49,7 +49,7 @@ function cn(...inputs) {
   return (0, import_tailwind_merge.twMerge)((0, import_clsx.clsx)(inputs));
 }
 
-// src/ui/dropdown.tsx
+// src/ui/dropdown-menu.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
 var DropdownMenu = DropdownMenuPrimitive.Root;
 var DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
@@ -177,8 +177,32 @@ var DropdownMenuShortcut = ({
 };
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
 
-// src/ui/button.tsx
+// src/ui/input.tsx
 var React2 = __toESM(require("react"));
+var import_jsx_runtime2 = require("react/jsx-runtime");
+var Input = React2.forwardRef(
+  ({ className, type, ...props }, ref) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      "input",
+      {
+        type,
+        className: cn(
+          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        ),
+        ref,
+        ...props
+      }
+    );
+  }
+);
+Input.displayName = "Input";
+
+// src/components/form.tsx
+var import_js_confetti = __toESM(require("js-confetti"));
+
+// src/ui/button.tsx
+var React3 = __toESM(require("react"));
 var import_react_slot = require("@radix-ui/react-slot");
 
 // ../../node_modules/class-variance-authority/dist/index.mjs
@@ -229,7 +253,7 @@ var cva = (base, config) => {
 };
 
 // src/ui/button.tsx
-var import_jsx_runtime2 = require("react/jsx-runtime");
+var import_jsx_runtime3 = require("react/jsx-runtime");
 var buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
@@ -255,10 +279,10 @@ var buttonVariants = cva(
     }
   }
 );
-var Button = React2.forwardRef(
+var Button = React3.forwardRef(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? import_react_slot.Slot : "button";
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
       Comp,
       {
         className: cn(buttonVariants({ variant, size, className })),
@@ -271,11 +295,11 @@ var Button = React2.forwardRef(
 Button.displayName = "Button";
 
 // src/ui/textarea.tsx
-var React3 = __toESM(require("react"));
-var import_jsx_runtime3 = require("react/jsx-runtime");
-var Textarea = React3.forwardRef(
+var React4 = __toESM(require("react"));
+var import_jsx_runtime4 = require("react/jsx-runtime");
+var Textarea = React4.forwardRef(
   ({ className, ...props }, ref) => {
-    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       "textarea",
       {
         className: cn(
@@ -291,8 +315,7 @@ var Textarea = React3.forwardRef(
 Textarea.displayName = "Textarea";
 
 // src/components/form.tsx
-var import_js_confetti = __toESM(require("js-confetti"));
-var import_jsx_runtime4 = require("react/jsx-runtime");
+var import_jsx_runtime5 = require("react/jsx-runtime");
 var generateConfetti = async () => {
   const jsConfetti = new import_js_confetti.default();
   await jsConfetti.addConfetti({
@@ -339,66 +362,86 @@ var Form = (props) => {
       setOpen(false);
       setLoading(false);
       await generateConfetti();
+      setData({ email: "", type: "", feedback: "" });
     } catch (error2) {
       setError(error2.message);
       setLoading(false);
     }
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(DropdownMenu, { open, onOpenChange: setOpen, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(DropdownMenuTrigger, { className: cn("px-3 py-1 rounded-sm border", triggerClassName), children: "Feedback" }),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(DropdownMenuContent, { align: "end", className: cn("", contentClassName), children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
-      "form",
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(DropdownMenu, { open, onOpenChange: setOpen, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(DropdownMenuTrigger, { className: cn("px-3 py-2 rounded-md border", triggerClassName), children: "Feedback" }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      DropdownMenuContent,
       {
-        onSubmit: handleSubmit,
-        className: "p-2 flex flex-col gap-1.5",
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            "input",
-            {
-              type: "email",
-              placeholder: "Email",
-              value: data.email,
-              onChange: (e) => setData({ ...data, email: e.target.value }),
-              className: "px-2 py-1 border rounded-sm focus:outline-none focus:ring-0"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
-            "select",
-            {
-              value: data.type,
-              onChange: (e) => setData({ ...data, type: e.target.value }),
-              className: "p-2 border rounded-sm text-sm",
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "", children: "Feedback type" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "bug", children: "Bug" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "feature", children: "Feature" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "suggestion", children: "Suggestion" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            Textarea,
-            {
-              rows: 3,
-              value: data.feedback,
-              placeholder: "Your feedback",
-              onChange: (e) => setData({ ...data, feedback: e.target.value }),
-              className: "resize-none ring-0"
-            }
-          ),
-          error && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { style: { color: "red", fontSize: "13px" }, children: error }),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            Button,
-            {
-              type: "submit",
-              variant: "default",
-              className: "w-full",
-              children: loading ? "Submitting..." : "Submit"
-            }
-          )
-        ]
+        align: "end",
+        className: cn("w-[400px] p-4", contentClassName),
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+          "form",
+          {
+            onSubmit: handleSubmit,
+            className: "flex flex-col gap-4",
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "email", className: "text-sm font-medium", children: "Your Email" }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+                  Input,
+                  {
+                    id: "email",
+                    type: "email",
+                    placeholder: "you@example.com",
+                    value: data.email,
+                    onChange: (e) => setData({ ...data, email: e.target.value }),
+                    required: true
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "feedback", className: "text-sm font-medium", children: "Your Feedback" }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+                  Textarea,
+                  {
+                    id: "feedback",
+                    rows: 3,
+                    value: data.feedback,
+                    placeholder: "Please enter your feedback here...",
+                    onChange: (e) => setData({ ...data, feedback: e.target.value }),
+                    className: "resize-none",
+                    required: true
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex gap-2", children: ["bug", "feature", "suggestion"].map((type) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+                Button,
+                {
+                  type: "button",
+                  variant: data.type === type ? "secondary" : "outline",
+                  onClick: () => setData({ ...data, type }),
+                  className: "flex-1 border",
+                  children: [
+                    type === "bug" && "\u{1F41B}",
+                    type === "feature" && "\u2728",
+                    type === "suggestion" && "\u{1F4A1}",
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "ml-2 capitalize", children: type })
+                  ]
+                },
+                type
+              )) }),
+              error && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { style: { color: "red" }, className: "text-red-500 text-sm", children: error }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+                Button,
+                {
+                  type: "submit",
+                  variant: "default",
+                  className: "w-full",
+                  disabled: loading,
+                  children: loading ? "Submitting..." : "Submit Feedback"
+                }
+              )
+            ]
+          }
+        )
       }
-    ) })
+    )
   ] });
 };
 // Annotate the CommonJS export names for ESM import in node:

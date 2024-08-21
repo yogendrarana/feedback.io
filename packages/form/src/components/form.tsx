@@ -3,11 +3,12 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuTrigger,
-} from "../ui/dropdown"
+} from "../ui/dropdown-menu"
 import { cn } from '../lib/utils';
+import { Input } from '../ui/input';
+import JSConfetti from "js-confetti";
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
-import JSConfetti from "js-confetti";
 
 // api response type
 interface ApiResponse {
@@ -82,56 +83,83 @@ export const Form = (props: FormProps): JSX.Element => {
             setLoading(false);
 
             await generateConfetti();
+            
+            // clear form data
+            setData({ email: '', type: '', feedback: '' });
         } catch (error: any) {
             setError(error.message);
             setLoading(false);
         }
     };
 
-
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
-            <DropdownMenuTrigger className={cn('px-3 py-1 rounded-sm border', triggerClassName)}>
+            <DropdownMenuTrigger className={cn('px-3 py-2 rounded-md border', triggerClassName)}>
                 Feedback
             </DropdownMenuTrigger>
-            <DropdownMenuContent align='end' className={cn("", contentClassName)}>
+            <DropdownMenuContent
+                align='end'
+                className={cn("w-[400px] p-4", contentClassName)}
+            >
                 <form
                     onSubmit={handleSubmit}
-                    className="p-2 flex flex-col gap-1.5"
+                    className="flex flex-col gap-4"
                 >
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={data.email}
-                        onChange={(e) => setData({ ...data, email: e.target.value })}
-                        className='px-2 py-1 border rounded-sm focus:outline-none focus:ring-0'
-                    />
-                    <select
-                        value={data.type}
-                        onChange={(e) => setData({ ...data, type: e.target.value })}
-                        className='p-2 border rounded-sm text-sm'
-                    >
-                        <option value="">Feedback type</option>
-                        <option value="bug">Bug</option>
-                        <option value="feature">Feature</option>
-                        <option value="suggestion">Suggestion</option>
-                    </select>
-                    <Textarea
-                        rows={3}
-                        value={data.feedback}
-                        placeholder='Your feedback'
-                        onChange={(e) => setData({ ...data, feedback: e.target.value })}
-                        className='resize-none ring-0'
-                    />
+                    <div className="space-y-2">
+                        <label htmlFor="email" className="text-sm font-medium">
+                            Your Email
+                        </label>
+                        <Input
+                            id="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            value={data.email}
+                            onChange={(e) => setData({ ...data, email: e.target.value })}
+                            required
+                        />
+                    </div>
 
-                    {error && <p style={{ color: "red", fontSize: "13px" }}>{error}</p>}
+                    <div className="space-y-2">
+                        <label htmlFor="feedback" className="text-sm font-medium">
+                            Your Feedback
+                        </label>
+                        <Textarea
+                            id="feedback"
+                            rows={3}
+                            value={data.feedback}
+                            placeholder='Please enter your feedback here...'
+                            onChange={(e) => setData({ ...data, feedback: e.target.value })}
+                            className='resize-none'
+                            required
+                        />
+                    </div>
+
+                    <div className="flex gap-2">
+                        {['bug', 'feature', 'suggestion'].map((type) => (
+                            <Button
+                                key={type}
+                                type="button"
+                                variant={data.type === type ? 'secondary' : 'outline'}
+                                onClick={() => setData({ ...data, type })}
+                                className="flex-1 border"
+                            >
+                                {type === 'bug' && '🐛'}
+                                {type === 'feature' && '✨'}
+                                {type === 'suggestion' && '💡'}
+                                <span className="ml-2 capitalize">{type}</span>
+                            </Button>
+                        ))}
+                    </div>
+
+                    {error && <p style={{color: "red"}} className="text-red-500 text-sm">{error}</p>}
 
                     <Button
                         type="submit"
                         variant="default"
                         className="w-full"
+                        disabled={loading}
                     >
-                        {loading ? 'Submitting...' : 'Submit'}
+                        {loading ? 'Submitting...' : 'Submit Feedback'}
                     </Button>
                 </form>
             </DropdownMenuContent>

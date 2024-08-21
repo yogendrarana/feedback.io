@@ -1,7 +1,7 @@
 // src/components/form.tsx
 import { useState } from "react";
 
-// src/ui/dropdown.tsx
+// src/ui/dropdown-menu.tsx
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
@@ -13,7 +13,7 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-// src/ui/dropdown.tsx
+// src/ui/dropdown-menu.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
 var DropdownMenu = DropdownMenuPrimitive.Root;
 var DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
@@ -141,8 +141,32 @@ var DropdownMenuShortcut = ({
 };
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
 
-// src/ui/button.tsx
+// src/ui/input.tsx
 import * as React2 from "react";
+import { jsx as jsx2 } from "react/jsx-runtime";
+var Input = React2.forwardRef(
+  ({ className, type, ...props }, ref) => {
+    return /* @__PURE__ */ jsx2(
+      "input",
+      {
+        type,
+        className: cn(
+          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        ),
+        ref,
+        ...props
+      }
+    );
+  }
+);
+Input.displayName = "Input";
+
+// src/components/form.tsx
+import JSConfetti from "js-confetti";
+
+// src/ui/button.tsx
+import * as React3 from "react";
 import { Slot } from "@radix-ui/react-slot";
 
 // ../../node_modules/class-variance-authority/dist/index.mjs
@@ -193,7 +217,7 @@ var cva = (base, config) => {
 };
 
 // src/ui/button.tsx
-import { jsx as jsx2 } from "react/jsx-runtime";
+import { jsx as jsx3 } from "react/jsx-runtime";
 var buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
@@ -219,10 +243,10 @@ var buttonVariants = cva(
     }
   }
 );
-var Button = React2.forwardRef(
+var Button = React3.forwardRef(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    return /* @__PURE__ */ jsx2(
+    return /* @__PURE__ */ jsx3(
       Comp,
       {
         className: cn(buttonVariants({ variant, size, className })),
@@ -235,11 +259,11 @@ var Button = React2.forwardRef(
 Button.displayName = "Button";
 
 // src/ui/textarea.tsx
-import * as React3 from "react";
-import { jsx as jsx3 } from "react/jsx-runtime";
-var Textarea = React3.forwardRef(
+import * as React4 from "react";
+import { jsx as jsx4 } from "react/jsx-runtime";
+var Textarea = React4.forwardRef(
   ({ className, ...props }, ref) => {
-    return /* @__PURE__ */ jsx3(
+    return /* @__PURE__ */ jsx4(
       "textarea",
       {
         className: cn(
@@ -255,8 +279,7 @@ var Textarea = React3.forwardRef(
 Textarea.displayName = "Textarea";
 
 // src/components/form.tsx
-import JSConfetti from "js-confetti";
-import { jsx as jsx4, jsxs as jsxs2 } from "react/jsx-runtime";
+import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
 var generateConfetti = async () => {
   const jsConfetti = new JSConfetti();
   await jsConfetti.addConfetti({
@@ -303,66 +326,86 @@ var Form = (props) => {
       setOpen(false);
       setLoading(false);
       await generateConfetti();
+      setData({ email: "", type: "", feedback: "" });
     } catch (error2) {
       setError(error2.message);
       setLoading(false);
     }
   };
   return /* @__PURE__ */ jsxs2(DropdownMenu, { open, onOpenChange: setOpen, children: [
-    /* @__PURE__ */ jsx4(DropdownMenuTrigger, { className: cn("px-3 py-1 rounded-sm border", triggerClassName), children: "Feedback" }),
-    /* @__PURE__ */ jsx4(DropdownMenuContent, { align: "end", className: cn("", contentClassName), children: /* @__PURE__ */ jsxs2(
-      "form",
+    /* @__PURE__ */ jsx5(DropdownMenuTrigger, { className: cn("px-3 py-2 rounded-md border", triggerClassName), children: "Feedback" }),
+    /* @__PURE__ */ jsx5(
+      DropdownMenuContent,
       {
-        onSubmit: handleSubmit,
-        className: "p-2 flex flex-col gap-1.5",
-        children: [
-          /* @__PURE__ */ jsx4(
-            "input",
-            {
-              type: "email",
-              placeholder: "Email",
-              value: data.email,
-              onChange: (e) => setData({ ...data, email: e.target.value }),
-              className: "px-2 py-1 border rounded-sm focus:outline-none focus:ring-0"
-            }
-          ),
-          /* @__PURE__ */ jsxs2(
-            "select",
-            {
-              value: data.type,
-              onChange: (e) => setData({ ...data, type: e.target.value }),
-              className: "p-2 border rounded-sm text-sm",
-              children: [
-                /* @__PURE__ */ jsx4("option", { value: "", children: "Feedback type" }),
-                /* @__PURE__ */ jsx4("option", { value: "bug", children: "Bug" }),
-                /* @__PURE__ */ jsx4("option", { value: "feature", children: "Feature" }),
-                /* @__PURE__ */ jsx4("option", { value: "suggestion", children: "Suggestion" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsx4(
-            Textarea,
-            {
-              rows: 3,
-              value: data.feedback,
-              placeholder: "Your feedback",
-              onChange: (e) => setData({ ...data, feedback: e.target.value }),
-              className: "resize-none ring-0"
-            }
-          ),
-          error && /* @__PURE__ */ jsx4("p", { style: { color: "red", fontSize: "13px" }, children: error }),
-          /* @__PURE__ */ jsx4(
-            Button,
-            {
-              type: "submit",
-              variant: "default",
-              className: "w-full",
-              children: loading ? "Submitting..." : "Submit"
-            }
-          )
-        ]
+        align: "end",
+        className: cn("w-[400px] p-4", contentClassName),
+        children: /* @__PURE__ */ jsxs2(
+          "form",
+          {
+            onSubmit: handleSubmit,
+            className: "flex flex-col gap-4",
+            children: [
+              /* @__PURE__ */ jsxs2("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ jsx5("label", { htmlFor: "email", className: "text-sm font-medium", children: "Your Email" }),
+                /* @__PURE__ */ jsx5(
+                  Input,
+                  {
+                    id: "email",
+                    type: "email",
+                    placeholder: "you@example.com",
+                    value: data.email,
+                    onChange: (e) => setData({ ...data, email: e.target.value }),
+                    required: true
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxs2("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ jsx5("label", { htmlFor: "feedback", className: "text-sm font-medium", children: "Your Feedback" }),
+                /* @__PURE__ */ jsx5(
+                  Textarea,
+                  {
+                    id: "feedback",
+                    rows: 3,
+                    value: data.feedback,
+                    placeholder: "Please enter your feedback here...",
+                    onChange: (e) => setData({ ...data, feedback: e.target.value }),
+                    className: "resize-none",
+                    required: true
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsx5("div", { className: "flex gap-2", children: ["bug", "feature", "suggestion"].map((type) => /* @__PURE__ */ jsxs2(
+                Button,
+                {
+                  type: "button",
+                  variant: data.type === type ? "secondary" : "outline",
+                  onClick: () => setData({ ...data, type }),
+                  className: "flex-1 border",
+                  children: [
+                    type === "bug" && "\u{1F41B}",
+                    type === "feature" && "\u2728",
+                    type === "suggestion" && "\u{1F4A1}",
+                    /* @__PURE__ */ jsx5("span", { className: "ml-2 capitalize", children: type })
+                  ]
+                },
+                type
+              )) }),
+              error && /* @__PURE__ */ jsx5("p", { style: { color: "red" }, className: "text-red-500 text-sm", children: error }),
+              /* @__PURE__ */ jsx5(
+                Button,
+                {
+                  type: "submit",
+                  variant: "default",
+                  className: "w-full",
+                  disabled: loading,
+                  children: loading ? "Submitting..." : "Submit Feedback"
+                }
+              )
+            ]
+          }
+        )
       }
-    ) })
+    )
   ] });
 };
 export {
