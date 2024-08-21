@@ -1,1 +1,1 @@
-export { Form } from './components/form';
+export { ReactForm } from './react/react-form';

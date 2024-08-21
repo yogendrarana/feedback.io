@@ -17,7 +17,7 @@ interface ApiResponse {
 }
 
 // form props
-interface FormProps {
+interface ReactFormProps {
     clientId: string;
     projectId: string;
     contentClassName?: string;
@@ -34,7 +34,7 @@ const generateConfetti = async () => {
     });
 };
 
-export const Form = (props: FormProps): JSX.Element => {
+export const ReactForm = (props: ReactFormProps): JSX.Element => {
     const { clientId, projectId, contentClassName, triggerClassName } = props;
 
     const [open, setOpen] = useState(false);
