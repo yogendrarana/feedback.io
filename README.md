@@ -40,7 +40,7 @@ Your request body should be a JSON object with the following structure:
 | :-------- | :------- | :------------------------- |
 | email | `string` | **Required**. Email address of the feedback sender |
 | feedback | `string` | **Required**. Content of the feedback message |
-| type | `string` | **Required**. Type of feedback: **bug** or **feature** or **message** |
+| type | `string` | **Required**. Type of feedback: **bug** or **feature** or **suggestion** |
 
 
 ### Successful Response

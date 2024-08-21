@@ -1,4 +1,4 @@
-import { Bug, Sparkles, MessageCircle, Lightbulb } from "lucide-react";
+import { Bug, Sparkles, Lightbulb } from "lucide-react";
 
 export const feedbackCategory = [
     {
@@ -15,10 +15,5 @@ export const feedbackCategory = [
         label: "Bug",
         value: "bug",
         icon: Bug
-    },
-    {
-        label: "Message",
-        value: "message",
-        icon: MessageCircle
-    },
+    }
 ]

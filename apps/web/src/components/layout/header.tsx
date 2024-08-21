@@ -40,7 +40,7 @@ const Header = ({ className }: HeaderProps) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center space-x-1 md:space-x-2">
+                <div className="flex items-center gap-4 md:gap-2">
                     <ExternalLink
                         href="https://github.com/yogendrarana/feedback.io"
                         className={buttonVariants({ variant: "ghost", size: "icon" })}
@@ -49,8 +49,8 @@ const Header = ({ className }: HeaderProps) => {
                     </ExternalLink>
                     <Commandk />
                     <ModeToggle />
-                    <UserButton />
                     <FeedbackClientWrapper />
+                    <UserButton />
                 </div>
             </div>
         </nav >
