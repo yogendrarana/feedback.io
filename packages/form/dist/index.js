@@ -43,11 +43,20 @@ var DropdownMenuPrimitive = __toESM(require("@radix-ui/react-dropdown-menu"));
 var import_lucide_react = require("lucide-react");
 
 // src/lib/utils.ts
+var import_js_confetti = __toESM(require("js-confetti"));
 var import_tailwind_merge = require("tailwind-merge");
 var import_clsx = require("clsx");
 function cn(...inputs) {
   return (0, import_tailwind_merge.twMerge)((0, import_clsx.clsx)(inputs));
 }
+var generateConfetti = async () => {
+  const jsConfetti = new import_js_confetti.default();
+  await jsConfetti.addConfetti({
+    confettiColors: ["#fdd835", "#4caf50", "#2196f3", "#f44336", "#ff9800"],
+    confettiRadius: 3,
+    confettiNumber: 100
+  });
+};
 
 // src/ui/dropdown-menu.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
@@ -198,9 +207,6 @@ var Input = React2.forwardRef(
 );
 Input.displayName = "Input";
 
-// src/react/react-form.tsx
-var import_js_confetti = __toESM(require("js-confetti"));
-
 // src/ui/button.tsx
 var React3 = __toESM(require("react"));
 var import_react_slot = require("@radix-ui/react-slot");
@@ -316,14 +322,6 @@ Textarea.displayName = "Textarea";
 
 // src/react/react-form.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
-var generateConfetti = async () => {
-  const jsConfetti = new import_js_confetti.default();
-  await jsConfetti.addConfetti({
-    confettiColors: ["#fdd835", "#4caf50", "#2196f3", "#f44336", "#ff9800"],
-    confettiRadius: 3,
-    confettiNumber: 100
-  });
-};
 var ReactForm = (props) => {
   const { clientId, projectId, contentClassName, triggerClassName } = props;
   const [open, setOpen] = (0, import_react.useState)(false);

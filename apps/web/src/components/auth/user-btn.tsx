@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 export default async function UserButton() {
     const session = await auth();
 
-    if (!session?.user)
+    if (!session?.user) {
         return (
             <Link
                 href="/auth"
@@ -30,8 +30,9 @@ export default async function UserButton() {
                 <ArrowRight size={16} />
             </Link>
         );
+    }
 
-    if (session?.user)
+    if (session?.user) {
         return (
             <DropdownMenu>
                 <DropdownMenuTrigger
@@ -68,4 +69,5 @@ export default async function UserButton() {
                 </DropdownMenuContent>
             </DropdownMenu>
         );
+    }
 }

@@ -7,11 +7,20 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
 
 // src/lib/utils.ts
+import JSConfetti from "js-confetti";
 import { twMerge } from "tailwind-merge";
 import { clsx } from "clsx";
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
+var generateConfetti = async () => {
+  const jsConfetti = new JSConfetti();
+  await jsConfetti.addConfetti({
+    confettiColors: ["#fdd835", "#4caf50", "#2196f3", "#f44336", "#ff9800"],
+    confettiRadius: 3,
+    confettiNumber: 100
+  });
+};
 
 // src/ui/dropdown-menu.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -162,9 +171,6 @@ var Input = React2.forwardRef(
 );
 Input.displayName = "Input";
 
-// src/react/react-form.tsx
-import JSConfetti from "js-confetti";
-
 // src/ui/button.tsx
 import * as React3 from "react";
 import { Slot } from "@radix-ui/react-slot";
@@ -280,14 +286,6 @@ Textarea.displayName = "Textarea";
 
 // src/react/react-form.tsx
 import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
-var generateConfetti = async () => {
-  const jsConfetti = new JSConfetti();
-  await jsConfetti.addConfetti({
-    confettiColors: ["#fdd835", "#4caf50", "#2196f3", "#f44336", "#ff9800"],
-    confettiRadius: 3,
-    confettiNumber: 100
-  });
-};
 var ReactForm = (props) => {
   const { clientId, projectId, contentClassName, triggerClassName } = props;
   const [open, setOpen] = useState(false);

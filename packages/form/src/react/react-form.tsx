@@ -4,9 +4,8 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { cn } from '../lib/utils';
+import { cn, generateConfetti } from '../lib/utils';
 import { Input } from '../ui/input';
-import JSConfetti from "js-confetti";
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 
@@ -24,15 +23,6 @@ interface ReactFormProps {
     triggerClassName?: string;
 }
 
-// Generate confetti animation:
-const generateConfetti = async () => {
-    const jsConfetti = new JSConfetti();
-    await jsConfetti.addConfetti({
-        confettiColors: ["#fdd835", "#4caf50", "#2196f3", "#f44336", "#ff9800"],
-        confettiRadius: 3,
-        confettiNumber: 100,
-    });
-};
 
 export const ReactForm = (props: ReactFormProps): JSX.Element => {
     const { clientId, projectId, contentClassName, triggerClassName } = props;
