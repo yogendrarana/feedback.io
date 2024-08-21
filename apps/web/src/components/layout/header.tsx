@@ -7,8 +7,7 @@ import { GithubLogo } from "@/components/icon/logos";
 import { buttonVariants } from "@/components/ui/button";
 import { ModeToggle } from "@/components/util/change-theme";
 import { ExternalLink } from "@/components/ui/external-link";
-import { LightBulb, LightBulbOutline } from "@/assets";
-import Image from "next/image";
+import FeedbackClientWrapper from "./feedback-client-wrapper";
 
 interface HeaderProps {
     className?: string;
@@ -51,6 +50,7 @@ const Header = ({ className }: HeaderProps) => {
                     <Commandk />
                     <ModeToggle />
                     <UserButton />
+                    <FeedbackClientWrapper />
                 </div>
             </div>
         </nav >
