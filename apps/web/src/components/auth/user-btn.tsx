@@ -39,8 +39,13 @@ export default async function UserButton() {
                     className={buttonVariants({ variant: "ghost", size: "icon" })}
                 >
                     {session.user.image && session.user.name && (
-                        <Avatar>
-                            <AvatarImage src={session.user.image} />
+                        <Avatar
+                            className={buttonVariants({
+                                variant: "outline",
+                                className: "p-1",
+                            })}
+                        >
+                            <AvatarImage src={session.user.image} alt="avatar" className="object-contain" />
                             <AvatarFallback>{getNameInitials(session.user.name)}</AvatarFallback>
                         </Avatar>
                     )}
