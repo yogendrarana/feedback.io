@@ -1,9 +1,10 @@
-interface ReactFormProps {
+type FormProps = {
     clientId: string;
     projectId: string;
     contentClassName?: string;
     triggerClassName?: string;
-}
-declare const ReactForm: (props: ReactFormProps) => JSX.Element;
+};
 
-export { ReactForm };
+declare const ReactForm: (props: FormProps) => JSX.Element;
+
+export { type FormProps, ReactForm };

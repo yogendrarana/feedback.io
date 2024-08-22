@@ -174,55 +174,7 @@ Input.displayName = "Input";
 // src/ui/button.tsx
 import * as React3 from "react";
 import { Slot } from "@radix-ui/react-slot";
-
-// ../../node_modules/class-variance-authority/dist/index.mjs
-import { clsx as clsx2 } from "clsx";
-var falsyToString = (value) => typeof value === "boolean" ? "".concat(value) : value === 0 ? "0" : value;
-var cx = clsx2;
-var cva = (base, config) => {
-  return (props) => {
-    var ref;
-    if ((config === null || config === void 0 ? void 0 : config.variants) == null)
-      return cx(base, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
-    const { variants, defaultVariants } = config;
-    const getVariantClassNames = Object.keys(variants).map((variant) => {
-      const variantProp = props === null || props === void 0 ? void 0 : props[variant];
-      const defaultVariantProp = defaultVariants === null || defaultVariants === void 0 ? void 0 : defaultVariants[variant];
-      if (variantProp === null)
-        return null;
-      const variantKey = falsyToString(variantProp) || falsyToString(defaultVariantProp);
-      return variants[variant][variantKey];
-    });
-    const propsWithoutUndefined = props && Object.entries(props).reduce((acc, param) => {
-      let [key, value] = param;
-      if (value === void 0) {
-        return acc;
-      }
-      acc[key] = value;
-      return acc;
-    }, {});
-    const getCompoundVariantClassNames = config === null || config === void 0 ? void 0 : (ref = config.compoundVariants) === null || ref === void 0 ? void 0 : ref.reduce((acc, param1) => {
-      let { class: cvClass, className: cvClassName, ...compoundVariantOptions } = param1;
-      return Object.entries(compoundVariantOptions).every((param) => {
-        let [key, value] = param;
-        return Array.isArray(value) ? value.includes({
-          ...defaultVariants,
-          ...propsWithoutUndefined
-        }[key]) : {
-          ...defaultVariants,
-          ...propsWithoutUndefined
-        }[key] === value;
-      }) ? [
-        ...acc,
-        cvClass,
-        cvClassName
-      ] : acc;
-    }, []);
-    return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
-  };
-};
-
-// src/ui/button.tsx
+import { cva } from "class-variance-authority";
 import { jsx as jsx3 } from "react/jsx-runtime";
 var buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -331,7 +283,7 @@ var ReactForm = (props) => {
     }
   };
   return /* @__PURE__ */ jsxs2(DropdownMenu, { open, onOpenChange: setOpen, children: [
-    /* @__PURE__ */ jsx5(DropdownMenuTrigger, { className: cn("px-3 py-2 rounded-md border", triggerClassName), children: "Feedback" }),
+    /* @__PURE__ */ jsx5(DropdownMenuTrigger, { className: cn("px-3 py-2 rounded-md outline-none ring-0", triggerClassName), children: "Feedback" }),
     /* @__PURE__ */ jsx5(
       DropdownMenuContent,
       {

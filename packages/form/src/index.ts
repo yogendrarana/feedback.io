@@ -1,1 +1,2 @@
-export { ReactForm } from './react/react-form';
+export * from './react/react-form';
+export * from './react/types';

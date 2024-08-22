@@ -8,6 +8,7 @@ import { cn, generateConfetti } from '../lib/utils';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
+import { FormProps } from './types';
 
 // api response type
 interface ApiResponse {
@@ -15,16 +16,7 @@ interface ApiResponse {
     message: string;
 }
 
-// form props
-interface ReactFormProps {
-    clientId: string;
-    projectId: string;
-    contentClassName?: string;
-    triggerClassName?: string;
-}
-
-
-export const ReactForm = (props: ReactFormProps): JSX.Element => {
+export const ReactForm = (props: FormProps): JSX.Element => {
     const { clientId, projectId, contentClassName, triggerClassName } = props;
 
     const [open, setOpen] = useState(false);
@@ -73,7 +65,7 @@ export const ReactForm = (props: ReactFormProps): JSX.Element => {
             setLoading(false);
 
             await generateConfetti();
-            
+
             // clear form data
             setData({ email: '', type: '', feedback: '' });
         } catch (error: any) {
@@ -84,7 +76,7 @@ export const ReactForm = (props: ReactFormProps): JSX.Element => {
 
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
-            <DropdownMenuTrigger className={cn('px-3 py-2 rounded-md border', triggerClassName)}>
+            <DropdownMenuTrigger className={cn('px-3 py-2 rounded-md outline-none ring-0', triggerClassName)}>
                 Feedback
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -141,7 +133,7 @@ export const ReactForm = (props: ReactFormProps): JSX.Element => {
                         ))}
                     </div>
 
-                    {error && <p style={{color: "red"}} className="text-red-500 text-sm">{error}</p>}
+                    {error && <p style={{ color: "red" }} className="text-red-500 text-sm">{error}</p>}
 
                     <Button
                         type="submit"
