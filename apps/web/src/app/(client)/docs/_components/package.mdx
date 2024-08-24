@@ -8,12 +8,22 @@ Currently, we only support installation of this package in react. Here, is how y
 ```bash
   npm install @feedmo/form
 ```
+
 ### Setup
 This package uses Tailwind CSS for styling. To use it effectively:
 
 1. Configure Tailwind CSS in your React project. Follow the [official Tailwind CSS setup guide](https://tailwindcss.com/docs/guides/vite) for instructions.
 
-2. If you prefer not to use Tailwind CSS, you can create your own form component and use our client and project IDs to receive user feedback. Visit our [official documentation](https://feedmo.vercel.app/docs) for manual implementation details.
+2. In your tailwind.config.js, make sure you include this in your contents array
+```javascript
+content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@feedmo/form/**/*.{js,jsx,ts,tsx}" // Add this line
+],
+```
+
+3. If you prefer not to use Tailwind CSS, you can create your own form component and use our client and project IDs to receive user feedback. Visit our [official documentation](https://feedmo.vercel.app/docs) for manual implementation details.
+
 ### Usage/Examples
 
 ```javascript
