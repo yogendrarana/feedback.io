@@ -16,7 +16,7 @@ Include these in your request headers as **x-client-id** and **x-project-id** re
 To submit feedback, send a POST request to the following endpoint.
 
 ```
-  POST https://feedbackio.vercel.app/api/v1/feedback
+  POST https://feedmo.vercel.app/api/v1/feedback
 ```
 
 | Header | Type     | Description                |
@@ -79,7 +79,7 @@ If the POST request fails, you will receive an appropriate status code depending
 ```javascript
 import axios from 'axios';
 
-axios.post('https://feedbackio.vercel.app/api/v1/feedback', {
+axios.post('https://feedmo.vercel.app/api/v1/feedback', {
     email: 'abc@gmail.com',
     type: "message",
     feedback: "Your site is cool."
