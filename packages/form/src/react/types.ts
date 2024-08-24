@@ -3,4 +3,12 @@ export type FormProps = {
     projectId: string;
     contentClassName?: string;
     triggerClassName?: string;
+    labelClassName?: string;
+    inputClassName?: string;
+    textareaClassName?: string;
+    submitBtnClassName?: string;
+    feedbackTypeClassName?: string;
+    formClassName?: string;
+    errorClassName?: string;
+    menuAlign?: 'start' | 'center' | 'end';
 }

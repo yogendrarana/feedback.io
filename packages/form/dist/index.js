@@ -274,8 +274,21 @@ Textarea.displayName = "Textarea";
 
 // src/react/react-form.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
+var API_ENDPOINT = "https://feedmo.vercel.app/api/v1/feedback";
 var ReactForm = (props) => {
-  const { clientId, projectId, contentClassName, triggerClassName } = props;
+  const {
+    clientId,
+    projectId,
+    contentClassName,
+    triggerClassName,
+    labelClassName,
+    inputClassName,
+    textareaClassName,
+    submitBtnClassName,
+    formClassName,
+    errorClassName,
+    menuAlign
+  } = props;
   const [open, setOpen] = (0, import_react.useState)(false);
   const [loading, setLoading] = (0, import_react.useState)(false);
   const [error, setError] = (0, import_react.useState)(null);
@@ -293,7 +306,7 @@ var ReactForm = (props) => {
     }
     try {
       setLoading(true);
-      const response = await fetch("https://feedbackio.vercel.app/api/v1/feedback", {
+      const response = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -323,16 +336,16 @@ var ReactForm = (props) => {
     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
       DropdownMenuContent,
       {
-        align: "end",
+        align: menuAlign || "end",
         className: cn("w-[400px] p-4", contentClassName),
         children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
           "form",
           {
             onSubmit: handleSubmit,
-            className: "flex flex-col gap-4",
+            className: cn("text-sm font-medium", formClassName),
             children: [
               /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-2", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "email", className: "text-sm font-medium", children: "Your Email" }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "email", className: cn("text-sm font-medium", labelClassName), children: "Your Email" }),
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                   Input,
                   {
@@ -341,12 +354,13 @@ var ReactForm = (props) => {
                     placeholder: "you@example.com",
                     value: data.email,
                     onChange: (e) => setData({ ...data, email: e.target.value }),
-                    required: true
+                    required: true,
+                    className: cn(inputClassName)
                   }
                 )
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-2", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "feedback", className: "text-sm font-medium", children: "Your Feedback" }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "feedback", className: cn("text-sm font-medium", labelClassName), children: "Your Feedback" }),
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                   Textarea,
                   {
@@ -355,7 +369,7 @@ var ReactForm = (props) => {
                     value: data.feedback,
                     placeholder: "Please enter your feedback here...",
                     onChange: (e) => setData({ ...data, feedback: e.target.value }),
-                    className: "resize-none",
+                    className: cn("resize-none", textareaClassName),
                     required: true
                   }
                 )
@@ -364,9 +378,11 @@ var ReactForm = (props) => {
                 Button,
                 {
                   type: "button",
-                  variant: data.type === type ? "secondary" : "outline",
+                  variant: "outline",
                   onClick: () => setData({ ...data, type }),
-                  className: "flex-1 border",
+                  style: {
+                    backgroundColor: data.type === type ? "rgba(0, 0, 0, 0.05)" : "transparent"
+                  },
                   children: [
                     type === "bug" && "\u{1F41B}",
                     type === "feature" && "\u2728",
@@ -376,13 +392,13 @@ var ReactForm = (props) => {
                 },
                 type
               )) }),
-              error && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { style: { color: "red" }, className: "text-red-500 text-sm", children: error }),
+              error && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: cn("text-red-500 text-sm", errorClassName), children: error }),
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                 Button,
                 {
                   type: "submit",
                   variant: "default",
-                  className: "w-full",
+                  className: cn("w-full", submitBtnClassName),
                   disabled: loading,
                   children: loading ? "Submitting..." : "Submit Feedback"
                 }

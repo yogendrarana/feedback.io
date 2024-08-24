@@ -238,8 +238,21 @@ Textarea.displayName = "Textarea";
 
 // src/react/react-form.tsx
 import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
+var API_ENDPOINT = "https://feedmo.vercel.app/api/v1/feedback";
 var ReactForm = (props) => {
-  const { clientId, projectId, contentClassName, triggerClassName } = props;
+  const {
+    clientId,
+    projectId,
+    contentClassName,
+    triggerClassName,
+    labelClassName,
+    inputClassName,
+    textareaClassName,
+    submitBtnClassName,
+    formClassName,
+    errorClassName,
+    menuAlign
+  } = props;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -257,7 +270,7 @@ var ReactForm = (props) => {
     }
     try {
       setLoading(true);
-      const response = await fetch("https://feedbackio.vercel.app/api/v1/feedback", {
+      const response = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -287,16 +300,16 @@ var ReactForm = (props) => {
     /* @__PURE__ */ jsx5(
       DropdownMenuContent,
       {
-        align: "end",
+        align: menuAlign || "end",
         className: cn("w-[400px] p-4", contentClassName),
         children: /* @__PURE__ */ jsxs2(
           "form",
           {
             onSubmit: handleSubmit,
-            className: "flex flex-col gap-4",
+            className: cn("text-sm font-medium", formClassName),
             children: [
               /* @__PURE__ */ jsxs2("div", { className: "space-y-2", children: [
-                /* @__PURE__ */ jsx5("label", { htmlFor: "email", className: "text-sm font-medium", children: "Your Email" }),
+                /* @__PURE__ */ jsx5("label", { htmlFor: "email", className: cn("text-sm font-medium", labelClassName), children: "Your Email" }),
                 /* @__PURE__ */ jsx5(
                   Input,
                   {
@@ -305,12 +318,13 @@ var ReactForm = (props) => {
                     placeholder: "you@example.com",
                     value: data.email,
                     onChange: (e) => setData({ ...data, email: e.target.value }),
-                    required: true
+                    required: true,
+                    className: cn(inputClassName)
                   }
                 )
               ] }),
               /* @__PURE__ */ jsxs2("div", { className: "space-y-2", children: [
-                /* @__PURE__ */ jsx5("label", { htmlFor: "feedback", className: "text-sm font-medium", children: "Your Feedback" }),
+                /* @__PURE__ */ jsx5("label", { htmlFor: "feedback", className: cn("text-sm font-medium", labelClassName), children: "Your Feedback" }),
                 /* @__PURE__ */ jsx5(
                   Textarea,
                   {
@@ -319,7 +333,7 @@ var ReactForm = (props) => {
                     value: data.feedback,
                     placeholder: "Please enter your feedback here...",
                     onChange: (e) => setData({ ...data, feedback: e.target.value }),
-                    className: "resize-none",
+                    className: cn("resize-none", textareaClassName),
                     required: true
                   }
                 )
@@ -328,9 +342,11 @@ var ReactForm = (props) => {
                 Button,
                 {
                   type: "button",
-                  variant: data.type === type ? "secondary" : "outline",
+                  variant: "outline",
                   onClick: () => setData({ ...data, type }),
-                  className: "flex-1 border",
+                  style: {
+                    backgroundColor: data.type === type ? "rgba(0, 0, 0, 0.05)" : "transparent"
+                  },
                   children: [
                     type === "bug" && "\u{1F41B}",
                     type === "feature" && "\u2728",
@@ -340,13 +356,13 @@ var ReactForm = (props) => {
                 },
                 type
               )) }),
-              error && /* @__PURE__ */ jsx5("p", { style: { color: "red" }, className: "text-red-500 text-sm", children: error }),
+              error && /* @__PURE__ */ jsx5("p", { className: cn("text-red-500 text-sm", errorClassName), children: error }),
               /* @__PURE__ */ jsx5(
                 Button,
                 {
                   type: "submit",
                   variant: "default",
-                  className: "w-full",
+                  className: cn("w-full", submitBtnClassName),
                   disabled: loading,
                   children: loading ? "Submitting..." : "Submit Feedback"
                 }

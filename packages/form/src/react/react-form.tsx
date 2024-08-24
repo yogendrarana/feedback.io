@@ -4,11 +4,11 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { cn, generateConfetti } from '../lib/utils';
 import { Input } from '../ui/input';
+import { FormProps } from './types';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
-import { FormProps } from './types';
+import { cn, generateConfetti } from '../lib/utils';
 
 // api response type
 interface ApiResponse {
@@ -16,8 +16,22 @@ interface ApiResponse {
     message: string;
 }
 
+const API_ENDPOINT = "https://feedmo.vercel.app/api/v1/feedback";
+
 export const ReactForm = (props: FormProps): JSX.Element => {
-    const { clientId, projectId, contentClassName, triggerClassName } = props;
+    const { 
+        clientId, 
+        projectId, 
+        contentClassName, 
+        triggerClassName,
+        labelClassName,
+        inputClassName,
+        textareaClassName,
+        submitBtnClassName,
+        formClassName,
+        errorClassName,
+        menuAlign
+    } = props;
 
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -41,7 +55,7 @@ export const ReactForm = (props: FormProps): JSX.Element => {
         try {
             setLoading(true);
 
-            const response = await fetch('https://feedbackio.vercel.app/api/v1/feedback', {
+            const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,15 +94,15 @@ export const ReactForm = (props: FormProps): JSX.Element => {
                 Feedback
             </DropdownMenuTrigger>
             <DropdownMenuContent
-                align='end'
+                align={menuAlign || "end"}
                 className={cn("w-[400px] p-4", contentClassName)}
             >
                 <form
                     onSubmit={handleSubmit}
-                    className="flex flex-col gap-4"
+                    className={cn("text-sm font-medium", formClassName)}
                 >
                     <div className="space-y-2">
-                        <label htmlFor="email" className="text-sm font-medium">
+                        <label htmlFor="email" className={cn("text-sm font-medium", labelClassName)}>
                             Your Email
                         </label>
                         <Input
@@ -98,11 +112,12 @@ export const ReactForm = (props: FormProps): JSX.Element => {
                             value={data.email}
                             onChange={(e) => setData({ ...data, email: e.target.value })}
                             required
+                            className={cn(inputClassName)}
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="feedback" className="text-sm font-medium">
+                        <label htmlFor="feedback" className={cn("text-sm font-medium", labelClassName)}>
                             Your Feedback
                         </label>
                         <Textarea
@@ -111,7 +126,7 @@ export const ReactForm = (props: FormProps): JSX.Element => {
                             value={data.feedback}
                             placeholder='Please enter your feedback here...'
                             onChange={(e) => setData({ ...data, feedback: e.target.value })}
-                            className='resize-none'
+                            className={cn('resize-none', textareaClassName)}
                             required
                         />
                     </div>
@@ -121,9 +136,11 @@ export const ReactForm = (props: FormProps): JSX.Element => {
                             <Button
                                 key={type}
                                 type="button"
-                                variant={data.type === type ? 'secondary' : 'outline'}
+                                variant="outline"
                                 onClick={() => setData({ ...data, type })}
-                                className="flex-1 border"
+                                style={{
+                                    backgroundColor: data.type === type ? 'rgba(0, 0, 0, 0.05)' : 'transparent',
+                                }}
                             >
                                 {type === 'bug' && '🐛'}
                                 {type === 'feature' && '✨'}
@@ -133,12 +150,11 @@ export const ReactForm = (props: FormProps): JSX.Element => {
                         ))}
                     </div>
 
-                    {error && <p style={{ color: "red" }} className="text-red-500 text-sm">{error}</p>}
-
+                    {error && <p className={cn("text-red-500 text-sm", errorClassName)}>{error}</p>}
                     <Button
                         type="submit"
                         variant="default"
-                        className="w-full"
+                        className={cn("w-full", submitBtnClassName)}
                         disabled={loading}
                     >
                         {loading ? 'Submitting...' : 'Submit Feedback'}
