@@ -19,10 +19,10 @@ interface ApiResponse {
 const API_ENDPOINT = "https://feedmo.vercel.app/api/v1/feedback";
 
 export const ReactForm = (props: FormProps): JSX.Element => {
-    const { 
-        clientId, 
-        projectId, 
-        contentClassName, 
+    const {
+        clientId,
+        projectId,
+        contentClassName,
         triggerClassName,
         labelClassName,
         inputClassName,
@@ -30,7 +30,8 @@ export const ReactForm = (props: FormProps): JSX.Element => {
         submitBtnClassName,
         formClassName,
         errorClassName,
-        menuAlign
+        feedbackTypeClassName,
+        contentAlign
     } = props;
 
     const [open, setOpen] = useState(false);
@@ -47,8 +48,18 @@ export const ReactForm = (props: FormProps): JSX.Element => {
             return;
         }
 
-        if (!data.email || !data.type || !data.feedback) {
-            setError('All fields are required');
+        if (!data.email) {
+            setError('Please provide email');
+            return;
+        }
+
+        if (!data.type) {
+            setError('Please select feedback type');
+            return;
+        }
+
+        if (!data.feedback) {
+            setError('Please provide feedback');
             return;
         }
 
@@ -90,33 +101,34 @@ export const ReactForm = (props: FormProps): JSX.Element => {
 
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
-            <DropdownMenuTrigger className={cn('px-3 py-2 rounded-md outline-none ring-0', triggerClassName)}>
+            <DropdownMenuTrigger className={cn('px-3 py-2 rounded-md outline-none ring-0 border', triggerClassName)}>
                 Feedback
             </DropdownMenuTrigger>
             <DropdownMenuContent
-                align={menuAlign || "end"}
-                className={cn("w-[400px] p-4", contentClassName)}
+                align={contentAlign || "end"}
+                className={cn("w-[425px] p-4", contentClassName)}
             >
                 <form
                     onSubmit={handleSubmit}
-                    className={cn("text-sm font-medium space-y-3", formClassName)}
+                    className={cn(formClassName)}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
                 >
-                    <div className="space-y-2">
+                    <div style={{ display: 'flex', flexDirection: "column",  gap: '10px' }}>
                         <label htmlFor="email" className={cn("text-sm font-medium", labelClassName)}>
                             Your Email
                         </label>
                         <Input
                             id="email"
                             type="email"
-                            placeholder="you@example.com"
                             value={data.email}
+                            placeholder="you@example.com"
                             onChange={(e) => setData({ ...data, email: e.target.value })}
-                            required
                             className={cn(inputClassName)}
+                            required
                         />
                     </div>
 
-                    <div className="space-y-2">
+                    <div style={{ display: 'flex', flexDirection: "column",  gap: '10px' }}>
                         <label htmlFor="feedback" className={cn("text-sm font-medium", labelClassName)}>
                             Your Feedback
                         </label>
@@ -131,30 +143,32 @@ export const ReactForm = (props: FormProps): JSX.Element => {
                         />
                     </div>
 
-                    <div className="flex gap-2">
+                    <div style={{ display: 'flex', gap: '10px' }}>
                         {['bug', 'feature', 'suggestion'].map((type) => (
-                            <Button
+                            <button
                                 key={type}
                                 type="button"
-                                variant="outline"
                                 onClick={() => setData({ ...data, type })}
                                 style={{
-                                    backgroundColor: data.type === type ? 'rgba(0, 0, 0, 0.05)' : 'transparent',
+                                    backgroundColor: data.type === type ? '#ededed' : 'transparent',
+                                    flex: '1 1 0',
+                                    textAlign: 'center',
+                                    borderRadius: '5px',
+                                    border: '1px solid #ededed',
+                                    padding: "10px 20px",
                                 }}
+                                className={cn("", feedbackTypeClassName)}
                             >
-                                {type === 'bug' && '🐛'}
-                                {type === 'feature' && '✨'}
-                                {type === 'suggestion' && '💡'}
-                                <span className="ml-2 capitalize">{type}</span>
-                            </Button>
+                                <span>{type}</span>
+                            </button>
                         ))}
                     </div>
 
                     {error && <p className={cn("text-red-500 text-sm", errorClassName)}>{error}</p>}
+
                     <Button
                         type="submit"
-                        variant="default"
-                        className={cn("w-full", submitBtnClassName)}
+                        className={cn("w-full bg-black text-white", submitBtnClassName)}
                         disabled={loading}
                     >
                         {loading ? 'Submitting...' : 'Submit Feedback'}

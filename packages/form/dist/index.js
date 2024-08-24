@@ -287,7 +287,8 @@ var ReactForm = (props) => {
     submitBtnClassName,
     formClassName,
     errorClassName,
-    menuAlign
+    feedbackTypeClassName,
+    contentAlign
   } = props;
   const [open, setOpen] = (0, import_react.useState)(false);
   const [loading, setLoading] = (0, import_react.useState)(false);
@@ -300,8 +301,16 @@ var ReactForm = (props) => {
       setError("Provide client and project ID as props.");
       return;
     }
-    if (!data.email || !data.type || !data.feedback) {
-      setError("All fields are required");
+    if (!data.email) {
+      setError("Please provide email");
+      return;
+    }
+    if (!data.type) {
+      setError("Please select feedback type");
+      return;
+    }
+    if (!data.feedback) {
+      setError("Please provide feedback");
       return;
     }
     try {
@@ -332,34 +341,35 @@ var ReactForm = (props) => {
     }
   };
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(DropdownMenu, { open, onOpenChange: setOpen, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(DropdownMenuTrigger, { className: cn("px-3 py-2 rounded-md outline-none ring-0", triggerClassName), children: "Feedback" }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(DropdownMenuTrigger, { className: cn("px-3 py-2 rounded-md outline-none ring-0 border", triggerClassName), children: "Feedback" }),
     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
       DropdownMenuContent,
       {
-        align: menuAlign || "end",
-        className: cn("w-[400px] p-4", contentClassName),
+        align: contentAlign || "end",
+        className: cn("w-[425px] p-4", contentClassName),
         children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
           "form",
           {
             onSubmit: handleSubmit,
-            className: cn("text-sm font-medium space-y-3", formClassName),
+            className: cn(formClassName),
+            style: { display: "flex", flexDirection: "column", gap: "10px" },
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-2", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { style: { display: "flex", flexDirection: "column", gap: "10px" }, children: [
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "email", className: cn("text-sm font-medium", labelClassName), children: "Your Email" }),
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                   Input,
                   {
                     id: "email",
                     type: "email",
-                    placeholder: "you@example.com",
                     value: data.email,
+                    placeholder: "you@example.com",
                     onChange: (e) => setData({ ...data, email: e.target.value }),
-                    required: true,
-                    className: cn(inputClassName)
+                    className: cn(inputClassName),
+                    required: true
                   }
                 )
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-2", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { style: { display: "flex", flexDirection: "column", gap: "10px" }, children: [
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "feedback", className: cn("text-sm font-medium", labelClassName), children: "Your Feedback" }),
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                   Textarea,
@@ -374,21 +384,21 @@ var ReactForm = (props) => {
                   }
                 )
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex gap-2", children: ["bug", "feature", "suggestion"].map((type) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
-                Button,
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { style: { display: "flex", gap: "10px" }, children: ["bug", "feature", "suggestion"].map((type) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+                "button",
                 {
                   type: "button",
-                  variant: "outline",
                   onClick: () => setData({ ...data, type }),
                   style: {
-                    backgroundColor: data.type === type ? "rgba(0, 0, 0, 0.05)" : "transparent"
+                    backgroundColor: data.type === type ? "#ededed" : "transparent",
+                    flex: "1 1 0",
+                    textAlign: "center",
+                    borderRadius: "5px",
+                    border: "1px solid #ededed",
+                    padding: "10px 20px"
                   },
-                  children: [
-                    type === "bug" && "\u{1F41B}",
-                    type === "feature" && "\u2728",
-                    type === "suggestion" && "\u{1F4A1}",
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "ml-2 capitalize", children: type })
-                  ]
+                  className: cn("", feedbackTypeClassName),
+                  children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: type })
                 },
                 type
               )) }),
@@ -397,8 +407,7 @@ var ReactForm = (props) => {
                 Button,
                 {
                   type: "submit",
-                  variant: "default",
-                  className: cn("w-full", submitBtnClassName),
+                  className: cn("w-full bg-black text-white", submitBtnClassName),
                   disabled: loading,
                   children: loading ? "Submitting..." : "Submit Feedback"
                 }

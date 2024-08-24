@@ -10,5 +10,5 @@ export type FormProps = {
     feedbackTypeClassName?: string;
     formClassName?: string;
     errorClassName?: string;
-    menuAlign?: 'start' | 'center' | 'end';
+    contentAlign?: 'start' | 'center' | 'end';
 }
