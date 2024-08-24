@@ -342,7 +342,7 @@ var ReactForm = (props) => {
           "form",
           {
             onSubmit: handleSubmit,
-            className: cn("text-sm font-medium", formClassName),
+            className: cn("text-sm font-medium space-y-3", formClassName),
             children: [
               /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-2", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("label", { htmlFor: "email", className: cn("text-sm font-medium", labelClassName), children: "Your Email" }),

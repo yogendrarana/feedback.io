@@ -99,7 +99,7 @@ export const ReactForm = (props: FormProps): JSX.Element => {
             >
                 <form
                     onSubmit={handleSubmit}
-                    className={cn("text-sm font-medium", formClassName)}
+                    className={cn("text-sm font-medium space-y-3", formClassName)}
                 >
                     <div className="space-y-2">
                         <label htmlFor="email" className={cn("text-sm font-medium", labelClassName)}>
