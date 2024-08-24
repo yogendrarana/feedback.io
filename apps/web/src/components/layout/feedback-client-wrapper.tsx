@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { ReactForm } from '@feedbackio/form'
+import { ReactForm } from '@feedmo/form'
 import { buttonVariants } from '../ui/button'
 
 const FeedbackClientWrapper = () => {

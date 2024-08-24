@@ -1,15 +1,15 @@
 {
-  "name": "@feedbackio/form",
+  "name": "@feedmo/form",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
-  "homepage": "https://feedbackio.vercel.app",
+  "homepage": "https://feedmo.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yogendrarana/feedback.io"
+    "url": "git+https://github.com/yogendrarana/feedmo.git"
   },
   "files": [
     "dist/**"

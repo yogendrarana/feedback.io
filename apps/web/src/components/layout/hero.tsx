@@ -17,7 +17,7 @@ const Hero = () => {
                 Collect Feedback From Your Users
             </TypographyH1>
             <TypographyP className="text-sm duration-700 animate-in fade-in-5 slide-in-from-top-2 md:text-base [&:not(:first-child)]:mt-6">
-                Feedback.io is an open-source platform that allows you to collect and manage
+                Feedmo is an open-source platform that allows you to collect and manage
                 feedback with ease.
             </TypographyP>
             <div className="mt-8 flex items-center justify-center gap-x-3 duration-700 animate-in fade-in-30 sm:flex sm:space-y-0">

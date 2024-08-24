@@ -35,7 +35,7 @@ const Header = ({ className }: HeaderProps) => {
                                 href="/"
                                 className="hidden space-x-2 md:flex md:items-center self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"
                             >
-                                <span>feedback.io</span>
+                                <span>feedmo</span>
                             </Link>
                         </div>
                     </div>
